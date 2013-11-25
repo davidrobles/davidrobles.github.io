@@ -1,0 +1,43 @@
+---
+layout: post
+title:  "A Month with Scala"
+date:   2013-08-17 08:48:16
+categories: jekyll update
+---
+
+Although I've played around with Scala for the few months, these efforts largely involved simple
+scripts and casual reading. It wasn't until last month that the opportunity to use Scala in a large
+scale project finally arose and I dove right in. The project was a typical REST based web service
+built on top of Amazon's Elastic Beanstalk, SimpleDB, S3 and Redis.
+
+{% highlight ruby %}
+class Person
+    def initialize(name, age)
+        @name = name
+        @age = age
+    end
+
+    def to_s
+        "My name is #{@name} and my age is #{@age}"
+    end
+end
+#=> prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
+
+You'll find this post in your `_posts` directory - edit this post and re-build (or run with the `-w` switch) to see your changes!
+To add new posts, simply add a file in the `_posts` directory that follows the convention: YYYY-MM-DD-name-of-post.ext.
+
+Jekyll also offers powerful support for code snippets:
+
+{% highlight ruby %}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
+
+Check out the [Jekyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll's GitHub repo][jekyll-gh].
+
+[jekyll-gh]: https://github.com/mojombo/jekyll
+[jekyll]:    http://jekyllrb.com
