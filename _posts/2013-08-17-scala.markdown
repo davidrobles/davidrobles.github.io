@@ -5,11 +5,6 @@ date:   2013-08-17 08:48:16
 categories: jekyll update
 ---
 
-Although I've played around with Scala for the few months, these efforts largely involved simple
-scripts and casual reading. It wasn't until last month that the opportunity to use Scala in a large
-scale project finally arose and I dove right in. The project was a typical REST based web service
-built on top of Amazon's Elastic Beanstalk, SimpleDB, S3 and Redis.
-
 {% highlight ruby %}
 class Person
     def initialize(name, age)
