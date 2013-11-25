@@ -1,9 +1,11 @@
 ---
 layout: post
-title:  "A Month with Scala"
+title:  "Scala"
 date:   2013-08-17 08:48:16
 categories: jekyll update
 ---
+
+Testing.
 
 {% highlight ruby %}
 class Person
