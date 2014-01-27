@@ -1,3 +1,4 @@
 name: David Robles
 markdown: redcarpet
 pygments: true
+paginate: 2
