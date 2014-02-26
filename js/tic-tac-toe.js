@@ -1,4 +1,6 @@
 
+// change to 'var' to make them kind of private
+
 var MatchController = function(game, players) {
 
 	var _this = this;
@@ -28,7 +30,7 @@ var MatchController = function(game, players) {
 	}
 
 	this.getGame = function(ply) {
-		if (typeof ply === 'undefined') {
+		if (!ply) {
 			return this.gameHistory[this.currentBoardIndex];
 		}
 		return this.gameHistory[ply];
