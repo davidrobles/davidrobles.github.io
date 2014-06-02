@@ -12,14 +12,13 @@ $bg-2: #283036;
 }
 
 html, body {
-    height: 100%;
-    /* -webkit-font-smoothing: antialiased; */
+  height: 100%;
 }
 
 body {
   font-family: 'Open Sans', Arial, sans-serif;
   font-size: 13px;
-  color: #000000;
+  color: #444;
   background-color: #ffffff;
   text-align: center;
 }
@@ -45,23 +44,14 @@ a {
   text-decoration: none;
 }
 
-/* a:hover { */
-/*   color: #555e58; */
-/* } */
-
-/* a:visited { */
-/*   color: #555e58; */
-/* } */
-
 hr {
   border: 1px solid #e0dddd;
 }
 
 /*****************************************************************************/
-/*
 /* Home
-/*
 /*****************************************************************************/
+
 ul.posts {
   list-style-type: none;
   margin-bottom: 2em;
@@ -77,21 +67,17 @@ ul.posts span {
   font-size: 80%;
 }
 
-/*****************************************************************************/
-/*
+/********/
 /* Site
-/*
-/*****************************************************************************/
+/********/
 
 .site .menu-bar {
   height: 10px;
   background-color: $bg-sec;
-  // border-top: 1px solid #67716a;
 }
 
 .site .content {
   width: 685px;
-  // border-right: 1px solid #e0dddd;
   padding: 20px 15px 20px 0px;
 }
 
@@ -109,12 +95,12 @@ ul.posts span {
 }
 
 .site .sidebar .widget .name {
-    font-weight: 700;
-    font-size: 1.4em;
-    letter-spacing: -1px;
-    text-shadow: 1px 1px 0 #fff;
-    margin-left: 1px;
-    padding: 15px;
+  font-weight: 700;
+  font-size: 1.4em;
+  letter-spacing: -1px;
+  text-shadow: 1px 1px 0 #fff;
+  margin-left: 1px;
+  padding: 15px;
 }
 
 .container {
@@ -208,11 +194,9 @@ ul.posts span {
   border: 0;
 }
 
-/*****************************************************************************/
-/*
-/* Posts
-/*
-/*****************************************************************************/
+/*********/
+/* Posts */
+/*********/
 
 /* standard */
 .post pre {
