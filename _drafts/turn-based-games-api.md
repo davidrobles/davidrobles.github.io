@@ -1,7 +1,7 @@
 ---
-layout: post
-title:  "Turn-Based Games API"
-date:   2014-01-18 09:48:16
+layout:   post
+title:    "Turn-Based Games API"
+date:     2014-01-18 09:48:16
 comments: true
 ---
 
