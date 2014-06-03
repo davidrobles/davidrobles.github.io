@@ -67,22 +67,18 @@ hr {
     margin: 0 auto;
     width: 960px;
     text-align: justify;
-    clear: both;
-}
-
-.site {
-  line-height: 1.5em;
-  padding: 0;
 }
 
 .content {
-  width: 685px;
-  padding: 0px 15px 20px 0px;
+    float: left;
+    width: 685px;
+    padding: 0px 15px 20px 0px;
 }
 
 .sidebar {
     float: right;
     width: 260px;
+    padding-top: 30px;
     .widget {
         font-size: 0.9em;
         margin-bottom: 15px;
