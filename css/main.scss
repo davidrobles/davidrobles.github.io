@@ -13,7 +13,7 @@ $bg-2: #283036;
 
 body {
   font-family: 'Open Sans', Arial, sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   color: #444;
   background-color: #ffffff;
   text-align: center;
@@ -59,14 +59,15 @@ hr {
 }
 
 .menu-bar {
-  height: 10px;
-  background-color: $bg-sec;
+    height: 10px;
+    background-color: $bg-sec;
 }
 
 .container {
-  margin: 0 auto;
-  width: 960px;
-  text-align: justify;
+    margin: 0 auto;
+    width: 960px;
+    text-align: justify;
+    clear: both;
 }
 
 .site {
@@ -76,15 +77,15 @@ hr {
 
 .content {
   width: 685px;
-  padding: 20px 15px 20px 0px;
+  padding: 0px 15px 20px 0px;
 }
 
 .sidebar {
-    // background-color: #00ff00;
     float: right;
     width: 260px;
     .widget {
-        font-size: 13px;
+        font-size: 0.9em;
+        margin-bottom: 15px;
         ul {
             margin: 10px 0 10px 30px;
         }
@@ -93,11 +94,9 @@ hr {
             font-size: 1.4em;
             letter-spacing: -1px;
             text-shadow: 1px 1px 0 #fff;
-            padding: 15px 15px 15px 0;
+            padding: 0px 15px 5px 0;
         }
         .con {
-            // margin-left : 20px;
-            // background-color: #ff0000;
             img.about {
                 display: block;
                 margin: 0 auto;
@@ -107,7 +106,7 @@ hr {
             }
             p.about {
                 font-size: 0.9em;
-                padding: 8px;
+                text-align: left;
             }
         }
     }
@@ -187,7 +186,9 @@ hr {
 .post {
     p.date {
         font-size: 0.9em;
-        margin-bottom: 0;
+        margin: 0;
+        padding: 0;
+        text-align: left;
     }
     pre {
         background-color: #eaeaea;
