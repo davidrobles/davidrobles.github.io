@@ -60,13 +60,21 @@
             </div>
         </div>
         <div class="widget">
-            <div class="name">
-                Recent Posts
-            </div>
+            <div class="name">Recent Posts</div>
             <div>
                 <ul>
                     {% for post in site.posts offset: 0 limit: 10  %}
                     <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="widget">
+            <div class="name">Categories</div>
+            <div>
+                <ul>
+                    {% for category in site.categories  %}
+                    <li><a href="{{ post. }}">{{ category | first }}</a></li>
                     {% endfor %}
                 </ul>
             </div>

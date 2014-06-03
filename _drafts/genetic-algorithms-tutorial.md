@@ -1,8 +1,9 @@
 ---
-layout:   post
-title:    "Genetic Algorithms Tutorial"
-date:     2014-05-26 09:48:16
-comments: true
+layout:     post
+title:      "Genetic Algorithms Tutorial"
+date:       2014-05-26 09:48:16
+comments:   true
+categories: [Evolutionary algorithms, Genetic Algorithms]
 ---
 
 Random search is an extremely basic method. It only explores the search space by randomly selecting
