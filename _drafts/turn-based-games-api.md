@@ -6,19 +6,17 @@ comments: true
 ---
 
 We will define an API for turn-based players. This can be games of n-number of players, as long as
-only one player can move per turn. A few examples of this games are Tic-Tac-Toe, Checkers, Chess,
-etc. 
+only one player can move per turn. A few examples of this games are
+[Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe), Checkers, Chess, etc. 
 
 Here we define a simple API that will allow us to play basically any game with a generic algorithm:
-
 
 A player only needs to be a function such as:
 
 - .move(game). It takes a game state and returns the move to take. If it returns a number, it will
   be assumed it is the index of the list of moves. If is a string, it is the string representation.
 
-Game
-----
+### Game
 
 A game is a description of strategic interaction that includes the constraints on the actions that
 the players can take and the players’ interests, but does not specify the actions that the players
@@ -86,7 +84,7 @@ class Game:
 
 Now let's put an example of what the implementation of Tic Tac Toe would return with the given API.
 
-### Copy
+#### Copy
 
 {% highlight python %}
 tic = TicTacToe()
@@ -99,7 +97,7 @@ print id(tic)
 print id(tic_copy)
 {% endhighlight %}
 
-### Current player
+#### Current player
 
 {% highlight python %}
 tic = TicTacToe()
@@ -114,11 +112,11 @@ Note: Of course, the efficiency of the game is not the priority, because well, w
 Python in the first place. But for illustrative purposes I think Python is a great prototyping
 programming language. All the examples presented here are 
 
-Players
--------
+### Players
 
-Players are the individuals who make decisions. A player can be defined as a class that has a *move()* method
-that takes that current state of the game and returns the move to take for the player in turn.
+Players are the individuals who make decisions. A player can be defined as a class that has a
+*move()* method that takes that current state of the game and returns the move to take for the
+player in turn.
 
 {% highlight python %}
 class Player:
@@ -169,8 +167,7 @@ print tic
 
 This simple framework allows us 
 
-Match
------
+### Match
 
 The game interface that we previously defined represent the current state of the game, which is the
 only thing needed to take a game. For simplicity, we will define a *match* class to play games until

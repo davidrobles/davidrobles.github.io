@@ -1,5 +1,5 @@
 name: David Robles
 markdown: redcarpet
-highlighter: pygments
+highlighter: rougess
 paginate: 2
 timezone: America/Los_Angeles
