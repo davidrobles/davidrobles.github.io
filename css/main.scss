@@ -145,10 +145,10 @@ hr {
                 color: $bg-sec;
                 text-decoration: none;
             }
-            .current {
-                color: $bg-sec;
-                text-decoration: none;
-            }
+          &.current {
+              color: $bg-sec;
+              text-decoration: none;
+          }
         }
     }
 }

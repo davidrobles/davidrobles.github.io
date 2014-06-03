@@ -19,10 +19,9 @@
     <div class="container">
         <div id="title"><a href="/">DAVID ROBLES</a></div>
         <div id="menu">
-            <a class="current" href="/about">ABOUT</a>
-            <a href="/about">{{ page.url }}</a>
-            <a href="/projects">PROJECTS</a>
-            <a href="/">BLOG</a>
+            <a {% if page.url == '/about/index.html' %}class="current" {% endif %}href="/about">ABOUT</a>
+            <a {% if page.url == '/projects/index.html' %}class="current" {% endif %}href="/projects">PROJECTS</a>
+            <a {% if page.url == '/index.html' %}class="current" {% endif %}href="/">BLOG</a>
         </div>
     </div>
 </div>
