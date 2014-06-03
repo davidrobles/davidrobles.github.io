@@ -1,5 +1,6 @@
 name: David Robles
 markdown: redcarpet
-highlighter: rougess
+highlighter: pygments
 paginate: 2
 timezone: America/Los_Angeles
+url: http://davidrobles.net
