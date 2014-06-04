@@ -23,14 +23,14 @@ videos, or even worse, Java applets! With JavaScript we can create a program wit
 interfaces that will load as you open a web page. No waiting for a video to load, or Java applets to
 load!.
 
-We know that the **area of the circle** is \\( A\_{circle} = \pi * r^2 \\) and the **area of the
+We know that the **area of the circle** is \\( A\_{circle} = \pi r^2 \\) and the **area of the
 square** is \\( (2r)^2 \\). Then, The ratio of both areas is:
 
 $$ \frac{A\_{circle}}{A\_{square}} = \frac{\pi r^2}{(2r)^2} = \frac{\pi r^2}{4 r^2} = \frac{\pi}{4} $$
 
-Solving for pi yields:
+Solving for \\( \pi \\) yields:
 
-$${ \pi = 4 * \frac{A\_c}{B\_c} }$$
+$${ \pi = 4 * \frac{A\_{circle}}{A\_{square}} }$$
 
 ### Demo
 
