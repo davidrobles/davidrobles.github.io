@@ -32,8 +32,10 @@ MCPI.Model.prototype = {
         this.points.push(point);
         var pi = (4.0 * this.counters.inside) / this.points.length;
         if (this.points.length % 50 == 0) {
-            var ele = document.getElementById("pi");
-            ele.innerHTML = pi.toFixed(4);
+            document.getElementById("pi").innerHTML = pi.toFixed(4);
+            document.getElementById("all").innerHTML = this.points.length;
+            document.getElementById("inside").innerHTML = this.counters.inside;
+            document.getElementById("outside").innerHTML = this.counters.outside;
         }
         this.notifyObservers(point);
         if (this.points.length == this.maxPoints) {

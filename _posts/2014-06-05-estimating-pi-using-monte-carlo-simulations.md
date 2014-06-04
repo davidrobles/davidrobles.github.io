@@ -25,10 +25,14 @@ load!.
 
 Here is a full demo that you can play with it:
 
+<div text-align="center; display: block;">&pi; = <span id="pi"></span></div>
+
 <canvas id="pi-mc" height="300px" width="300px" style="margin: 20px auto; display: block;">
 Your browser does not support HTML5 Canvas!
 </canvas>
 
-<div id="pi"></div>
+Dots = <span id="all"></span><br />
+Inside = <span id="inside"></span><br />
+Outside = <span id="outside"></span><br />
 
 <script src="/js/mc-pi.js"></script>
