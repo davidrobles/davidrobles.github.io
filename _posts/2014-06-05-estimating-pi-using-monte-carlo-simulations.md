@@ -45,6 +45,34 @@ Dots = <span id="all"></span><br />
 Inside = <span id="inside"></span><br />
 Outside = <span id="outside"></span><br />
 
+### View on Github
+
+The code for this tutorial is in [Github](http://www.github.com/davidrobles/mcpi.js). To run it just
+include the JavaScript file:
+
+{% highlight html %}
+<script src="/js/mc-pi.js"></script>
+{% endhighlight html %}
+
+This is how we can configure and run this example:
+
+{% highlight javascript %}
+var model = new MCPI.Model(10000);
+var view = new MCPI.View({
+    canvas: document.getElementById("pi-mc"),
+    lineWidth: 3,
+    dotRadius: 2,
+    colors: {
+        bg: "something",
+        line: "rgb(154, 129, 61)",
+        inside: "rgb(67, 148, 145)",
+        outside: "rgb(216, 59, 55)"
+    }
+});
+model.addObserver(view);
+model.run();
+{% endhighlight %}
+
 <script src="/js/mc-pi.js"></script>
 
 
