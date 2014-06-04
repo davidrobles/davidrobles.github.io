@@ -5,7 +5,6 @@ $bg-color: #384047;
 $bg-sec: #4bc970;
 $bg-2: #283036;
 
-
 * {
     margin: 0;
     padding: 0;
@@ -13,10 +12,9 @@ $bg-2: #283036;
 
 body {
     font-family: 'Open Sans', Arial, sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     color: #444;
     background-color: #ffffff;
-    text-align: center;
 }
 
 h1 {
@@ -72,13 +70,15 @@ hr {
 .container {
     margin: 0 auto;
     width: 960px;
-    text-align: justify;
 }
 
 .content {
     float: left;
     width: 685px;
     padding: 0px 15px 20px 0px;
+    p {
+        text-align: justify;
+    }
 }
 
 .sidebar {
