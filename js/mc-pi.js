@@ -6,6 +6,10 @@ MCPI.Model = function(maxPoints) {
     this.observers = [];
     this.timerId = 0;
     this.maxPoints = maxPoints;
+    this.counters = {
+        inside: 0,
+        outside: 0
+    };
 };
 
 MCPI.Model.prototype = {
@@ -20,10 +24,20 @@ MCPI.Model.prototype = {
             x: Math.random(),
             y: Math.random()
         };
-        that.points.push(point);
-        that.notifyObservers(point);
-        if (that.points.length == this.maxPoints) {
-            clearInterval(that.timerId);
+        if (MCPI.inside(point)) {
+            this.counters.inside += 1;
+        } else {
+            this.counters.outside += 1;
+        }
+        this.points.push(point);
+        var pi = (4.0 * this.counters.inside) / this.points.length;
+        if (this.points.length % 50 == 0) {
+            var ele = document.getElementById("pi");
+            ele.innerHTML = pi.toFixed(4);
+        }
+        this.notifyObservers(point);
+        if (this.points.length == this.maxPoints) {
+            clearInterval(this.timerId);
         }
     },
 
@@ -35,14 +49,14 @@ MCPI.Model.prototype = {
 
     run: function() {
         var that = this;
-        this.timerId = setInterval(function() { that.addPoint(that); }, 10);
+        this.timerId = setInterval(function() { that.addPoint(that); }, 3);
     }
 
 };
 
-MCPI.inside = function(x, y) {
-    var dist = Math.sqrt(Math.pow(x - 0.5, 2) + Math.pow(y - 0.5, 2));
-    return dist < 0.5 ? true : false; // remove this!
+MCPI.inside = function(point) {
+    var dist = Math.pow(point.x - 0.5, 2) + Math.pow(point.y - 0.5, 2);
+    return dist < Math.pow(0.50, 2);
 };
 
 MCPI.View = function(options) {
@@ -71,7 +85,7 @@ MCPI.View.prototype = {
             centerY = point.y * this.canvas.height;
         this.ctx.beginPath();
         this.ctx.arc(centerX, centerY, this.dotRadius, 0, Math.PI * 2, false);
-        if (MCPI.inside(point.x, point.y)) {
+        if (MCPI.inside(point)) {
             this.ctx.fillStyle = this.colors.inside;
         } else {
             this.ctx.fillStyle = this.colors.outside;
