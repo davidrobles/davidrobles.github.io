@@ -103,7 +103,7 @@ MCPI.View.prototype = {
 
 (function() {
 
-    var model = new MCPI.Model();
+    var model = new MCPI.Model(10000);
     var view = new MCPI.View({
         canvas: document.getElementById("pi-mc"),
         lineWidth: 3,
