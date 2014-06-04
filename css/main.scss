@@ -7,16 +7,16 @@ $bg-2: #283036;
 
 
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: 'Open Sans', Arial, sans-serif;
-  font-size: 15px;
-  color: #444;
-  background-color: #ffffff;
-  text-align: center;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 15px;
+    color: #444;
+    background-color: #ffffff;
+    text-align: center;
 }
 
 h1 {
@@ -32,27 +32,27 @@ h2 {
 }
 
 h3 {
-  font-size: 1.3em;
-  font-weight: 600;
-  margin: 1em 0;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin: 1em 0;
 }
 
 h4 {
-  font-size: 1em;
-  font-weight: 600;
-  margin: 15px 0;
+    font-size: 1em;
+    font-weight: 600;
+    margin: 15px 0;
 }
 
 p {
-  margin: 1em 0;
+    margin: 1em 0;
 }
 
 a {
-  color: $link-color;
-  text-decoration: none;
-  &:hover {
-      text-decoration: underline;
-  }
+    color: $link-color;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 ul {
@@ -146,43 +146,43 @@ hr {
                 color: $bg-sec;
                 text-decoration: none;
             }
-          &.current {
-              color: $bg-sec;
-              text-decoration: none;
-          }
+            &.current {
+                color: $bg-sec;
+                text-decoration: none;
+            }
         }
     }
 }
 
 .meta {
-  color: #000;
-  text-transform: uppercase;
-  font-size: 0.85em;
-  font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    font-weight: bold;
 }
 
 .footer {
-  clear: both;
-  font-size: 80%;
-  color: #666;
-  border-top: 4px solid #eee;
-  margin-top: 2em;
-  overflow: hidden;
-  .contact {
-    float: left;
-    margin-right: 3em;
-    a {
-      color: #8085C1;
+    clear: both;
+    font-size: 80%;
+    color: #666;
+    border-top: 4px solid #eee;
+    margin-top: 2em;
+    overflow: hidden;
+    .contact {
+        float: left;
+        margin-right: 3em;
+        a {
+            color: #8085C1;
+        }
     }
-  }
-  .rss {
-    margin-top: 1.1em;
-    margin-right: -.2em;
-    float: right;
-    img {
-      border: 0;
+    .rss {
+        margin-top: 1.1em;
+        margin-right: -.2em;
+        float: right;
+        img {
+            border: 0;
+        }
     }
-  }
 }
 
 .post {
@@ -193,7 +193,7 @@ hr {
         text-align: left;
     }
     pre {
-        background-color: #eaeaea;
+        background-color: #eee;
         padding: 12px 14px;
         margin: 4px 4px 18px 4px;
         code {
