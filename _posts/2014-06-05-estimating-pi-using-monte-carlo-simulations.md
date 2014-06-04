@@ -16,21 +16,20 @@ obtain the distribution of an unknown probabilistic entity.
 
 ### Estimating PI
 
-We created a program to estimate the value of PI using JavaScript. Why JavaScript? Simply because is
-the best programming language for demos! If you look for a tutorial or demo about any algorithm or
-technique you will find code in different programming languages that DO NOT run in a web browser,
-videos, or even worse, Java applets! With JavaScript we can create a program with beautiful
-interfaces that will load as you open a web page. No waiting for a video to load, or Java applets to
-load!.
-
-We know that the **area of the circle** is \\( A\_{circle} = \pi r^2 \\) and the **area of the
-square** is \\( (2r)^2 \\). Then, The ratio of both areas is:
+Probably the most basic and popular example of monte carlo simulations is estimating the value of
+\\( \pi \\). So how can we do that? Well, we know that the **area of the circle** is \\( A\_{circle}
+= \pi r^2 \\) and the **area of the square** is \\( A\_{square} = (2r)^2 \\). Then, the ratio of
+both areas is:
 
 $$ \frac{A\_{circle}}{A\_{square}} = \frac{\pi r^2}{(2r)^2} = \frac{\pi r^2}{4 r^2} = \frac{\pi}{4} $$
 
 Solving for \\( \pi \\) yields:
 
 $${ \pi = 4 * \frac{A\_{circle}}{A\_{square}} }$$
+
+Knowing this we can run a simulation in which we randomly place \\( n \\) number of dots, with the
+idea of approximating the value of \\( \pi \\) by counting dots **inside** the circle, \\(
+A\_{circle} \\), and **outside**, \\( A\_{square} \\).
 
 ### Demo
 
@@ -47,3 +46,15 @@ Inside = <span id="inside"></span><br />
 Outside = <span id="outside"></span><br />
 
 <script src="/js/mc-pi.js"></script>
+
+
+<!--
+We created a program to estimate the value of PI using JavaScript. Why JavaScript? Simply because is
+the best programming language for demos! If you look for a tutorial or demo about any algorithm or
+technique you will find code in different programming languages that DO NOT run in a web browser,
+videos, or even worse, Java applets! With JavaScript we can create a program with beautiful
+interfaces that will load as you open a web page. No waiting for a video to load, or Java applets to
+load!.
+-->
+
+
