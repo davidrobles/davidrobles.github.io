@@ -8,7 +8,7 @@ categories: [Evolutionary algorithms, Genetic Algorithms]
 
 Monte Carlo simulations are a technique.
 
-<canvas id="pi-mc" height="300px" width="300px">
+<canvas id="pi-mc" height="300px" width="300px" style="margin: 0 auto; display: block;">
 Your browser does not support HTML5 Canvas!
 </canvas>
 
