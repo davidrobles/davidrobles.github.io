@@ -4,6 +4,7 @@ $link-color: #568d9f;
 $bg-color: #384047;
 $bg-sec: #4bc970;
 $bg-2: #283036;
+$bg-code: #eee;
 
 * {
     margin: 0;
@@ -195,7 +196,7 @@ hr {
         color: #585858;
     }
     pre {
-        background-color: #eee;
+        background-color: $bg-code;
         padding: 12px 14px;
         margin: 4px 4px 18px 4px;
         code {
@@ -208,3 +209,20 @@ hr {
         margin-left: 2em;
     }
 }
+
+
+
+
+
+
+
+
+
+#pi-mc {
+    background-color: #b8c6e0;
+}
+
+// #6f8ebd
+
+
+
