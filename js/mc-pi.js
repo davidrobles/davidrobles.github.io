@@ -49,11 +49,16 @@ MCPI.Model.prototype = {
         }
         this.points.push(point);
         var pi = (4.0 * this.counters.inside) / this.points.length;
-        if (this.points.length % 50 == 0) {
-            document.getElementById("pi").innerHTML = pi.toFixed(4);
-            document.getElementById("all").innerHTML = this.points.length;
+        // if (this.points.length % 4 == 0) {
             document.getElementById("inside").innerHTML = this.counters.inside;
             document.getElementById("outside").innerHTML = this.counters.outside;
+        // }
+        if (this.points.length % 50 == 0) {
+            var math = MathJax.Hub.getAllJax("pi")[0];
+            MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
+               this.counters.inside + "}{" + this.points.length + "} = " + pi.toFixed(4)]);
+
+            document.getElementById("all").innerHTML = this.points.length;
         }
         document.getElementById("fps").innerHTML = this.calculateFps().toFixed() + " fps";
         this.notifyObservers(point);
@@ -92,7 +97,6 @@ MCPI.inside = function(point) {
 MCPI.View = function(options) {
     this.canvas = options.canvas;
     this.ctx = this.canvas.getContext("2d");
-    this.lineWidth = options.lineWidth;
     this.colors = options.colors;
     this.pointSize = options.pointSize;
     this.canvas.width = options.size;
@@ -103,13 +107,12 @@ MCPI.View.prototype = {
 
     render: function(model) {
         this.canvas.style.backgroundColor = this.colors.bg;
-        this.canvas.style.border = "10px solid #F2D6B3"; // handcoded value
+        this.canvas.style.border = Math.round(this.canvas.width * 0.05) + "px solid " + this.colors.circle; // handcoded value
         var centerX = this.canvas.width / 2,
             centerY = this.canvas.height / 2,
-            radius = (this.canvas.width / 2) - (this.lineWidth / 2) + 2;
+            radius = this.canvas.width / 2;
         this.ctx.beginPath();
         this.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
-        this.ctx.lineWidth = this.lineWidth;
         this.ctx.fillStyle = this.colors.circle;
         this.ctx.fill();
     },
@@ -138,9 +141,8 @@ MCPI.View.prototype = {
     var model = new MCPI.Model(10000);
     var view = new MCPI.View({
         canvas: document.getElementById("mcpi"),
-        lineWidth: 4,
         pointSize: 2,
-        size: 200,
+        size: 300,
         colors: {
             bg: "#F2D6B3",
             inside: "#46658C",

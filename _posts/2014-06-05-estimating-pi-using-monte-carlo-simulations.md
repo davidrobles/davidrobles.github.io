@@ -4,9 +4,16 @@ title:      "Estimating PI using Monte Carlo Simulations"
 date:       2014-05-26 09:48:16
 comments:   true
 categories: [Evolutionary algorithms, Genetic Algorithms]
+style:      mcpi.scss
+js:         mcpi.js
 ---
-
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 ### Monte Carlo Simulations
 
@@ -32,20 +39,44 @@ Knowing this we can run a simulation in which we randomly place \\( n \\) number
 idea of approximating the value of \\( \pi \\) by counting dots **inside** the circle, \\(
 A\_{circle} \\), and **outside**, \\( A\_{square} \\).
 
+### Steps
+
+This Demonstration approximates using the Monte Carlo method:
+
+1. Randomly select points in a square with an inscribed circle.
+2. Multiply the number of points inside the circle by four.
+3. Divide by the total number of points in the square.
+
 ### Demo
 
 Here is a full demo that you can play with it:
 
-<div text-align="center; display: block;">&pi; = <span id="pi"></span></div>
+<p id="pi" style="display: block; margin: 0 auto; text-align: center;">\( \)</p>
 
 <canvas id="mcpi" style="margin: 20px auto; display: block;">
 Your browser does not support HTML5 Canvas!
 </canvas>
 
+<div style="background-color: #ffffff; text-align: center; margin: 0 auto;">
+
+    <svg height="24" width="24" style="display: inline;">
+        <circle cx="12" cy="12" r="12" fill="#46658C" />
+    </svg><span style="font-size: 1.1em">
+    <span id="inside"></span></span>
+
+    <svg height="24" width="24" style="display: inline;">
+        <circle cx="12" cy="12" r="12" fill="#BB2115" />
+    </svg><span style="font-size: 1.1em">
+    <span id="outside"></span></span>
+
+</div>
+
 <button class="start">Start</button>
 
 Dots = <span id="all"></span><br />
-Inside = <span id="inside"></span><br />
+
+
+
 Outside = <span id="outside"></span><br />
 Outside = <span id="fps"></span><br />
 
