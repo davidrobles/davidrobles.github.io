@@ -49,8 +49,6 @@ This Demonstration approximates using the Monte Carlo method:
 
 ### Demo
 
-Here is a full demo that you can play with it:
-
 <p id="pi" style="display: block; margin: 0 auto; text-align: center;">\( \)</p>
 
 <canvas id="mcpi" style="margin: 20px auto; display: block;">
