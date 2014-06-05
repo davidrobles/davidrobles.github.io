@@ -26,7 +26,7 @@ $$ \frac{A\_{circle}}{A\_{square}} = \frac{\pi r^2}{(2r)^2} = \frac{\pi r^2}{4 r
 
 Solving for \\( \pi \\) yields:
 
-$${ \pi = 4 * \frac{A\_{circle}}{A\_{square}} }$$
+$${ \pi = 4 \frac{A\_{circle}}{A\_{square}} }$$
 
 Knowing this we can run a simulation in which we randomly place \\( n \\) number of dots, with the
 idea of approximating the value of \\( \pi \\) by counting dots **inside** the circle, \\(
@@ -45,6 +45,7 @@ Your browser does not support HTML5 Canvas!
 Dots = <span id="all"></span><br />
 Inside = <span id="inside"></span><br />
 Outside = <span id="outside"></span><br />
+Outside = <span id="fps"></span><br />
 
 ### View on Github
 

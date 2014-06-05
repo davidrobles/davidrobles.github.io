@@ -1,3 +1,20 @@
+window.requestNextAnimationFrame = (function () {
+    return window.requestAnimationFrame       ||
+           window.webkitRequestAnimationFrame ||
+           window.mozRequestAnimationFrame    ||
+           window.msRequestAnimationFrame     ||
+           function (callback, element) {
+               var self = this,
+                   start,
+                   finish;
+               window.setTimeout(function() {
+                   start = +new Date();
+                   callback(start);
+                   finish = +new Date();
+                   self.timeout = 1000 / 60 - (finish - start);
+               }, self.timeout);
+           };
+}());
 
 var MCPI = MCPI || {};
 
@@ -6,6 +23,7 @@ MCPI.Model = function(maxPoints) {
     this.observers = [];
     this.timerId = 0;
     this.maxPoints = maxPoints;
+    this.lastTime = 0;
     this.counters = {
         inside: 0,
         outside: 0
@@ -37,10 +55,20 @@ MCPI.Model.prototype = {
             document.getElementById("inside").innerHTML = this.counters.inside;
             document.getElementById("outside").innerHTML = this.counters.outside;
         }
+        document.getElementById("fps").innerHTML = this.calculateFps().toFixed() + " fps";
         this.notifyObservers(point);
         if (this.points.length == this.maxPoints) {
             clearInterval(this.timerId);
         }
+        window.requestNextAnimationFrame(function() { that.addPoint(that); });
+    },
+
+    calculateFps: function() {
+        var now = (+new Date),
+            fps = 1000 / (now - this.lastTime);
+        console.log(this.points.length);
+        this.lastTime = now;
+        return fps;
     },
 
     notifyObservers: function(point) {
@@ -51,7 +79,8 @@ MCPI.Model.prototype = {
 
     run: function() {
         var that = this;
-        this.timerId = setInterval(function() { that.addPoint(that); }, 3);
+        // this.timerId = setInterval(function() { that.addPoint(that); }, 3);
+        window.requestNextAnimationFrame(function() { that.addPoint(that); });
     }
 
 };
