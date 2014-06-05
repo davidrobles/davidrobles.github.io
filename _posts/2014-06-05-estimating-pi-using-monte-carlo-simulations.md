@@ -15,29 +15,32 @@ MathJax.Hub.Config({
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-### Monte Carlo Simulations
+Monte Carlo simulations are a broad class of computational algorithms that rely
+on repeated random sampling to obtain numerical results; typically one runs
+simulations many times over in order to obtain the distribution of an unknown
+probabilistic entity. One of the most popular examples of Monte Carlo
+simulations is estimating the value of \\( \pi \\). So how can we do that?
 
-Monte Carlo simulations are a broad class of computational algorithms that rely on repeated random
-sampling to obtain numerical results; typically one runs simulations many times over in order to
-obtain the distribution of an unknown probabilistic entity. In the <span
-class="code">config/default.js</span>.
+Well, we know that the **area of the circle** is \\( A\_{circle} = \pi r^2 \\)
+and the **area of the square** is \\( A\_{square} = (2r)^2 \\). Then, the ratio
+of both areas is:
 
-### Estimating PI
-
-Probably the most basic and popular example of monte carlo simulations is estimating the value of
-\\( \pi \\). So how can we do that? Well, we know that the **area of the circle** is \\( A\_{circle}
-= \pi r^2 \\) and the **area of the square** is \\( A\_{square} = (2r)^2 \\). Then, the ratio of
-both areas is:
-
-$$ \frac{A\_{circle}}{A\_{square}} = \frac{\pi r^2}{(2r)^2} = \frac{\pi r^2}{4 r^2} = \frac{\pi}{4} $$
+$$
+\frac{A\_{circle}}{A\_{square}} = \frac{\pi r^2}{(2r)^2}
+                                = \frac{\pi r^2}{4 r^2}
+                                = \frac{\pi}{4}
+$$
 
 Solving for \\( \pi \\) yields:
 
-$${ \pi = 4 \frac{A\_{circle}}{A\_{square}} }$$
+$$
+{ \pi = 4 \frac{A\_{circle}}{A\_{square}} }
+$$
 
-Knowing this we can run a simulation in which we randomly place \\( n \\) number of dots, with the
-idea of approximating the value of \\( \pi \\) by counting dots **inside** the circle, \\(
-A\_{circle} \\), and **outside**, \\( A\_{square} \\).
+Knowing this we can run a simulation in which we randomly place \\( n \\)
+number of dots, with the idea of approximating the value of \\( \pi \\) by
+counting dots **inside** the circle, \\( A\_{circle} \\), and **outside**, \\(
+A\_{square} \\).
 
 ### Steps
 
