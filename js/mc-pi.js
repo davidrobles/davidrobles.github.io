@@ -103,12 +103,12 @@ MCPI.View.prototype = {
     render: function(model) {
         var centerX = this.canvas.width / 2,
             centerY = this.canvas.height / 2,
-            radius = (this.canvas.width / 2) - (this.lineWidth / 2);
+            radius = (this.canvas.width / 2) - (this.lineWidth / 2) + 2;
         this.ctx.beginPath();
         this.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
         this.ctx.lineWidth = this.lineWidth;
-        this.ctx.strokeStyle = this.colors.line;
-        this.ctx.stroke();
+        this.ctx.fillStyle = this.colors.circle;
+        this.ctx.fill();
     },
 
     renderPoint: function(point) {
@@ -135,13 +135,18 @@ MCPI.View.prototype = {
     var model = new MCPI.Model(10000);
     var view = new MCPI.View({
         canvas: document.getElementById("pi-mc"),
-        lineWidth: 3,
-        dotRadius: 2,
+        lineWidth: 4,
+        dotRadius: 3,
         colors: {
             bg: "something",
-            line: "rgb(154, 129, 61)",
-            inside: "rgb(67, 148, 145)",
-            outside: "rgb(216, 59, 55)"
+
+            inside: "#01254C",
+            outside: "#EA575B",
+            circle: "#52718D",
+
+            // line: "rgb(154, 129, 61)",
+            // inside: "rgb(67, 148, 145)",
+            // outside: "rgb(216, 59, 55)"
         }
     });
     model.addObserver(view);
