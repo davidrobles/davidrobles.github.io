@@ -12,7 +12,8 @@ categories: [Evolutionary algorithms, Genetic Algorithms]
 
 Monte Carlo simulations are a broad class of computational algorithms that rely on repeated random
 sampling to obtain numerical results; typically one runs simulations many times over in order to
-obtain the distribution of an unknown probabilistic entity.
+obtain the distribution of an unknown probabilistic entity. In the <span
+class="code">config/default.js</span>.
 
 ### Estimating PI
 
@@ -51,13 +52,12 @@ The code for this tutorial is in [Github](http://www.github.com/davidrobles/mcpi
 include the JavaScript file:
 
 {% highlight html %}
-<script src="/js/mc-pi.js"></script>
+<script src="mcpi.js"></script>
 {% endhighlight html %}
 
 This is how we can configure and run this example:
 
 {% highlight javascript %}
-var model = new MCPI.Model(10000);
 var view = new MCPI.View({
     canvas: document.getElementById("pi-mc"),
     lineWidth: 3,
@@ -68,6 +68,9 @@ var view = new MCPI.View({
         inside: "rgb(67, 148, 145)",
         outside: "rgb(216, 59, 55)"
     }
+});
+var model = new MCPI.Model({
+    dotSims: 10000
 });
 model.addObserver(view);
 model.run();

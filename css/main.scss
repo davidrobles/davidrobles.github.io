@@ -64,6 +64,12 @@ hr {
     margin: 20px 0px;
 }
 
+span.code {
+    background-color: $bg-code;
+    padding: 1px 4px;
+    // border: 1px solid #ccc;
+}
+
 .menu-bar {
     height: 10px;
     background-color: $bg-sec;
@@ -78,6 +84,7 @@ hr {
     float: left;
     width: 685px;
     padding: 0px 15px 20px 0px;
+    line-height: 1.6em;
     p {
         text-align: justify;
     }
