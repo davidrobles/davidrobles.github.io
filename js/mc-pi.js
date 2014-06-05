@@ -140,9 +140,9 @@ MCPI.View.prototype = {
         colors: {
             bg: "something",
 
-            inside: "#01254C",
-            outside: "#EA575B",
-            circle: "#52718D",
+            inside: "#46658C",
+            outside: "#BB2115",
+            circle: "#D9B89C",
 
             // line: "rgb(154, 129, 61)",
             // inside: "rgb(67, 148, 145)",
