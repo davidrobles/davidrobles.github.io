@@ -38,9 +38,11 @@ Here is a full demo that you can play with it:
 
 <div text-align="center; display: block;">&pi; = <span id="pi"></span></div>
 
-<canvas id="pi-mc" height="300px" width="300px" style="margin: 20px auto; display: block;">
+<canvas id="mcpi" style="margin: 20px auto; display: block;">
 Your browser does not support HTML5 Canvas!
 </canvas>
+
+<button class="start">Start</button>
 
 Dots = <span id="all"></span><br />
 Inside = <span id="inside"></span><br />

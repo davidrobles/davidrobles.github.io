@@ -227,8 +227,22 @@ span.code {
 #pi-mc {
     // background-color: rgb(240, 203, 141);
     // border: 4px solid rgb(80, 94, 147);
-    background-color: #F2D6B3;
-    border: 6px solid #244673;
+}
+
+button {
+    padding: 6px 10px;
+    cursor: pointer;
+    border: 0;
+    font-size: 1em;
+    outline: none;
+    &.start {
+        background-color: #40ba89;
+        color: #ffffff;
+    }
+    &.stop {
+        background-color: #e26458;
+        color: #ffffff;
+    }
 }
 
 // #6f8ebd

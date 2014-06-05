@@ -66,7 +66,6 @@ MCPI.Model.prototype = {
     calculateFps: function() {
         var now = (+new Date),
             fps = 1000 / (now - this.lastTime);
-        console.log(this.points.length);
         this.lastTime = now;
         return fps;
     },
@@ -95,12 +94,16 @@ MCPI.View = function(options) {
     this.ctx = this.canvas.getContext("2d");
     this.lineWidth = options.lineWidth;
     this.colors = options.colors;
-    this.dotRadius = options.dotRadius;
+    this.pointSize = options.pointSize;
+    this.canvas.width = options.size;
+    this.canvas.height = options.size;
 };
 
 MCPI.View.prototype = {
 
     render: function(model) {
+        this.canvas.style.backgroundColor = this.colors.bg;
+        this.canvas.style.border = "10px solid #F2D6B3"; // handcoded value
         var centerX = this.canvas.width / 2,
             centerY = this.canvas.height / 2,
             radius = (this.canvas.width / 2) - (this.lineWidth / 2) + 2;
@@ -115,7 +118,7 @@ MCPI.View.prototype = {
         var centerX = point.x * this.canvas.width,
             centerY = point.y * this.canvas.height;
         this.ctx.beginPath();
-        this.ctx.arc(centerX, centerY, this.dotRadius, 0, Math.PI * 2, false);
+        this.ctx.arc(centerX, centerY, this.pointSize, 0, Math.PI * 2, false);
         if (MCPI.inside(point)) {
             this.ctx.fillStyle = this.colors.inside;
         } else {
@@ -134,19 +137,15 @@ MCPI.View.prototype = {
 
     var model = new MCPI.Model(10000);
     var view = new MCPI.View({
-        canvas: document.getElementById("pi-mc"),
+        canvas: document.getElementById("mcpi"),
         lineWidth: 4,
-        dotRadius: 3,
+        pointSize: 2,
+        size: 200,
         colors: {
-            bg: "something",
-
+            bg: "#F2D6B3",
             inside: "#46658C",
             outside: "#BB2115",
             circle: "#D9B89C",
-
-            // line: "rgb(154, 129, 61)",
-            // inside: "rgb(67, 148, 145)",
-            // outside: "rgb(216, 59, 55)"
         }
     });
     model.addObserver(view);
