@@ -47,8 +47,8 @@ $$
 
 Knowing this we can run a simulation in which we randomly place \\( n \\)
 number of dots, with the idea of approximating the value of \\( \pi \\) by
-counting dots **inside** the circle, \\( A\_{circle} \\), and **outside**, \\(
-A\_{square} \\).
+counting the points **inside** the circle, \\( A\_{circle} \\), and
+**outside**, \\( A\_{square} \\).
 
 ### Steps
 

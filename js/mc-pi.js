@@ -84,10 +84,12 @@ MCPI.Model.prototype = {
     reset: function() {
         clearInterval(this.timerId);
         this.points = [];
+        fire("reset");
     },
 
     run: function() {
         var that = this;
+        this.reset();
         // this.timerId = setInterval(function() { that.addPoint(that); }, 3);
         this.timerId = window.requestNextAnimationFrame(function() { that.addPoint(that); });
     }
