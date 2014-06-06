@@ -75,6 +75,10 @@ MCPI.Model.prototype = {
         return fps;
     },
 
+    fire: function(event) {
+
+    },
+
     notifyObservers: function(point) {
         this.observers.forEach(function(observer) {
             observer.renderPoint(point);
@@ -84,7 +88,7 @@ MCPI.Model.prototype = {
     reset: function() {
         clearInterval(this.timerId);
         this.points = [];
-        fire("reset");
+        this.fire("reset");
     },
 
     run: function() {

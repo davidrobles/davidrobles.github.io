@@ -23,6 +23,8 @@ simulations is estimating the value of \\( \pi \\). So how can we do that?
 
 We generate random points and verify if they are inside or outside
 
+asymptotically approaching the real value of PI.
+
 But, how do we estimate Pi by simulation? In the simulation, you keep throwing
 darts at random onto the dartboard. All of the darts fall within the square,
 but not all of them fall within the circle. Here is the key. If you throw darts
