@@ -21,6 +21,14 @@ simulations many times over in order to obtain the distribution of an unknown
 probabilistic entity. One of the most popular examples of Monte Carlo
 simulations is estimating the value of \\( \pi \\). So how can we do that?
 
+We generate random points and verify if they are inside or outside
+
+But, how do we estimate Pi by simulation? In the simulation, you keep throwing
+darts at random onto the dartboard. All of the darts fall within the square,
+but not all of them fall within the circle. Here is the key. If you throw darts
+completely at random, this experiment estimate the ratio of the area of the
+circle to the area of the square, by counting the number of darts in each.
+
 Well, we know that the **area of the circle** is \\( A\_{circle} = \pi r^2 \\)
 and the **area of the square** is \\( A\_{square} = (2r)^2 \\). Then, the ratio
 of both areas is:
@@ -52,39 +60,65 @@ This Demonstration approximates using the Monte Carlo method:
 
 ### Demo
 
-<p id="pi" style="display: block; margin: 0 auto; text-align: center;">\( \)</p>
+<div style="margin: 0 auto; background-color: #eaeaea; padding: 20px;">
 
-<canvas id="mcpi" style="margin: 20px auto; display: block;">
-Your browser does not support HTML5 Canvas!
-</canvas>
+    <div style="float: left;">
+        <br /><br /><br /><br /><br />
+        <label for="mcpiSelect">Sample size:</label>
+        <select id="mcpiSampleSize" class="mcpiSelect">
+            <option value="500">500</option>
+            <option value="1000" selected="selected">1000</option>
+            <option value="2500">2500</option>
+            <option value="5000">5000</option>
+            <option value="7500">7500</option>
+            <option value="10000">10000</option>
+        </select>
+        <br /><br />
+        <label for="mcpiPointSize">Point size:</label>
+        <select id="mcpiPointSize" class="mcpiSelect">
+            <option value="1">1</option>
+            <option value="2" selected="selected">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+        <br /><br />
+        <label for="mcpiStart">&nbsp;</label>
+        <button id="mcpiStart">START</button>
+    </div>
 
-<div style="background-color: #ffffff; text-align: center; margin: 0 auto;">
+    <div style="margin-left: 40px; float: left; padding: 0;">
+        <p id="pi" style="display: block; height: 40px; margin: 0 auto; text-align: center;">\( \)</p>
+        <canvas id="mcpi" style="margin: 0 auto; display: block;">
+        Your browser does not support HTML5 Canvas!
+        </canvas>
+        <br />
+        <div style="display: table-cell; height: 100px; text-align: center; margin: 0 auto; background-color: #ff0000; vertical-align: middle;">
+            <svg height="24" width="24" style="vertical-align: middle; display: inline; background-color: #eaeaea;">
+                <circle cx="12" cy="12" r="12" fill="#46658C" />
+            </svg><span style="background-color: #0000ff; height: 24px; margin: 0; padding: 0; font-size: 1.1em; vertical-align: middle;">
+            <span id="inside" style="width: 40px; display: inline-block; background-color: #00ff00; text-align: left;">0</span></span>
+            <svg height="24" width="24" style="display: inline; vertical-align: middle;">
+                <circle cx="12" cy="12" r="12" fill="#BB2115" />
+            </svg><span style="font-size: 1.1em; vertical-align: middle;">
+            <span id="outside">0</span></span>
+        </div>
+    </div>
 
-    <svg height="24" width="24" style="display: inline;">
-        <circle cx="12" cy="12" r="12" fill="#46658C" />
-    </svg><span style="font-size: 1.1em">
-    <span id="inside"></span></span>
-
-    <svg height="24" width="24" style="display: inline;">
-        <circle cx="12" cy="12" r="12" fill="#BB2115" />
-    </svg><span style="font-size: 1.1em">
-    <span id="outside"></span></span>
+    <div style="clear: both;"></div>
 
 </div>
 
-<button class="start">Start</button>
+<div style="clear: both;"></div>
 
 Dots = <span id="all"></span><br />
 
-
-
-Outside = <span id="outside"></span><br />
-Outside = <span id="fps"></span><br />
-
 ### View on Github
 
-The code for this tutorial is in [Github](http://www.github.com/davidrobles/mcpi.js). To run it just
-include the JavaScript file:
+The code for this tutorial is in
+[Github](http://www.github.com/davidrobles/mcpi.js). To run it just include the
+JavaScript file:
 
 {% highlight html %}
 <script src="mcpi.js"></script>

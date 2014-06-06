@@ -18,11 +18,11 @@ window.requestNextAnimationFrame = (function () {
 
 var MCPI = MCPI || {};
 
-MCPI.Model = function(maxPoints) {
+MCPI.Model = function(options) {
     this.points = [];
     this.observers = [];
     this.timerId = 0;
-    this.maxPoints = maxPoints;
+    this.sampleSize = options.sampleSize;
     this.lastTime = 0;
     this.counters = {
         inside: 0,
@@ -60,12 +60,12 @@ MCPI.Model.prototype = {
 
             document.getElementById("all").innerHTML = this.points.length;
         }
-        document.getElementById("fps").innerHTML = this.calculateFps().toFixed() + " fps";
+        // document.getElementById("mcpiFPS").innerHTML = this.calculateFps().toFixed() + " fps";
         this.notifyObservers(point);
-        if (this.points.length == this.maxPoints) {
-            clearInterval(this.timerId);
+        if (this.points.length < this.sampleSize) {
+            // clearInterval(this.timerId);
+            window.requestNextAnimationFrame(function() { that.addPoint(that); });
         }
-        window.requestNextAnimationFrame(function() { that.addPoint(that); });
     },
 
     calculateFps: function() {
@@ -81,10 +81,15 @@ MCPI.Model.prototype = {
         });
     },
 
+    reset: function() {
+        clearInterval(this.timerId);
+        this.points = [];
+    },
+
     run: function() {
         var that = this;
         // this.timerId = setInterval(function() { that.addPoint(that); }, 3);
-        window.requestNextAnimationFrame(function() { that.addPoint(that); });
+        this.timerId = window.requestNextAnimationFrame(function() { that.addPoint(that); });
     }
 
 };
@@ -131,25 +136,35 @@ MCPI.View.prototype = {
 
     update: function(point) {
         this.renderPoint(point);
+    },
+
+    start: function() {
+
     }
 
 };
 
 (function() {
 
-    var model = new MCPI.Model(10000);
+    var model = new MCPI.Model({
+        sampleSize: document.getElementById("mcpiSampleSize").value
+    });
     var view = new MCPI.View({
         canvas: document.getElementById("mcpi"),
-        pointSize: 2,
-        size: 300,
+        start: document.getElementById("start"),
+        pointSize: parseInt(document.getElementById("mcpiPointSize").value, 10),
+        size: 250,
         colors: {
-            bg: "#F2D6B3",
-            inside: "#46658C",
-            outside: "#BB2115",
-            circle: "#D9B89C",
+            bg: "#F2D6B3",      // light brown
+            inside: "#46658C",  // blue
+            outside: "#BB2115", // red
+            circle: "#D9B89C",  // brown
         }
     });
     model.addObserver(view);
-    model.run();
+    var mcpiStart = document.getElementById("mcpiStart");
+    mcpiStart.addEventListener("click", function() {
+        model.run();
+    });
 
 }());

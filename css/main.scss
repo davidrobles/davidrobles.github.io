@@ -226,15 +226,32 @@ button {
     padding: 6px 10px;
     cursor: pointer;
     border: 0;
-    font-size: 1em;
+    font-size: 1.2em;
     outline: none;
-    &.start {
+    &#mcpiStart {
         background-color: #40ba89;
         color: #ffffff;
+        float: left;
     }
-    &.stop {
+    &#mcpiStop {
         background-color: #e26458;
         color: #ffffff;
     }
+}
+
+select.mcpiSelect {
+    border: 2px solid #cecece;
+    padding: 6px;
+    font-size: 1em;
+    outline: none;
+    // width: 80px;
+    float: left;
+}
+
+label {
+    float: left;
+    min-width: 100px;
+    padding: 0 20px 0 0;
+    text-align: right
 }
 
