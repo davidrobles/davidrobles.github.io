@@ -94,11 +94,11 @@ This Demonstration approximates using the Monte Carlo method:
         Your browser does not support HTML5 Canvas!
         </canvas>
         <br />
-        <div style="display: table-cell; height: 100px; text-align: center; margin: 0 auto; background-color: #ff0000; vertical-align: middle;">
-            <svg height="24" width="24" style="vertical-align: middle; display: inline; background-color: #eaeaea;">
+        <div style="display: table-cell; text-align: center; margin: 0 auto; vertical-align: middle;">
+            <svg height="24" width="24" style="vertical-align: middle; display: inline;">
                 <circle cx="12" cy="12" r="12" fill="#46658C" />
-            </svg><span style="background-color: #0000ff; height: 24px; margin: 0; padding: 0; font-size: 1.1em; vertical-align: middle;">
-            <span id="inside" style="width: 40px; display: inline-block; background-color: #00ff00; text-align: left;">0</span></span>
+            </svg><span style="height: 24px; margin: 0; padding: 0; font-size: 1.1em; vertical-align: middle;">
+            <span id="inside" style="width: 40px; display: inline-block; text-align: left;">0</span></span>
             <svg height="24" width="24" style="display: inline; vertical-align: middle;">
                 <circle cx="12" cy="12" r="12" fill="#BB2115" />
             </svg><span style="font-size: 1.1em; vertical-align: middle;">
