@@ -39,8 +39,8 @@ MCPI.Model.prototype = {
 
     addPoint: function(that) {
         var point = {
-            x: Math.random(),
-            y: Math.random()
+            x: (Math.random() * 2) - 1,
+            y: (Math.random() * 2) - 1
         };
         if (MCPI.inside(point)) {
             this.counters.inside += 1;
@@ -90,8 +90,7 @@ MCPI.Model.prototype = {
 };
 
 MCPI.inside = function(point) {
-    var dist = Math.pow(point.x - 0.5, 2) + Math.pow(point.y - 0.5, 2);
-    return dist < Math.pow(0.50, 2);
+    return (Math.pow(point.x, 2) + Math.pow(point.y, 2)) < 1;
 };
 
 MCPI.View = function(options) {
@@ -118,8 +117,8 @@ MCPI.View.prototype = {
     },
 
     renderPoint: function(point) {
-        var centerX = point.x * this.canvas.width,
-            centerY = point.y * this.canvas.height;
+        var centerX = this.canvas.width * ((point.x + 1) / 2),
+            centerY = this.canvas.height * ((point.y + 1) / 2);
         this.ctx.beginPath();
         this.ctx.arc(centerX, centerY, this.pointSize, 0, Math.PI * 2, false);
         if (MCPI.inside(point)) {
