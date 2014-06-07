@@ -30,6 +30,17 @@ MCPI.Model = function(options) {
     };
 };
 
+MCPI.randomPoint = function() {
+    return {
+        x: (Math.random() * 2) - 1,
+        y: (Math.random() * 2) - 1
+    };
+}
+
+MCPI.inside = function(point) {
+    return (Math.pow(point.x, 2) + Math.pow(point.y, 2)) < 1;
+};
+
 MCPI.Model.prototype = {
 
     addObserver: function(observer) {
@@ -37,49 +48,51 @@ MCPI.Model.prototype = {
         observer.render(this);
     },
 
+    updateCounters: function(point) {
+        var side = MCPI.inside(point) ? "inside" : "outside";
+        this.counters[side] += 1;
+    },
+
     addPoint: function(that) {
-        var point = {
-            x: (Math.random() * 2) - 1,
-            y: (Math.random() * 2) - 1
-        };
+        var point = MCPI.randomPoint();
+        this.updateCounters(point);
+        this.points.push(point);
+        this.fire("pointAdded");
+    },
+
+    addPoint: function(that) {
+        var point = MCPI.randomPoint();
         if (MCPI.inside(point)) {
             this.counters.inside += 1;
         } else {
             this.counters.outside += 1;
         }
         this.points.push(point);
+        this.notifyObservers(point);
+        if (this.points.length < this.sampleSize) {
+            window.requestNextAnimationFrame(function() { that.addPoint(that); });
+        } else {
+            clearInterval(this.timerId);
+        }
+    },
+
+    fire: function(event) {
+        // this.observers.forEach(function(observer) {
+        //     observer.fire(event);
+        // });
+    },
+
+    notifyObservers: function(point) {
         var pi = (4.0 * this.counters.inside) / this.points.length;
-        // if (this.points.length % 4 == 0) {
-            document.getElementById("inside").innerHTML = this.counters.inside;
-            document.getElementById("outside").innerHTML = this.counters.outside;
-        // }
+        document.getElementById("inside").innerHTML = this.counters.inside;
+        document.getElementById("outside").innerHTML = this.counters.outside;
+        var test = (this.points.length * 249) / this.sampleSize;
+        document.getElementById("mcpiRect").setAttribute("width", "" + test);
         if (this.points.length % 50 == 0) {
             var math = MathJax.Hub.getAllJax("pi")[0];
             MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
                this.counters.inside + "}{" + this.points.length + "} = " + pi.toFixed(4)]);
-
-            document.getElementById("all").innerHTML = this.points.length;
         }
-        // document.getElementById("mcpiFPS").innerHTML = this.calculateFps().toFixed() + " fps";
-        this.notifyObservers(point);
-        if (this.points.length < this.sampleSize) {
-            // clearInterval(this.timerId);
-            window.requestNextAnimationFrame(function() { that.addPoint(that); });
-        }
-    },
-
-    calculateFps: function() {
-        var now = (+new Date),
-            fps = 1000 / (now - this.lastTime);
-        this.lastTime = now;
-        return fps;
-    },
-
-    fire: function(event) {
-
-    },
-
-    notifyObservers: function(point) {
         this.observers.forEach(function(observer) {
             observer.renderPoint(point);
         });
@@ -88,20 +101,17 @@ MCPI.Model.prototype = {
     reset: function() {
         clearInterval(this.timerId);
         this.points = [];
+        this.inside = 0;
+        this.outside = 0;
         this.fire("reset");
     },
 
     run: function() {
         var that = this;
         this.reset();
-        // this.timerId = setInterval(function() { that.addPoint(that); }, 3);
         this.timerId = window.requestNextAnimationFrame(function() { that.addPoint(that); });
     }
 
-};
-
-MCPI.inside = function(point) {
-    return (Math.pow(point.x, 2) + Math.pow(point.y, 2)) < 1;
 };
 
 MCPI.View = function(options) {
@@ -153,13 +163,13 @@ MCPI.View.prototype = {
 (function() {
 
     var model = new MCPI.Model({
-        sampleSize: document.getElementById("mcpiSampleSize").value
+        sampleSize: parseInt(document.getElementById("mcpiSampleSize").value, 10)
     });
     var view = new MCPI.View({
         canvas: document.getElementById("mcpi"),
         start: document.getElementById("start"),
         pointSize: parseInt(document.getElementById("mcpiPointSize").value, 10),
-        size: 250,
+        size: 300,
         colors: {
             bg: "#F2D6B3",      // light brown
             inside: "#46658C",  // blue
@@ -170,6 +180,10 @@ MCPI.View.prototype = {
     model.addObserver(view);
     var mcpiStart = document.getElementById("mcpiStart");
     mcpiStart.addEventListener("click", function() {
+        view.pointSize = parseInt(document.getElementById("mcpiPointSize").value, 10);
+        model.sampleSize = parseInt(document.getElementById("mcpiSampleSize").value, 10);
+        document.getElementById("mcpiSampleSize").disabled = "disabled";
+        document.getElementById("mcpiPointSize").disabled = "disabled";
         model.run();
     });
 

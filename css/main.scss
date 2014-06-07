@@ -65,6 +65,11 @@ hr {
     margin: 20px 0px;
 }
 
+img.center {
+    display: block;
+    margin: 0 auto;
+}
+
 span.code {
     background-color: $bg-code;
     padding: 1px 4px;
@@ -82,7 +87,7 @@ span.code {
 
 .content {
     float: left;
-    width: 685px;
+    width: 675px;
     padding: 0px 15px 20px 0px;
     line-height: 1.6em;
     p {
@@ -220,24 +225,64 @@ span.code {
 
 
 
-
-
-button {
-    padding: 6px 10px;
-    cursor: pointer;
-    border: 0;
-    font-size: 1.2em;
-    outline: none;
-    &#mcpiStart {
-        background-color: #40ba89;
-        color: #ffffff;
+div.mcpiDemo {
+    margin: 0 auto;
+    background-color: #eaeaea;
+    padding: 15px;
+    width: 600px;
+    div.mcpiCanvasPanel {
         float: left;
     }
-    &#mcpiStop {
-        background-color: #e26458;
-        color: #ffffff;
+    div.rightPanel {
+        display: table;
+        height: 330px;
+        width: 255px;
+        float: right;
+        // background-color: #ff0000;
+        div.mcpiEquation {
+            font-size: 1.3em;
+            border-bottom: 2px solid #cecece;
+            height: 40px;
+            padding: 15px 0;
+            text-align: center;
+            div.pi {
+                vertical-align: middle;
+            }
+        }
+        div.mcpiStatsPanel {
+            border-bottom: 2px solid #cecece;
+            text-align: center;
+            // width: 300px;
+            padding: 20px 0;
+        }
+        div.mcpiConfigPanel {
+            float: right;
+            padding-top: 25px;
+            width: 255px;
+            // background-color: #00ff00;
+        }
+    }
+
+    button {
+        padding: 6px 10px;
+        cursor: pointer;
+        border: 0;
+        font-size: 1.2em;
+        outline: none;
+        &#mcpiStart {
+            background-color: #40ba89;
+            color: #ffffff;
+            // float: left;
+            margin: 0 auto;
+            display: block;
+        }
+        &#mcpiStop {
+            background-color: #e26458;
+            color: #ffffff;
+        }
     }
 }
+
 
 select.mcpiSelect {
     border: 2px solid #cecece;
@@ -250,7 +295,7 @@ select.mcpiSelect {
 
 label {
     float: left;
-    min-width: 100px;
+    min-width: 135px;
     padding: 0 20px 0 0;
     text-align: right
 }
