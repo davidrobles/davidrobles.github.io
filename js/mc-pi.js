@@ -31,10 +31,7 @@ MCPI.inside = function(point) {
 
 MCPI.Model = function(options) {
     this.points = [];
-    this.observers = [];
-    // this.timerId = 0;
-    this.sampleSize = options.sampleSize;
-    // this.lastTime = 0;
+    this.handlers = [];
     this.counters = {
         inside: 0,
         outside: 0
@@ -52,13 +49,6 @@ MCPI.Model.prototype = {
     addRandomPoint: function() {
         var randomPoint = MCPI.randomPoint();
         this.addPoint(randomPoint);
-        // if (this.points.length < this.sampleSize) {
-        //     window.requestNextAnimationFrame(function() {
-        //         that.addPoint(that);
-        //     });
-        // } else {
-        //     clearInterval(this.timerId);
-        // }
     },
 
     addRandomPoints: function(number) {
@@ -68,12 +58,12 @@ MCPI.Model.prototype = {
     },
 
     bind: function(handler) {
-        this.observers.push(handler);
+        this.handlers.push(handler);
         handler.ready.call(handler);
     },
 
     trigger: function(event, params) {
-        this.observers.forEach(function(handler) {
+        this.handlers.forEach(function(handler) {
             if (event in handler) {
                 handler[event].apply(handler, params);
             }
@@ -82,7 +72,7 @@ MCPI.Model.prototype = {
 
     updateCounters: function(point) {
         var side = MCPI.inside(point) ? "inside" : "outside";
-        this.counters[side] += 1;
+        this.counters[side]++;
     },
 
     notifyObservers: function(point) {
@@ -96,7 +86,7 @@ MCPI.Model.prototype = {
         //     MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
         //        this.counters.inside + "}{" + this.points.length + "} = " + pi.toFixed(4)]);
         // }
-        // this.observers.forEach(function(observer) {
+        // this.handlers.forEach(function(observer) {
         //     observer.renderPoint(point);
 
         //     this.renderPoint(point, hello);
@@ -105,7 +95,6 @@ MCPI.Model.prototype = {
     },
 
     reset: function() {
-        // clearInterval(this.timerId);
         this.points = [];
         this.inside = 0;
         this.outside = 0;
@@ -115,7 +104,9 @@ MCPI.Model.prototype = {
     // run: function() {
     //     var that = this;
     //     this.reset();
-    //     this.timerId = window.requestNextAnimationFrame(function() { that.addPoint(that); });
+    //     this.timerId = window.requestNextAnimationFrame(function() {
+    //         that.runIter(that);
+    //     });
     // }
 
 };
@@ -168,6 +159,41 @@ MCPI.View.prototype = {
 
 };
 
+MCPI.RunModel = function(model, sampleSize) {
+    this.model = model;
+    this.sampleSize = sampleSize;
+    this.timerId = 0;
+    this.lastTime = 0;
+};
+
+MCPI.RunModel.prototype = {
+
+    run: function() {
+        this.model.reset();
+        this.timerId = window.requestNextAnimationFrame(function() {
+            this.runIter();
+        }.bind(this));
+    },
+
+    runIter: function() {
+        console.log(this.model.points.length);
+        if (this.model.points.length < this.sampleSize) {
+            this.model.addRandomPoint();
+            window.requestNextAnimationFrame(function() {
+                this.runIter();
+            }.bind(this));
+        } else {
+            clearInterval(this.timerId);
+        }
+    },
+
+    stop: function() {
+       clearInterval(this.timerId);
+    }
+
+};
+
+
 (function() {
 
     var model = new MCPI.Model({
@@ -180,31 +206,41 @@ MCPI.View.prototype = {
         size: 300,
         colors: {
             bg: "#F2D6B3",      // light brown
-            inside: "#2980b9",  // blue
-            outside: "#c0392b", // red
             circle: "#D9B89C",  // brown
+            inside: "#2980b9",  // blue
+            outside: "#c0392b"  // red
         }
     });
     model.bind(view);
-    model.addRandomPoints(10000);
-    var mcpiStart = document.getElementById("mcpiStartStop");
-    mcpiStart.addEventListener("click", function() {
-        if (mcpiStart.value === "start") {
-            var pointSizeStr = document.getElementById("mcpiPointSize").value;
-            var sampleSizeStr = document.getElementById("mcpiSampleSize").value;
-            view.pointSize = parseInt(pointSizeStr, 10);
-            model.sampleSize = parseInt(sampleSizeStr, 10);
-            document.getElementById("mcpiSampleSize").disabled = "disabled";
-            document.getElementById("mcpiPointSize").disabled = "disabled";
-            mcpiStart.className = "mcpiStartStop mcpiStop";
-            mcpiStart.innerHTML = "RESET";
-            mcpiStart.value = "stop";
-            // model.run();
-        } else if (mcpiStart.value === "stop") {
-            mcpiStart.className = "mcpiStartStop mcpiStart";
-            mcpiStart.innerHTML = "START";
-            mcpiStart.value = "start";
-        }
-    });
+    
+    var runModel = new MCPI.RunModel(model, 1000);
+    runModel.run();
+
+    // model.addRandomPoints(10000);
+
+    // var mcpiStart = document.getElementById("mcpiStartStop");
+
+    // mcpiStart.addEventListener("click", function() {
+    //     if (mcpiStart.value === "start") {
+    //         var pointSizeStr = document.getElementById("mcpiPointSize").value;
+    //         var sampleSizeStr = document.getElementById("mcpiSampleSize").value;
+    //         view.pointSize = parseInt(pointSizeStr, 10);
+    //         model.sampleSize = parseInt(sampleSizeStr, 10);
+    //         document.getElementById("mcpiSampleSize").disabled = "disabled";
+    //         document.getElementById("mcpiPointSize").disabled = "disabled";
+    //         mcpiStart.className = "mcpiStartStop mcpiStop";
+    //         mcpiStart.innerHTML = "RESET";
+    //         mcpiStart.value = "stop";
+    //         // model.run();
+    //     } else if (mcpiStart.value === "stop") {
+    //         mcpiStart.className = "mcpiStartStop mcpiStart";
+    //         mcpiStart.innerHTML = "START";
+    //         mcpiStart.value = "start";
+    //     }
+    // });
 
 }());
+
+
+
+
