@@ -67,7 +67,7 @@ This Demonstration approximates using the Monte Carlo method:
 <div class="mcpiDemo" >
 
     <div class="mcpiCanvasPanel">
-        <canvas id="mcpi" style="margin: 0 auto; display: block;">
+        <canvas id="mcpiCanvasView" style="margin: 0 auto; display: block;">
             Your browser does not support HTML5 Canvas!
         </canvas>
     </div>
@@ -82,11 +82,11 @@ This Demonstration approximates using the Monte Carlo method:
             <svg height="24" width="24" style="vertical-align: middle;">
                 <circle cx="12" cy="12" r="12" fill="#2980b9" />
             </svg><span style="height: 24px; margin: 0; padding: 0; font-size: 1.1em; vertical-align: middle;">
-            <span id="inside" style="width: 40px; display: inline-block; text-align: left;">0</span></span>
+            <span id="mcpiInsideCounter" style="width: 40px; display: inline-block; text-align: left;">0</span></span>
             <svg height="24" width="24" style="vertical-align: middle;">
                 <circle cx="12" cy="12" r="12" fill="#c0392b" />
             </svg><span style="font-size: 1.1em; vertical-align: middle;">
-            <span id="outside">0</span></span>
+            <span id="mcpiOutsideCounter">0</span></span>
             <br />
             <br />
             <svg height="20" width="255" style="display: block;">
