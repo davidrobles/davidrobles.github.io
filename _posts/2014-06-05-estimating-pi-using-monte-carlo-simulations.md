@@ -80,18 +80,18 @@ This Demonstration approximates using the Monte Carlo method:
 
         <div class="mcpiStatsPanel">
             <svg height="24" width="24" style="vertical-align: middle;">
-                <circle cx="12" cy="12" r="12" fill="#46658C" />
+                <circle cx="12" cy="12" r="12" fill="#2980b9" />
             </svg><span style="height: 24px; margin: 0; padding: 0; font-size: 1.1em; vertical-align: middle;">
             <span id="inside" style="width: 40px; display: inline-block; text-align: left;">0</span></span>
             <svg height="24" width="24" style="vertical-align: middle;">
-                <circle cx="12" cy="12" r="12" fill="#BB2115" />
+                <circle cx="12" cy="12" r="12" fill="#c0392b" />
             </svg><span style="font-size: 1.1em; vertical-align: middle;">
             <span id="outside">0</span></span>
             <br />
             <br />
             <svg height="20" width="255" style="display: block;">
                 <rect x="0" y="0" width="255px" height="20" fill="#cecece" />
-                <rect id="mcpiRect" x="3" y="3" width="249" height="14" fill="#20b6d1" />
+                <rect id="mcpiRect" x="3" y="3" width="249" height="14" fill="#7f8c8d" />
             </svg>
 
         </div>
@@ -109,14 +109,14 @@ This Demonstration approximates using the Monte Carlo method:
             <label for="mcpiPointSize">Point size:</label>
             <select id="mcpiPointSize" class="mcpiSelect">
                 <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3" selected="selected">3</option>
+                <option value="2" selected="selected">2</option>
+                <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>
             </select>
             <br /><br />
-            <button id="mcpiStart" class="mcpiStart">START</button>
+            <button id="mcpiStartStop" class="mcpiStartStop mcpiStart" value="start">START</button>
         </div>
     </div>
 

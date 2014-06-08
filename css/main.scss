@@ -3,7 +3,7 @@
 
 $link-color: #568d9f;
 $bg-color: #384047;
-$bg-sec: #4bc970;
+$bg-sec: #2ecc71;
 $bg-2: #283036;
 $bg-code: #eee;
 
@@ -238,7 +238,6 @@ div.mcpiDemo {
         height: 330px;
         width: 255px;
         float: right;
-        // background-color: #ff0000;
         div.mcpiEquation {
             font-size: 1.3em;
             border-bottom: 2px solid #cecece;
@@ -252,33 +251,36 @@ div.mcpiDemo {
         div.mcpiStatsPanel {
             border-bottom: 2px solid #cecece;
             text-align: center;
-            // width: 300px;
             padding: 20px 0;
         }
         div.mcpiConfigPanel {
             float: right;
             padding-top: 25px;
             width: 255px;
-            // background-color: #00ff00;
         }
     }
 
-    button {
-        padding: 6px 10px;
+    button.mcpiStartStop {
         cursor: pointer;
         border: 0;
+        display: block;
         font-size: 1.2em;
+        margin: 0 auto;
         outline: none;
-        &#mcpiStart {
-            background-color: #40ba89;
+        padding: 6px 10px;
+        &.mcpiStart {
+            background-color: #27ae60;
             color: #ffffff;
-            // float: left;
-            margin: 0 auto;
-            display: block;
+            &:hover {
+                background-color: #2cc36b;
+            }
         }
-        &#mcpiStop {
-            background-color: #e26458;
+        &.mcpiStop {
+            background-color: #c0392b;
             color: #ffffff;
+            &:hover {
+                background-color: #d14233;
+            }
         }
     }
 }
