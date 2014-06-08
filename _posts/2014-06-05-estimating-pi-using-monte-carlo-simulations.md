@@ -116,7 +116,7 @@ This Demonstration approximates using the Monte Carlo method:
                 <option value="6">6</option>
             </select>
             <br /><br />
-            <button id="mcpiStartStop" class="mcpiStartStop mcpiStart" value="start">START</button>
+            <button id="mcpiStartButton" class="mcpiStartStop mcpiStart" value="start">START</button>
         </div>
     </div>
 
