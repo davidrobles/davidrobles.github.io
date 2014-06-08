@@ -18,6 +18,17 @@ window.requestNextAnimationFrame = (function () {
 
 var MCPI = MCPI || {};
 
+MCPI.randomPoint = function() {
+    return {
+        x: Math.random() * 2 - 1,
+        y: Math.random() * 2 - 1
+    };
+}
+
+MCPI.inside = function(point) {
+    return (Math.pow(point.x, 2) + Math.pow(point.y, 2)) < 1;
+};
+
 MCPI.Model = function(options) {
     this.points = [];
     this.observers = [];
@@ -28,17 +39,6 @@ MCPI.Model = function(options) {
         inside: 0,
         outside: 0
     };
-};
-
-MCPI.randomPoint = function() {
-    return {
-        x: (Math.random() * 2) - 1,
-        y: (Math.random() * 2) - 1
-    };
-}
-
-MCPI.inside = function(point) {
-    return (Math.pow(point.x, 2) + Math.pow(point.y, 2)) < 1;
 };
 
 MCPI.Model.prototype = {
@@ -67,15 +67,15 @@ MCPI.Model.prototype = {
         }
     },
 
-    bind: function(observer) {
-        this.observers.push(observer);
-        observer.ready.call(observer);
+    bind: function(handler) {
+        this.observers.push(handler);
+        handler.ready.call(handler);
     },
 
     trigger: function(event, params) {
-        this.observers.forEach(function(observer) {
-            if (event in observer) {
-                observer[event].apply(observer, params);
+        this.observers.forEach(function(handler) {
+            if (event in handler) {
+                handler[event].apply(handler, params);
             }
         });
     },
@@ -134,22 +134,24 @@ MCPI.View.prototype = {
     // Callbacks
 
     pointAdded: function(point) {
-        var circleSide = MCPI.inside(point) ? "inside" : "outside";
-        var color = this.colors[circleSide];
+        var circleSide = MCPI.inside(point) ? "inside" : "outside",
+            color = this.colors[circleSide];
         this.renderPoint(point, color);
     },
 
     ready: function() {
-        this.canvas.style.backgroundColor = this.colors.bg;
-        var borderSize = Math.round(this.canvas.width * 0.05);
-        this.canvas.style.border = borderSize + "px solid " + this.colors.circle;
-        var centerX = this.canvas.width / 2,
-            centerY = this.canvas.height / 2,
-            radius = this.canvas.width / 2;
-        this.ctx.beginPath();
-        this.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
-        this.ctx.fillStyle = this.colors.circle;
-        this.ctx.fill();
+        var ctx = this.ctx,
+            canvas = this.canvas,
+            centerX = canvas.width / 2,
+            centerY = canvas.height / 2,
+            radius = canvas.width / 2,
+            borderSize = Math.round(canvas.width * 0.05);
+        canvas.style.backgroundColor = this.colors.bg;
+        canvas.style.border = borderSize + "px solid " + this.colors.circle;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.colors.circle;
+        ctx.fill();
     },
 
     // Drawing
