@@ -170,12 +170,12 @@ MCPI.DashboardView.prototype = {
     },
 
     renderEquation: function(model) {
-        // var pi = (4.0 * model.counters.inside) / model.points.length;
-        // if (model.points.length % 50 == 0) {
-        //     var math = MathJax.Hub.getAllJax("pi")[0];
-        //     MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
-        //        this.counters.inside + "}{" + this.points.length + "} = " + pi.toFixed(4)]);
-        // }
+        var pi = (4.0 * model.counters.inside) / model.points.length;
+        if (model.points.length % 50 == 0) {
+            var math = MathJax.Hub.getAllJax(this.equation)[0];
+            MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
+               model.counters.inside + "}{" + model.points.length + "} = " + pi.toFixed(4)]);
+        }
     },
 
     renderCounters: function(model) {
@@ -273,34 +273,14 @@ MCPI.CanvasView.prototype = {
             inside: document.getElementById("mcpiInsideCounter"),
             outside: document.getElementById("mcpiOutsideCounter")
         },
-        // equation: document.getElementById(""),
+        equation: document.getElementById("mcpiEquation"),
         sampleSize: document.getElementById("mcpiSampleSize"),
         pointSize: document.getElementById("mcpiPointSize"),
         startButton: document.getElementById("mcpiStartButton"),
         controller: controller
     });
 
-    // controller.run();
     model.bind(canvasView);
     model.bind(dashboardView);
     
-    // mcpiStart.addEventListener("click", function() {
-    //     if (mcpiStart.value === "start") {
-    //         var pointSizeStr = document.getElementById("mcpiPointSize").value;
-    //         var sampleSizeStr = document.getElementById("mcpiSampleSize").value;
-    //         view.pointSize = parseInt(pointSizeStr, 10);
-    //         model.sampleSize = parseInt(sampleSizeStr, 10);
-    //         document.getElementById("mcpiSampleSize").disabled = "disabled";
-    //         document.getElementById("mcpiPointSize").disabled = "disabled";
-    //         mcpiStart.className = "mcpiStartStop mcpiStop";
-    //         mcpiStart.innerHTML = "RESET";
-    //         mcpiStart.value = "stop";
-    //         // model.run();
-    //     } else if (mcpiStart.value === "stop") {
-    //         mcpiStart.className = "mcpiStartStop mcpiStart";
-    //         mcpiStart.innerHTML = "START";
-    //         mcpiStart.value = "start";
-    //     }
-    // });
-
 }());
