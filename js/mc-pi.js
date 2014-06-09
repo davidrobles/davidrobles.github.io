@@ -142,7 +142,7 @@ MCPI.DashboardView = function(options) {
             this.startButton.value = "stop";
             this.controller.run();
         } else if (this.startButton.value === "stop") {
-            this.startButton.className = "mcpiStartStop startButton";
+            this.startButton.className = "mcpiStartStop mcpiStart";
             this.startButton.innerHTML = "START";
             this.startButton.value = "start";
             this.controller.reset();
@@ -217,8 +217,16 @@ MCPI.CanvasView.prototype = {
             centerY = canvas.height / 2,
             radius = canvas.width / 2,
             borderSize = Math.round(canvas.width * 0.05);
-        canvas.style.backgroundColor = this.colors.bg;
+
+        // border
         canvas.style.border = borderSize + "px solid " + this.colors.circle;
+
+        // background
+        ctx.rect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = this.colors.bg;
+        ctx.fill();
+
+        // circle
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
         ctx.fillStyle = this.colors.circle;

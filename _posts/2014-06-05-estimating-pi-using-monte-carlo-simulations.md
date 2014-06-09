@@ -91,7 +91,7 @@ This Demonstration approximates using the Monte Carlo method:
             <br />
             <svg height="20" width="255" style="display: block;">
                 <rect x="0" y="0" width="255px" height="20" fill="#cecece" />
-                <rect id="mcpiRect" x="3" y="3" width="249" height="14" fill="#7f8c8d" />
+                <rect id="mcpiRect" x="3" y="3" width="0" height="14" fill="#7f8c8d" />
             </svg>
 
         </div>
