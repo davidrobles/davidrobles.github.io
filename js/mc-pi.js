@@ -66,9 +66,9 @@ MCPI.Model.prototype = {
 
     reset: function() {
         this.points = [];
-        this.inside = 0;
-        this.outside = 0;
-        this.trigger("reset");
+        this.counters.inside = 0;
+        this.counters.outside = 0;
+        this.trigger("reset", [this]);
     },
 
     trigger: function(event, params) {
@@ -89,24 +89,31 @@ MCPI.Model.prototype = {
 MCPI.Controller = function(model, sampleSize) {
     this.model = model;
     this.sampleSize = sampleSize;
+    this.play = false;
 };
 
 MCPI.Controller.prototype = {
 
-    run: function() {
-        this.model.reset();
-        window.requestNextAnimationFrame(function() {
-            this.next();
-        }.bind(this));
-    },
-
     next: function() {
-        if (this.model.points.length < this.sampleSize) {
+        if (this.play && this.model.points.length < this.sampleSize) {
             this.model.addRandomPoint();
             window.requestNextAnimationFrame(function() {
                 this.next();
             }.bind(this));
         }
+    },
+
+    reset: function() {
+        this.model.reset();
+        this.play = false;
+    },
+
+    run: function() {
+        this.model.reset();
+        this.play = true;
+        window.requestNextAnimationFrame(function() {
+            this.next();
+        }.bind(this));
     }
 
 };
@@ -138,7 +145,7 @@ MCPI.DashboardView = function(options) {
             this.startButton.className = "mcpiStartStop startButton";
             this.startButton.innerHTML = "START";
             this.startButton.value = "start";
-            this.controller.stop();
+            this.controller.reset();
         }
     }.bind(this));
 };
@@ -146,6 +153,12 @@ MCPI.DashboardView = function(options) {
 MCPI.DashboardView.prototype = {
 
     pointAdded: function(model) {
+        this.renderEquation(model);
+        this.renderCounters(model);
+        this.renderCompletionBar(model);
+    },
+
+    reset: function(model) {
         this.renderEquation(model);
         this.renderCounters(model);
         this.renderCompletionBar(model);
@@ -183,11 +196,19 @@ MCPI.CanvasView = function(options) {
 
 MCPI.CanvasView.prototype = {
 
+    // Callbacks
+
     pointAdded: function(model, point) {
         var circleSide = MCPI.inside(point) ? "inside" : "outside",
             color = this.colors[circleSide];
         this.renderPoint(point, color);
     },
+
+    reset: function() {
+        this.ready();
+    },
+
+    // Object
 
     ready: function() {
         var ctx = this.ctx,
