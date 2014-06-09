@@ -1,0 +1,227 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 14px;
+  color: #444;
+  background-color: #ffffff; }
+
+h1 {
+  color: #568d9f;
+  font-size: 1.5em;
+  margin: 0.4em 0 0.8em 0; }
+
+h2 {
+  color: #568d9f;
+  font-size: 1.5em;
+  margin: 0.4em 0 0.8em 0; }
+
+h3 {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 1em 0; }
+
+h4 {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 15px 0; }
+
+p {
+  margin: 1em 0; }
+
+a {
+  color: #568d9f;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+
+ul {
+  list-style-type: square; }
+
+hr {
+  border: 1px solid #e0dddd;
+  margin: 20px 0px; }
+
+img.center {
+  display: block;
+  margin: 0 auto; }
+
+span.code {
+  background-color: #eeeeee;
+  padding: 1px 4px; }
+
+.menu-bar {
+  height: 10px;
+  background-color: #2ecc71; }
+
+.container {
+  margin: 0 auto;
+  width: 960px; }
+
+.content {
+  float: left;
+  width: 675px;
+  padding: 0px 15px 20px 0px;
+  line-height: 1.6em; }
+  .content p {
+    text-align: justify; }
+
+.sidebar {
+  float: right;
+  width: 260px;
+  padding-top: 30px; }
+  .sidebar .widget {
+    font-size: 0.9em;
+    margin-bottom: 15px; }
+    .sidebar .widget ul {
+      margin: 10px 0 10px 30px; }
+    .sidebar .widget .name {
+      font-weight: 600;
+      font-size: 1.4em;
+      letter-spacing: -1px;
+      text-shadow: 1px 1px 0 #fff;
+      padding: 0px 15px 5px 0; }
+    .sidebar .widget .con img.about {
+      display: block;
+      margin: 0 auto;
+      height: 150px;
+      width: 150px;
+      border: 4px solid #cecece; }
+    .sidebar .widget .con p.about {
+      text-align: center; }
+
+.header {
+  background-color: #384047;
+  height: 100px;
+  border-bottom: 1px solid #515953; }
+  .header #title {
+    display: inline-block;
+    margin-top: 28px;
+    margin-bottom: 2em;
+    font-size: 2.4em;
+    float: left;
+    font-weight: 500; }
+    .header #title a {
+      color: #ffffff; }
+      .header #title a:hover {
+        text-decoration: none; }
+  .header #menu {
+    width: 550px;
+    float: right; }
+    .header #menu a {
+      letter-spacing: 0.1em;
+      margin: 32px 2px;
+      font-size: 1em;
+      float: right;
+      color: #ffffff;
+      padding: 15px 25px; }
+      .header #menu a:hover {
+        color: #2ecc71;
+        text-decoration: none; }
+      .header #menu a.current {
+        color: #2ecc71;
+        text-decoration: none; }
+
+.meta {
+  color: #000;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  font-weight: bold; }
+
+.footer {
+  clear: both;
+  font-size: 80%;
+  color: #666;
+  border-top: 4px solid #eee;
+  margin-top: 2em;
+  overflow: hidden; }
+  .footer .contact {
+    float: left;
+    margin-right: 3em; }
+    .footer .contact a {
+      color: #8085C1; }
+  .footer .rss {
+    margin-top: 1.1em;
+    margin-right: -.2em;
+    float: right; }
+    .footer .rss img {
+      border: 0; }
+
+.post p.date {
+  font-size: 0.9em;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  color: #585858; }
+.post pre {
+  background-color: #eeeeee;
+  padding: 12px 14px;
+  margin: 4px 4px 18px 4px; }
+  .post pre code {
+    font-size: 0.9em;
+    font-family: 'Menlo';
+    line-height: 1.6em; }
+.post ul, .post ol {
+  margin-left: 2em; }
+
+div.mcpiDemo {
+  margin: 0 auto;
+  background-color: #eaeaea;
+  padding: 15px;
+  width: 600px; }
+  div.mcpiDemo div.mcpiCanvasPanel {
+    float: left; }
+  div.mcpiDemo div.rightPanel {
+    display: table;
+    height: 330px;
+    width: 255px;
+    float: right; }
+    div.mcpiDemo div.rightPanel div.mcpiEquation {
+      font-size: 1.3em;
+      border-bottom: 2px solid #cecece;
+      height: 40px;
+      padding: 15px 0;
+      text-align: center; }
+      div.mcpiDemo div.rightPanel div.mcpiEquation div.pi {
+        vertical-align: middle; }
+    div.mcpiDemo div.rightPanel div.mcpiStatsPanel {
+      border-bottom: 2px solid #cecece;
+      text-align: center;
+      padding: 20px 0; }
+    div.mcpiDemo div.rightPanel div.mcpiConfigPanel {
+      float: right;
+      padding-top: 25px;
+      width: 255px; }
+  div.mcpiDemo button.mcpiStartStop {
+    cursor: pointer;
+    border: 0;
+    display: block;
+    font-size: 1.2em;
+    margin: 0 auto;
+    outline: none;
+    padding: 6px 10px; }
+    div.mcpiDemo button.mcpiStartStop.mcpiStart {
+      background-color: #27ae60;
+      color: #ffffff; }
+      div.mcpiDemo button.mcpiStartStop.mcpiStart:hover {
+        background-color: #2cc36b; }
+    div.mcpiDemo button.mcpiStartStop.mcpiStop {
+      background-color: #c0392b;
+      color: #ffffff; }
+      div.mcpiDemo button.mcpiStartStop.mcpiStop:hover {
+        background-color: #d14233; }
+
+select.mcpiSelect {
+  border: 2px solid #cecece;
+  padding: 6px;
+  font-size: 1em;
+  outline: none;
+  float: left; }
+
+label {
+  float: left;
+  min-width: 135px;
+  padding: 0 20px 0 0;
+  text-align: right; }
