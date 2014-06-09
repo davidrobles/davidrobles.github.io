@@ -40,6 +40,8 @@ MCPI.Model = function() {
 
 MCPI.Model.prototype = {
 
+    constructor: MCPI.Model,
+
     addPoint: function(point) {
         this.points.push(point);
         this.updateCounters(point);
@@ -94,6 +96,8 @@ MCPI.Controller = function(model, sampleSize) {
 
 MCPI.Controller.prototype = {
 
+    constructor: MCPI.Controller,
+
     next: function() {
         if (this.play && this.model.points.length < this.sampleSize) {
             this.model.addRandomPoint();
@@ -133,6 +137,8 @@ MCPI.DashboardView = function(options) {
 };
 
 MCPI.DashboardView.prototype = {
+
+    constructor: MCPI.DashboardView,
 
     addListeners: function() {
         this.startButton.addEventListener("click", function() {
@@ -201,6 +207,8 @@ MCPI.CanvasView = function(options) {
 };
 
 MCPI.CanvasView.prototype = {
+
+    constructor: MCPI.CanvasView,
 
     // Callbacks
 
