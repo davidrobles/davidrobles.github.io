@@ -119,38 +119,44 @@ MCPI.Controller.prototype = {
 };
 
 MCPI.DashboardView = function(options) {
+    this.completionBar = options.completionBar;
     this.controller = options.controller;
-    this.equation = options.equation;
     this.counters = {
         inside: options.counters.inside,
         outside: options.counters.outside
     };
-    this.completionBar = options.completionBar;
-    this.sampleSize = options.sampleSize;
+    this.equation = options.equation;
     this.pointSize = options.pointSize;
+    this.sampleSize = options.sampleSize;
     this.startButton = options.startButton;
-    this.startButton.addEventListener("click", function() {
-        if (this.startButton.value === "start") {
-            var pointSizeStr = this.pointSize.value;
-            var sampleSizeStr = this.sampleSize.value;
-            // view.pointSize = parseInt(pointSizeStr, 10);
-            // model.sampleSize = parseInt(sampleSizeStr, 10);
-            this.sampleSize.disabled = "disabled";
-            this.pointSize.disabled = "disabled";
-            this.startButton.className = "mcpiStartStop mcpiStop";
-            this.startButton.innerHTML = "RESET";
-            this.startButton.value = "stop";
-            this.controller.run();
-        } else if (this.startButton.value === "stop") {
-            this.startButton.className = "mcpiStartStop mcpiStart";
-            this.startButton.innerHTML = "START";
-            this.startButton.value = "start";
-            this.controller.reset();
-        }
-    }.bind(this));
+    this.addListeners();
 };
 
 MCPI.DashboardView.prototype = {
+
+    addListeners: function() {
+        this.startButton.addEventListener("click", function() {
+            if (this.startButton.value === "start") {
+                var pointSizeStr = this.pointSize.value;
+                var sampleSizeStr = this.sampleSize.value;
+                // view.pointSize = parseInt(pointSizeStr, 10);
+                // model.sampleSize = parseInt(sampleSizeStr, 10);
+                this.sampleSize.disabled = true;
+                this.pointSize.disabled = true;
+                this.startButton.className = "mcpiStartStop mcpiStop";
+                this.startButton.innerHTML = "RESET";
+                this.startButton.value = "stop";
+                this.controller.run();
+            } else if (this.startButton.value === "stop") {
+                this.startButton.className = "mcpiStartStop mcpiStart";
+                this.startButton.innerHTML = "START";
+                this.startButton.value = "start";
+                this.sampleSize.disabled = false;
+                this.pointSize.disabled = false;
+                this.controller.reset();
+            }
+        }.bind(this));
+    },
 
     pointAdded: function(model) {
         this.renderEquation(model);
@@ -169,6 +175,11 @@ MCPI.DashboardView.prototype = {
         this.completionBar.setAttribute("width", "" + test);
     },
 
+    renderCounters: function(model) {
+        this.counters.inside.innerHTML = model.counters.inside;
+        this.counters.outside.innerHTML = model.counters.outside;
+    },
+
     renderEquation: function(model) {
         var pi = (4.0 * model.counters.inside) / model.points.length;
         if (model.points.length % 50 == 0) {
@@ -176,11 +187,6 @@ MCPI.DashboardView.prototype = {
             MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
                model.counters.inside + "}{" + model.points.length + "} = " + pi.toFixed(4)]);
         }
-    },
-
-    renderCounters: function(model) {
-        this.counters.inside.innerHTML = model.counters.inside;
-        this.counters.outside.innerHTML = model.counters.outside;
     }
 
 };
