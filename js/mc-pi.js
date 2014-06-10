@@ -191,9 +191,9 @@ MCPI.DashboardView.prototype = {
     },
 
     renderEquation: function(model) {
-        var pi = this.calculatePi();
+        var pi = model.calculatePi();
         if (model.points.length % 50 == 0) {
-            var math = MathJax.Hub.getAllJax(this.equation)[0];
+            var math = MathJax.Hub.getAllJax(this.equation.id)[0];
             MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
                model.counters.inside + "}{" + model.points.length + "} = " + pi.toFixed(4)]);
         }

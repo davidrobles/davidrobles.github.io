@@ -64,7 +64,7 @@ This Demonstration approximates using the Monte Carlo method:
 
 ### Demo
 
-<div class="mcpiDemo" >
+<div class="mcpiDemo">
 
     <div class="mcpiCanvasPanel">
         <canvas id="mcpiCanvasView" style="margin: 0 auto; display: block;">
@@ -74,7 +74,7 @@ This Demonstration approximates using the Monte Carlo method:
 
     <div class="rightPanel">
 
-        <div class="mcpiEquation">
+        <div id="mcpiEquation" class="mcpiEquation">
             <div class="pi" id="pi">\( \pi \approx 4 \frac{A_{circle}}{A_{square}} \)</div>
         </div>
 
