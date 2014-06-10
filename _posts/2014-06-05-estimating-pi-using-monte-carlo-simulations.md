@@ -157,7 +157,7 @@ model.addObserver(view);
 model.run();
 {% endhighlight %}
 
-<script src="/js/mc-pi.js"></script>
+<script src="/js/mcpi.js"></script>
 
 
 <!--
