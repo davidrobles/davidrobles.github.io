@@ -45,18 +45,22 @@ MCPI.Model.prototype = {
     addPoint: function(point) {
         this.points.push(point);
         this.updateCounters(point);
-        this.trigger("pointAdded", [this, point]);
     },
 
     addRandomPoint: function() {
         var randomPoint = MCPI.randomPoint();
         this.addPoint(randomPoint);
+        this.trigger("pointAdded", [this, point]);
     },
 
     addRandomPoints: function(number) {
+        var points = [];
         for (var i = 0; i < number; i++) {
-            this.addRandomPoint();
+            var randomPoint = MCPI.randomPoint();
+            this.addPoint(randomPoint);
+            points.push(randomPoint);
         }
+        this.trigger("pointsAdded", [this, points]);
     },
 
     bind: function(handler) {
@@ -109,7 +113,7 @@ MCPI.Controller.prototype = {
 
     next: function() {
         if (this.play && this.model.points.length < this.sampleSize) {
-            this.model.addRandomPoint();
+            this.model.addRandomPoints(5000);
             window.requestNextAnimationFrame(function() {
                 this.next();
             }.bind(this));
@@ -170,12 +174,18 @@ MCPI.DashboardView.prototype = {
             this.controller.sampleSize = parseInt(event.srcElement.value, 10);
         }.bind(this));
         this.pointSize.addEventListener("change", function(event) {
-            hello('test');
+            alert('test');
             this.pointSize = parseInt(event.srcElement.value, 10);
         }.bind(this));
     },
 
     pointAdded: function(model) {
+        this.renderEquation(model);
+        this.renderCounters(model);
+        this.renderCompletionBar(model);
+    },
+
+    pointsAdded: function(model) {
         this.renderEquation(model);
         this.renderCounters(model);
         this.renderCompletionBar(model);
@@ -195,10 +205,6 @@ MCPI.DashboardView.prototype = {
     },
 
     start: function() {
-        var pointSizeStr = this.pointSize.value;
-        var sampleSizeStr = this.sampleSize.value;
-        // view.pointSize = parseInt(pointSizeStr, 10);
-        // model.sampleSize = parseInt(sampleSizeStr, 10);
         this.sampleSize.disabled = true;
         this.pointSize.disabled = true;
         this.startButton.className = "mcpiStartStop mcpiStop";
@@ -207,7 +213,7 @@ MCPI.DashboardView.prototype = {
     },
 
     renderCompletionBar: function(model) {
-        var test = (model.points.length * 249) / 5000;
+        var test = (model.points.length * 249) / parseInt(this.sampleSize.value, 10);
         this.completionBar.setAttribute("width", "" + test);
     },
 
@@ -231,7 +237,8 @@ MCPI.CanvasView = function(options) {
     this.canvas = options.canvas;
     this.ctx = this.canvas.getContext("2d");
     this.colors = options.colors;
-    this.pointSize = options.pointSize;
+    // this.pointSize = options.pointSize;
+    this.pointSize = 1;
     this.canvas.width = options.size;
     this.canvas.height = options.size;
 };
@@ -246,6 +253,12 @@ MCPI.CanvasView.prototype = {
         var circleSide = MCPI.inside(point) ? "inside" : "outside",
             color = this.colors[circleSide];
         this.renderPoint(point, color);
+    },
+
+    pointsAdded: function(model, points) {
+        for (var i = 0; i < points.length; i++) {
+            this.pointAdded(model, points[i]);
+        }
     },
 
     reset: function() {

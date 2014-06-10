@@ -99,11 +99,11 @@ This Demonstration approximates using the Monte Carlo method:
         <div class="mcpiConfigPanel">
             <label for="mcpiSelect">Sample size:</label>
             <select id="mcpiSampleSize" class="mcpiSelect">
-                <option value="1000">1000</option>
-                <option value="2500">2500</option>
-                <option value="5000" selected="selected">5000</option>
-                <option value="7500">7500</option>
-                <option value="10000">10000</option>
+                <option value="10000" selected="selected">10000</option>
+                <option value="50000">50000</option>
+                <option value="100000">100000</option>
+                <option value="500000">500000</option>
+                <option value="1000000">1000000</option>
             </select>
             <br /><br />
             <label for="mcpiPointSize">Point size:</label>
