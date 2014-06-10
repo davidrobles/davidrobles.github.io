@@ -166,6 +166,13 @@ MCPI.DashboardView.prototype = {
                 this.controller.reset();
             }
         }.bind(this));
+        this.sampleSize.addEventListener("change", function(event) {
+            this.controller.sampleSize = parseInt(event.srcElement.value, 10);
+        }.bind(this));
+        this.pointSize.addEventListener("change", function(event) {
+            hello('test');
+            this.pointSize = parseInt(event.srcElement.value, 10);
+        }.bind(this));
     },
 
     pointAdded: function(model) {
