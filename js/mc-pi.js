@@ -66,6 +66,10 @@ MCPI.Model.prototype = {
         }
     },
 
+    calculatePi: function() {
+        return (4.0 * this.counters.inside) / this.points.length;
+    },
+
     reset: function() {
         this.points = [];
         this.counters.inside = 0;
@@ -187,7 +191,7 @@ MCPI.DashboardView.prototype = {
     },
 
     renderEquation: function(model) {
-        var pi = (4.0 * model.counters.inside) / model.points.length;
+        var pi = this.calculatePi();
         if (model.points.length % 50 == 0) {
             var math = MathJax.Hub.getAllJax(this.equation)[0];
             MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
