@@ -71,7 +71,9 @@ MCPI.Model.prototype = {
     },
 
     calculatePi: function() {
-        return (4.0 * this.counters.inside) / this.points.length;
+        var pointsInside = this.counters.inside;
+        var numPoints = this.points.length;
+        return (4.0 * pointsInside) / numPoints;
     },
 
     reset: function() {
@@ -215,7 +217,8 @@ MCPI.DashboardView.prototype = {
     renderCompletionBar: function(model) {
         var numPoints = model.points.length;
         var sampleSize = parseInt(this.sampleSize.value, 10);
-        var completionbarWidth = (numPoints * 249) / sampleSize;
+        var barWidth = 249;
+        var completionbarWidth = (numPoints * barWidth) / sampleSize;
         this.completionBar.setAttribute("width", "" + completionbarWidth);
     },
 
@@ -270,36 +273,39 @@ MCPI.CanvasView.prototype = {
     // Object
 
     ready: function() {
-        var ctx = this.ctx,
-            canvas = this.canvas,
-            centerX = canvas.width / 2,
-            centerY = canvas.height / 2,
-            radius = canvas.width / 2,
-            borderSize = Math.round(canvas.width * 0.05);
+        this.renderBorder();
+        this.renderBackground();
+        this.renderCircle();
+    },
 
-        // border
-        canvas.style.border = borderSize + "px solid " + this.colors.circle;
+    renderBackground: function() {
+        this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = this.colors.bg;
+        this.ctx.fill();
+    },
 
-        // background
-        ctx.rect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = this.colors.bg;
-        ctx.fill();
+    renderBorder: function() {
+        var borderSize = Math.round(this.canvas.width * 0.05);
+        this.canvas.style.border = borderSize + "px solid " + this.colors.circle;
+    },
 
-        // circle
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
-        ctx.fillStyle = this.colors.circle;
-        ctx.fill();
+    renderCircle: function() {
+        var centerX = this.canvas.width / 2,
+            centerY = this.canvas.height / 2,
+            radius = this.canvas.width / 2;
+        this.ctx.beginPath();
+        this.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
+        this.ctx.fillStyle = this.colors.circle;
+        this.ctx.fill();
     },
 
     renderPoint: function(point, color) {
-        var ctx = this.ctx,
-            centerX = this.canvas.width * ((point.x + 1) / 2),
+        var centerX = this.canvas.width * ((point.x + 1) / 2),
             centerY = this.canvas.height * ((point.y + 1) / 2);
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, this.pointSize, 0, Math.PI * 2, false);
-        ctx.fillStyle = color;
-        ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(centerX, centerY, this.pointSize, 0, Math.PI * 2, false);
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
     }
 
 };
