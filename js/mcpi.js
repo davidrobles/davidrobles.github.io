@@ -213,8 +213,10 @@ MCPI.DashboardView.prototype = {
     },
 
     renderCompletionBar: function(model) {
-        var test = (model.points.length * 249) / parseInt(this.sampleSize.value, 10);
-        this.completionBar.setAttribute("width", "" + test);
+        var numPoints = model.points.length;
+        var sampleSize = parseInt(this.sampleSize.value, 10);
+        var completionbarWidth = (numPoints * 249) / sampleSize;
+        this.completionBar.setAttribute("width", "" + completionbarWidth);
     },
 
     renderCounters: function(model) {
