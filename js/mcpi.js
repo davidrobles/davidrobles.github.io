@@ -165,19 +165,30 @@ MCPI.DashboardView.prototype = {
     constructor: MCPI.DashboardView,
 
     addListeners: function() {
+        this.addStartResetListener();
+        this.addSampleSizeListener();
+        this.addPointSizeListener();
+    },
+
+    addPointSizeListener: function() {
+        this.pointSize.addEventListener("change", function(event) {
+            this.pointSize = parseInt(event.srcElement.value, 10);
+        }.bind(this));
+    },
+
+    addSampleSizeListener: function() {
+        this.sampleSize.addEventListener("change", function(event) {
+            this.controller.sampleSize = parseInt(event.srcElement.value, 10);
+        }.bind(this));
+    },
+
+    addStartResetListener: function() {
         this.startButton.addEventListener("click", function() {
             if (this.startButton.value === "start") {
                 this.controller.start();
             } else if (this.startButton.value === "stop") {
                 this.controller.reset();
             }
-        }.bind(this));
-        this.sampleSize.addEventListener("change", function(event) {
-            this.controller.sampleSize = parseInt(event.srcElement.value, 10);
-        }.bind(this));
-        this.pointSize.addEventListener("change", function(event) {
-            alert('test');
-            this.pointSize = parseInt(event.srcElement.value, 10);
         }.bind(this));
     },
 
