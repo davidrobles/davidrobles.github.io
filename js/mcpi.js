@@ -71,9 +71,9 @@ MCPI.Model.prototype = {
     },
 
     calculatePi: function() {
-        var pointsInside = this.counters.inside;
-        var numPoints = this.points.length;
-        return (4.0 * pointsInside) / numPoints;
+        var insidePoints = this.counters.inside;
+        var totalPoints = this.points.length;
+        return (4.0 * insidePoints) / totalPoints;
     },
 
     reset: function() {
