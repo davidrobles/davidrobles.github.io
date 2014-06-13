@@ -106,6 +106,9 @@ MCPI.Controller.prototype = {
 
     bind: function(handler) {
         this.handlers.push(handler);
+        if ("bound" in handler) {
+            handler.bound.call(handler);
+        }
     },
 
     next: function() {
@@ -168,13 +171,13 @@ MCPI.DashboardView.prototype = {
 
     addPointSizeListener: function() {
         this.pointSize.addEventListener("change", function(event) {
-            this.pointSize = parseInt(event.srcElement.value, 10);
+            this.updatePointSize();
         }.bind(this));
     },
 
     addSampleSizeListener: function() {
         this.sampleSize.addEventListener("change", function(event) {
-            this.controller.sampleSize = parseInt(event.srcElement.value, 10);
+            this.updateSampleSize();
         }.bind(this));
     },
 
@@ -188,6 +191,14 @@ MCPI.DashboardView.prototype = {
         }.bind(this));
     },
 
+    updatePointSize: function() {
+        this.pointSize = parseInt(this.pointSize.value, 10);
+    },
+
+    updateSampleSize: function() {
+        this.controller.sampleSize = parseInt(this.sampleSize.value, 10);
+    },
+
     // Model callbacks
 
     pointsAdded: function() {
@@ -197,6 +208,10 @@ MCPI.DashboardView.prototype = {
     },
 
     // Controller callbacks
+
+    bound: function() {
+        this.updateSampleSize();
+    },
 
     reset: function(model) {
         this.renderEquation();
