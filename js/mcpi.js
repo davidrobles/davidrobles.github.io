@@ -59,8 +59,8 @@ MCPI.Model.prototype = {
 
     bind: function(handler) {
         this.handlers.push(handler);
-        if ("ready" in handler) {
-            handler.ready.call(handler);
+        if ("bound" in handler) {
+            handler.bound.call(handler);
         }
     },
 
@@ -141,6 +141,7 @@ MCPI.Controller.prototype = {
 };
 
 MCPI.DashboardView = function(options) {
+    this.model = options.model;
     this.controller = options.controller;
     this.completionBar = options.completionBar;
     this.counters = {
@@ -186,18 +187,20 @@ MCPI.DashboardView.prototype = {
         }.bind(this));
     },
 
-    pointsAdded: function(model) {
-        this.renderEquation(model);
-        this.renderCounters(model);
-        this.renderCompletionBar(model);
+    // Model callbacks
+
+    pointsAdded: function() {
+        this.renderEquation();
+        this.renderCounters();
+        this.renderCompletionBar();
     },
 
     // Controller callbacks
 
     reset: function(model) {
-        this.renderEquation(model);
-        this.renderCounters(model);
-        this.renderCompletionBar(model);
+        this.renderEquation();
+        this.renderCounters();
+        this.renderCompletionBar();
         this.startButton.className = "mcpiStartStop mcpiStart";
         this.startButton.innerHTML = "START";
         this.startButton.value = "start";
@@ -213,25 +216,25 @@ MCPI.DashboardView.prototype = {
         this.startButton.value = "stop";
     },
 
-    renderCompletionBar: function(model) {
-        var numPoints = model.points.length;
+    renderCompletionBar: function() {
+        var numPoints = this.model.points.length;
         var sampleSize = parseInt(this.sampleSize.value, 10);
         var barWidth = 249;
         var completionbarWidth = (numPoints * barWidth) / sampleSize;
         this.completionBar.setAttribute("width", "" + completionbarWidth);
     },
 
-    renderCounters: function(model) {
-        this.counters.inside.innerHTML = model.counters.inside;
-        this.counters.outside.innerHTML = model.counters.outside;
+    renderCounters: function() {
+        this.counters.inside.innerHTML = this.model.counters.inside;
+        this.counters.outside.innerHTML = this.model.counters.outside;
     },
 
-    renderEquation: function(model) {
-        var pi = model.calculatePi();
-        if (model.points.length % 50 == 0) {
+    renderEquation: function() {
+        var pi = this.model.calculatePi();
+        if (this.model.points.length % 50 == 0) {
             var math = MathJax.Hub.getAllJax(this.equation.id)[0];
             MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
-               model.counters.inside + "}{" + model.points.length + "} = " + pi.toFixed(4)]);
+               this.model.counters.inside + "}{" + this.model.points.length + "} = " + pi.toFixed(4)]);
         }
     }
 
@@ -263,14 +266,20 @@ MCPI.CanvasView.prototype = {
     },
 
     reset: function() {
-        this.ready();
+        this.renderAll();
     },
 
-    // Object
+    // Model callbacks
 
-    ready: function() {
-        this.renderBorder();
+    bound: function() {
+        this.renderAll();
+    },
+
+    // Rendering
+
+    renderAll: function() {
         this.renderBackground();
+        this.renderBorder();
         this.renderCircle();
     },
 
@@ -325,6 +334,8 @@ MCPI.CanvasView.prototype = {
     });
 
     var dashboardView = new MCPI.DashboardView({
+        model: model,
+        controller: controller,
         colors: {
             inside: "#2980b9",  // blue
             outside: "#c0392b"  // red
@@ -337,8 +348,7 @@ MCPI.CanvasView.prototype = {
         equation: document.getElementById("mcpiEquation"),
         sampleSize: document.getElementById("mcpiSampleSize"),
         pointSize: document.getElementById("mcpiPointSize"),
-        startButton: document.getElementById("mcpiStartButton"),
-        controller: controller
+        startButton: document.getElementById("mcpiStartButton")
     });
 
     model.bind(canvasView);
