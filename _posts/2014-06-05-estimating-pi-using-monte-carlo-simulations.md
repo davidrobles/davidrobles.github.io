@@ -102,8 +102,8 @@ This Demonstration approximates using the Monte Carlo method:
                 <option value="10000" selected="selected">10000</option>
                 <option value="50000">50000</option>
                 <option value="100000">100000</option>
+                <option value="250000">250000</option>
                 <option value="500000">500000</option>
-                <option value="1000000">1000000</option>
             </select>
             <br /><br />
             <label for="mcpiPointSize">Point size:</label>
