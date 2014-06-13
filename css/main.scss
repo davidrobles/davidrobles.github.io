@@ -242,7 +242,7 @@ div.mcpiDemo {
             font-size: 1.3em;
             border-bottom: 2px solid #cecece;
             height: 40px;
-            padding: 15px 0;
+            padding: 20px 0;
             text-align: center;
             div.pi {
                 vertical-align: middle;
@@ -251,11 +251,11 @@ div.mcpiDemo {
         div.mcpiStatsPanel {
             border-bottom: 2px solid #cecece;
             text-align: center;
-            padding: 20px 0;
+            padding: 25px 0;
         }
         div.mcpiConfigPanel {
             float: right;
-            padding-top: 25px;
+            padding-top: 30px;
             width: 255px;
         }
     }
@@ -291,14 +291,12 @@ select.mcpiSelect {
     padding: 6px;
     font-size: 1em;
     outline: none;
-    // width: 80px;
     float: left;
 }
 
 label {
     float: left;
-    min-width: 135px;
+    min-width: 115px;
     padding: 0 20px 0 0;
     text-align: right
 }
-
