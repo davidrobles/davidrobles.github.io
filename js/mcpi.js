@@ -92,9 +92,10 @@ MCPI.Model.prototype = {
 
 };
 
-MCPI.Controller = function(model, sampleSize) {
-    this.model = model;
-    this.sampleSize = sampleSize;
+MCPI.Controller = function(options) {
+    this.model = options.model;
+    this.sampleSize = options.sampleSize;
+    this.stepSize = options.stepSize;
     this.play = false;
     this.handlers = [];
 };
@@ -109,7 +110,7 @@ MCPI.Controller.prototype = {
 
     next: function() {
         if (this.play && this.model.points.length < this.sampleSize) {
-            this.model.addRandomPoints(5000);
+            this.model.addRandomPoints(this.stepSize);
             window.requestNextAnimationFrame(function() {
                 this.next();
             }.bind(this));
@@ -216,6 +217,8 @@ MCPI.DashboardView.prototype = {
         this.startButton.value = "stop";
     },
 
+    // Rendering
+
     renderCompletionBar: function() {
         var numPoints = this.model.points.length;
         var sampleSize = parseInt(this.sampleSize.value, 10);
@@ -319,7 +322,11 @@ MCPI.CanvasView.prototype = {
 
     var model = new MCPI.Model();
 
-    var controller = new MCPI.Controller(model, 5000);
+    var controller = new MCPI.Controller({
+        model: model,
+        sampleSize: 50000,
+        stepSize: 500
+    });
 
     var canvasView = new MCPI.CanvasView({
         canvas: document.getElementById("mcpiCanvasView"),
