@@ -153,7 +153,6 @@ MCPI.DashboardView = function(options) {
         outside: options.counters.outside
     };
     this.equation = options.equation;
-    this.pointSize = options.pointSize;
     this.sampleSize = options.sampleSize;
     this.startButton = options.startButton;
     this.addListeners();
@@ -166,13 +165,6 @@ MCPI.DashboardView.prototype = {
     addListeners: function() {
         this.addStartResetListener();
         this.addSampleSizeListener();
-        this.addPointSizeListener();
-    },
-
-    addPointSizeListener: function() {
-        this.pointSize.addEventListener("change", function(event) {
-            this.updatePointSize();
-        }.bind(this));
     },
 
     addSampleSizeListener: function() {
@@ -189,10 +181,6 @@ MCPI.DashboardView.prototype = {
                 this.controller.reset();
             }
         }.bind(this));
-    },
-
-    updatePointSize: function() {
-        this.pointSize = parseInt(this.pointSize.value, 10);
     },
 
     updateSampleSize: function() {
@@ -222,12 +210,10 @@ MCPI.DashboardView.prototype = {
         this.startButton.innerHTML = "START";
         this.startButton.value = "start";
         this.sampleSize.disabled = false;
-        this.pointSize.disabled = false;
     },
 
     start: function() {
         this.sampleSize.disabled = true;
-        this.pointSize.disabled = true;
         this.startButton.className = "mcpiStartStop mcpiStop";
         this.startButton.innerHTML = "RESET";
         this.startButton.value = "stop";
@@ -263,7 +249,6 @@ MCPI.CanvasView = function(options) {
     this.canvas = options.canvas;
     this.ctx = this.canvas.getContext("2d");
     this.colors = options.colors;
-    // this.pointSize = options.pointSize;
     this.pointSize = 1;
     this.canvas.width = options.size;
     this.canvas.height = options.size;
@@ -346,7 +331,6 @@ MCPI.CanvasView.prototype = {
 
     var canvasView = new MCPI.CanvasView({
         canvas: document.getElementById("mcpiCanvasView"),
-        pointSize: parseInt(document.getElementById("mcpiPointSize").value, 10),
         size: 300,
         colors: {
             bg: "#F2D6B3",      // light brown
@@ -370,7 +354,6 @@ MCPI.CanvasView.prototype = {
         },
         equation: document.getElementById("mcpiEquation"),
         sampleSize: document.getElementById("mcpiSampleSize"),
-        pointSize: document.getElementById("mcpiPointSize"),
         startButton: document.getElementById("mcpiStartButton")
     });
 
