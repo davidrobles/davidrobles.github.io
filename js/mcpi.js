@@ -124,7 +124,7 @@ MCPI.Controller.prototype = {
     start: function() {
         this.model.reset();
         this.play = true;
-        this.trigger("start", [this]);
+        this.trigger("start", []);
         window.requestNextAnimationFrame(function() {
             this.next();
         }.bind(this));
@@ -133,10 +133,10 @@ MCPI.Controller.prototype = {
     trigger: function(event, params) {
         this.handlers.forEach(function(handler) {
             if (event in handler) {
-                handler[event].apply(handler, params);
+                handler[event].apply(handler, [this].concat(params));
             }
-        });
-    }
+        }, this);
+    },
 
 };
 
