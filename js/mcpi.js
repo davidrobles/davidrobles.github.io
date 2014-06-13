@@ -47,12 +47,6 @@ MCPI.Model.prototype = {
         this.updateCounters(point);
     },
 
-    addRandomPoint: function() {
-        var randomPoint = MCPI.randomPoint();
-        this.addPoint(randomPoint);
-        this.trigger("pointAdded", [this, point]);
-    },
-
     addRandomPoints: function(number) {
         var points = [];
         for (var i = 0; i < number; i++) {
@@ -192,12 +186,6 @@ MCPI.DashboardView.prototype = {
         }.bind(this));
     },
 
-    pointAdded: function(model) {
-        this.renderEquation(model);
-        this.renderCounters(model);
-        this.renderCompletionBar(model);
-    },
-
     pointsAdded: function(model) {
         this.renderEquation(model);
         this.renderCounters(model);
@@ -265,15 +253,12 @@ MCPI.CanvasView.prototype = {
 
     // Callbacks
 
-    pointAdded: function(model, point) {
-        var circleSide = MCPI.inside(point) ? "inside" : "outside",
-            color = this.colors[circleSide];
-        this.renderPoint(point, color);
-    },
-
     pointsAdded: function(model, points) {
         for (var i = 0; i < points.length; i++) {
-            this.pointAdded(model, points[i]);
+            var point = points[i],
+                circleSide = MCPI.inside(point) ? "inside" : "outside",
+                color = this.colors[circleSide];
+            this.renderPoint(point, color);
         }
     },
 
