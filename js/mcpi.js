@@ -54,7 +54,7 @@ MCPI.Model.prototype = {
             this.addPoint(randomPoint);
             points.push(randomPoint);
         }
-        this.trigger("pointsAdded", [this, points]);
+        this.trigger("pointsAdded", [points]);
     },
 
     bind: function(handler) {
@@ -74,15 +74,15 @@ MCPI.Model.prototype = {
         this.points = [];
         this.counters.inside = 0;
         this.counters.outside = 0;
-        this.trigger("reset", [this]);
+        this.trigger("reset", []);
     },
 
     trigger: function(event, params) {
         this.handlers.forEach(function(handler) {
             if (event in handler) {
-                handler[event].apply(handler, params);
+                handler[event].apply(handler, [this].concat(params));
             }
-        });
+        }, this);
     },
 
     updateCounters: function(point) {
