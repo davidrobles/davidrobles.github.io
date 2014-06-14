@@ -15,11 +15,39 @@ MathJax.Hub.Config({
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-Monte Carlo simulations are a broad class of computational algorithms that rely
-on repeated random sampling to obtain numerical results; typically one runs
-simulations many times over in order to obtain the distribution of an unknown
-probabilistic entity. One of the most popular examples of Monte Carlo
-simulations is estimating the value of \\( \pi \\). So how can we do that?
+Monte Carlo simulations are a class of computational algorithms that rely on
+repeated random sampling to approximate the optimal solution. They have a wide
+variety of applications, from problems too complex to solve analytically, to
+problems in which domain knowledge is either limited or hard to represent and
+formalize.
+
+### Applications
+
+Fill.
+
+### Solving Pi
+
+Let's consider the problem of estimating Pi by using Monte Carlo simulations.
+
+### Steps
+
+This Demonstration approximates using the Monte Carlo method:
+
+1. Generate \\(N\\) pairs of random numbers drawn from the interval
+   \\([-1, 1]\\).
+2. Determine the number of pari
+
+1. Randomly select points in a square with an inscribed circle.
+2. Multiply the number of points inside the circle by four.
+3. Divide by the total number of points in the square.
+
+### Demo
+
+Fill.
+
+### Programming language
+
+---
 
 We generate random points and verify if they are inside or outside
 
@@ -27,9 +55,11 @@ asymptotically approaching the real value of PI.
 
 <img src="/img/mcpi.png" class="center" width="250px" height="250px" />
 
+### Hello
+
 But, how do we estimate Pi by simulation? In the simulation, you keep throwing
-darts at random onto the dartboard. All of the darts fall within the square,
-but not all of them fall within the circle. Here is the key. If you throw darts
+darts at random onto the dartboard. All of the darts fall within the square, but
+not all of them fall within the circle. Here is the key. If you throw darts
 completely at random, this experiment estimate the ratio of the area of the
 circle to the area of the square, by counting the number of darts in each.
 
@@ -53,14 +83,6 @@ Knowing this we can run a simulation in which we randomly place \\( n \\)
 number of dots, with the idea of approximating the value of \\( \pi \\) by
 counting the points **inside** the circle, \\( A\_{circle} \\), and
 **outside**, \\( A\_{square} \\).
-
-### Steps
-
-This Demonstration approximates using the Monte Carlo method:
-
-1. Randomly select points in a square with an inscribed circle.
-2. Multiply the number of points inside the circle by four.
-3. Divide by the total number of points in the square.
 
 ### Demo
 
@@ -149,6 +171,11 @@ model.run();
 
 <script src="/js/mcpi.js"></script>
 
+
+### Bibliography
+
+- Wikipedia.
+- Bandit Algorithms for Website Optimization
 
 <!--
 We created a program to estimate the value of PI using JavaScript. Why JavaScript? Simply because is
