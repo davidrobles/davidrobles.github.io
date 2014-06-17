@@ -32,26 +32,21 @@ MCPI.randomPoint = function() {
 MCPI.Model = function() {
     this.counters = {
         inside: 0,
-        outside: 0
+        outside: 0,
+        total: 0
     };
     this.handlers = [];
-    this.points = [];
 };
 
 MCPI.Model.prototype = {
 
     constructor: MCPI.Model,
 
-    addPoint: function(point) {
-        this.points.push(point);
-        this.updateCounters(point);
-    },
-
     addRandomPoints: function(number) {
         var points = [];
         for (var i = 0; i < number; i++) {
             var randomPoint = MCPI.randomPoint();
-            this.addPoint(randomPoint);
+            this.updateCounters(randomPoint);
             points.push(randomPoint);
         }
         this.trigger("pointsAdded", [points]);
@@ -65,15 +60,13 @@ MCPI.Model.prototype = {
     },
 
     calculatePi: function() {
-        var insidePoints = this.counters.inside;
-        var totalPoints = this.points.length;
-        return (4.0 * insidePoints) / totalPoints;
+        return (4.0 * this.counters.inside) / this.counters.total;
     },
 
     reset: function() {
-        this.points = [];
         this.counters.inside = 0;
         this.counters.outside = 0;
+        this.counters.total = 0;
         this.trigger("reset", []);
     },
 
@@ -85,9 +78,10 @@ MCPI.Model.prototype = {
         }, this);
     },
 
-    updateCounters: function(point) {
+    updateCounters: function(point, num) {
         var side = MCPI.inside(point) ? "inside" : "outside";
         this.counters[side]++;
+        this.counters.total++;
     }
 
 };
@@ -112,7 +106,7 @@ MCPI.Controller.prototype = {
     },
 
     next: function() {
-        if (this.play && this.model.points.length < this.sampleSize) {
+        if (this.play && this.model.counters.total < this.sampleSize) {
             this.model.addRandomPoints(this.stepSize);
             window.requestNextAnimationFrame(function() {
                 this.next();
@@ -222,7 +216,7 @@ MCPI.DashboardView.prototype = {
     // Rendering
 
     renderCompletionBar: function() {
-        var numPoints = this.model.points.length;
+        var numPoints = this.model.counters.total;
         var sampleSize = parseInt(this.sampleSize.value, 10);
         var barWidth = 249;
         var completionbarWidth = (numPoints * barWidth) / sampleSize;
@@ -236,10 +230,10 @@ MCPI.DashboardView.prototype = {
 
     renderEquation: function() {
         var pi = this.model.calculatePi();
-        if (this.model.points.length % 50 == 0) {
+        if (this.model.counters.total % 50 == 0) {
             var math = MathJax.Hub.getAllJax(this.equation.id)[0];
             MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
-               this.model.counters.inside + "}{" + this.model.points.length + "} = " + pi.toFixed(4)]);
+               this.model.counters.inside + "}{" + this.model.counters.total + "} = " + pi.toFixed(4)]);
         }
     }
 
