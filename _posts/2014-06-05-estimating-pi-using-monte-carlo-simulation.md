@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Estimating PI using Monte Carlo Simulation"
+title:      "Estimating PI using Monte Carlo Simulations"
 date:       2014-05-26 09:48:16
 comments:   true
 categories: [Evolutionary algorithms, Genetic Algorithms]
@@ -16,14 +16,19 @@ MathJax.Hub.Config({
 </script>
 
 Monte Carlo simulations are a class of computational algorithms that rely on
-repeated random sampling to approximate the optimal solution. They have a wide
-variety of applications, from problems too complex to solve analytically, to
-problems in which domain knowledge is either limited or hard to represent and
-formalize.
+repeated random sampling to approximate the optimal solution. Typically one runs
+computational trial runs, called **simulation**, driven by random number
+generators. 
 
-### Applications
+Because each simulation is powered by random numbers, the results
+are noisy. For that reason, you'll want to run lots of simulations. As you'll
+see in a moment, we can easily simulate 100,000's of FILL to.
 
-Fill.
+Monte Carlo simulations a wide variety of applications, from problems too
+complex to solve analytically, to problems in which domain knowledge is either
+limited or hard to represent and formalize. One of the best examples to
+illustrate how Monte Carlo simulations work is approximating the value of
+\\(\pi\\).
 
 ### Solving Pi
 
@@ -126,6 +131,7 @@ counting the points **inside** the circle, \\( A\_{circle} \\), and
                 <option value="100000">100000</option>
                 <option value="150000">150000</option>
                 <option value="250000">250000</option>
+                <option value="10000000">10000000</option>
             </select>
             <br /><br />
             <button id="mcpiStartButton" class="mcpiStartStop mcpiStart" value="start">START</button>
