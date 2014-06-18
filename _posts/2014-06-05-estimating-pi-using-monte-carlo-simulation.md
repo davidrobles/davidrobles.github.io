@@ -15,22 +15,26 @@ MathJax.Hub.Config({
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-Monte Carlo simulations are a class of computational algorithms that rely on
-repeated random sampling to approximate the optimal solution. Typically one runs
-computational trial runs, called **simulation**, driven by random number
-generators. 
+### Monte Carlo Simulations
 
-Because each simulation is powered by random numbers, the results
-are noisy. For that reason, you'll want to run lots of simulations. As you'll
-see in a moment, we can easily simulate 100,000's of FILL to.
+Monte Carlo simulations are a class of computational algorithms that consist in
+running multiple computational trials driven by random processes to approximate
+the optimal solution. Each trial is called a **simulation**, which is a random
+realization of the model for a given set of parameters. When a batch of
+simulations is complete, the results are used to describe the likelihood, or
+probability, of reaching various results in the model.
 
-Monte Carlo simulations a wide variety of applications, from problems too
-complex to solve analytically, to problems in which domain knowledge is either
-limited or hard to represent and formalize. One of the best examples to
-illustrate how Monte Carlo simulations work is approximating the value of
-\\(\pi\\).
+Because each simulation is powered by random numbers, the results are often
+noisy. For that reason, it is usually necessary to run thousands of simulations
+in order to approximate to the optimal solution. Monte Carlo simulations are
+used in a wide variety of applications, from problems too complex to solve
+analytically, to problems in which domain knowledge is either limited or hard to
+represent and formalize. One of the best examples to illustrate how Monte Carlo
+simulations work is approximating the value of \\(\pi\\).
 
 ### Solving Pi
+
+As you'll see in a moment, we can easily simulate 100,000's of FILL to.
 
 Let's consider the problem of estimating Pi by using Monte Carlo simulations.
 

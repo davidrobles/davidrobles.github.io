@@ -232,8 +232,9 @@ MCPI.DashboardView.prototype = {
         var pi = this.model.calculatePi();
         if (this.model.counters.total % 50 == 0) {
             var math = MathJax.Hub.getAllJax(this.equation.id)[0];
-            MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
-               this.model.counters.inside + "}{" + this.model.counters.total + "} = " + pi.toFixed(4)]);
+            MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{"
+                + this.model.counters.inside + "}{" + this.model.counters.total
+                + "} = " + pi.toFixed(4)]);
         }
     }
 
