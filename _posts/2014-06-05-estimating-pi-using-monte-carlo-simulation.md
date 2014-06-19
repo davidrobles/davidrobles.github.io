@@ -7,6 +7,7 @@ categories: [Evolutionary algorithms, Genetic Algorithms]
 style:      mcpi.scss
 js:         mcpi.js
 ---
+
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     showProcessingMessages: false
@@ -14,15 +15,20 @@ MathJax.Hub.Config({
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+<script src="/js/mcpi.js"></script>
 
 ### Monte Carlo Simulations
 
-Monte Carlo simulations are a class of computational algorithms that consist in
-running multiple computational trials driven by random processes to approximate
-the optimal solution. Each trial is called a **simulation**, which is a random
+Monte Carlo simulations are a class of computational algorithms that involve
+multiple computational trials driven by random sampling to approximate the
+optimal solution. Each trial is called a **simulation**, which is a random
 realization of the model for a given set of parameters. When a batch of
 simulations is complete, the results are used to describe the likelihood, or
 probability, of reaching various results in the model.
+
+<canvas id="mcpiShortDemo">
+    Your browser does not support HTML5 Canvas!
+</canvas>
 
 Because each simulation is powered by random numbers, the results are often
 noisy. For that reason, it is usually necessary to run thousands of simulations
@@ -32,7 +38,52 @@ analytically, to problems in which domain knowledge is either limited or hard to
 represent and formalize. One of the best examples to illustrate how Monte Carlo
 simulations work is approximating the value of \\(\pi\\).
 
+<script>
+(function() {
+    var model = new MCPI.Model();
+    var controller = new MCPI.Controller({
+        model: model,
+        sampleSize: 25000,
+        stepSize: 100
+    });
+    var canvasView = new MCPI.CanvasView({
+        canvas: document.getElementById("mcpiShortDemo"),
+        size: 180,
+        colors: {
+            bg: "#F2D6B3",      // light brown
+            circle: "#D9B89C",  // brown
+            inside: "#2980b9",  // blue
+            outside: "#c0392b"  // red
+        }
+    });
+    model.bind(canvasView);
+    controller.loop();
+}());
+</script>
+
 ### Solving Pi
+
+But, how do we estimate Pi by simulation? In the simulation, you keep throwing
+darts at random onto the dartboard. All of the darts fall within the square, but
+not all of them fall within the circle. Here is the key. If you throw darts
+completely at random, this experiment estimate the ratio of the area of the
+circle to the area of the square, by counting the number of darts in each.
+
+Well, we know that the **area of the circle** is \\( A\_{circle} = \pi r^2 \\)
+and the **area of the square** is \\( A\_{square} = (2r)^2 \\). Then, the ratio
+of both areas is:
+
+$$
+\frac{A\_{circle}}{A\_{square}} = \frac{\pi r^2}{(2r)^2}
+                                = \frac{\pi r^2}{4 r^2}
+                                = \frac{\pi}{4}
+$$
+
+Solving for \\( \pi \\) yields:
+
+$$
+{ \pi = 4 \frac{A\_{circle}}{A\_{square}} }
+$$
 
 As you'll see in a moment, we can easily simulate 100,000's of FILL to.
 
@@ -62,31 +113,7 @@ We generate random points and verify if they are inside or outside
 
 asymptotically approaching the real value of PI.
 
-<img src="/img/mcpi.png" class="center" width="250px" height="250px" />
-
 ### Hello
-
-But, how do we estimate Pi by simulation? In the simulation, you keep throwing
-darts at random onto the dartboard. All of the darts fall within the square, but
-not all of them fall within the circle. Here is the key. If you throw darts
-completely at random, this experiment estimate the ratio of the area of the
-circle to the area of the square, by counting the number of darts in each.
-
-Well, we know that the **area of the circle** is \\( A\_{circle} = \pi r^2 \\)
-and the **area of the square** is \\( A\_{square} = (2r)^2 \\). Then, the ratio
-of both areas is:
-
-$$
-\frac{A\_{circle}}{A\_{square}} = \frac{\pi r^2}{(2r)^2}
-                                = \frac{\pi r^2}{4 r^2}
-                                = \frac{\pi}{4}
-$$
-
-Solving for \\( \pi \\) yields:
-
-$$
-{ \pi = 4 \frac{A\_{circle}}{A\_{square}} }
-$$
 
 Knowing this we can run a simulation in which we randomly place \\( n \\)
 number of dots, with the idea of approximating the value of \\( \pi \\) by
@@ -179,8 +206,51 @@ model.addObserver(view);
 model.run();
 {% endhighlight %}
 
-<script src="/js/mcpi.js"></script>
+<script>
+(function() {
 
+    var model = new MCPI.Model();
+
+    var controller = new MCPI.Controller({
+        model: model,
+        sampleSize: 50000,
+        stepSize: 500
+    });
+
+    var canvasView = new MCPI.CanvasView({
+        canvas: document.getElementById("mcpiCanvasView"),
+        size: 300,
+        colors: {
+            bg: "#F2D6B3",      // light brown
+            circle: "#D9B89C",  // brown
+            inside: "#2980b9",  // blue
+            outside: "#c0392b"  // red
+        }
+    });
+
+    var dashboardView = new MCPI.DashboardView({
+        model: model,
+        controller: controller,
+        colors: {
+            inside: "#2980b9",  // blue
+            outside: "#c0392b"  // red
+        },
+        completionBar: document.getElementById("mcpiRect"),
+        counters: {
+            inside: document.getElementById("mcpiInsideCounter"),
+            outside: document.getElementById("mcpiOutsideCounter")
+        },
+        equation: document.getElementById("mcpiEquation"),
+        sampleSize: document.getElementById("mcpiSampleSize"),
+        startButton: document.getElementById("mcpiStartButton")
+    });
+
+    model.bind(canvasView);
+    model.bind(dashboardView);
+    controller.bind(dashboardView);
+    
+}());
+</script>
 
 ### Bibliography
 

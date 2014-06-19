@@ -105,12 +105,20 @@ MCPI.Controller.prototype = {
         }
     },
 
+    loop: function() {
+        this.start();
+        this.loop = true;
+    },
+
     next: function() {
         if (this.play && this.model.counters.total < this.sampleSize) {
             this.model.addRandomPoints(this.stepSize);
             window.requestNextAnimationFrame(function() {
                 this.next();
             }.bind(this));
+        } else if (this.loop) {
+            this.reset();
+            this.start();
         }
     },
 
@@ -314,46 +322,3 @@ MCPI.CanvasView.prototype = {
 
 };
 
-(function() {
-
-    var model = new MCPI.Model();
-
-    var controller = new MCPI.Controller({
-        model: model,
-        sampleSize: 50000,
-        stepSize: 500
-    });
-
-    var canvasView = new MCPI.CanvasView({
-        canvas: document.getElementById("mcpiCanvasView"),
-        size: 300,
-        colors: {
-            bg: "#F2D6B3",      // light brown
-            circle: "#D9B89C",  // brown
-            inside: "#2980b9",  // blue
-            outside: "#c0392b"  // red
-        }
-    });
-
-    var dashboardView = new MCPI.DashboardView({
-        model: model,
-        controller: controller,
-        colors: {
-            inside: "#2980b9",  // blue
-            outside: "#c0392b"  // red
-        },
-        completionBar: document.getElementById("mcpiRect"),
-        counters: {
-            inside: document.getElementById("mcpiInsideCounter"),
-            outside: document.getElementById("mcpiOutsideCounter")
-        },
-        equation: document.getElementById("mcpiEquation"),
-        sampleSize: document.getElementById("mcpiSampleSize"),
-        startButton: document.getElementById("mcpiStartButton")
-    });
-
-    model.bind(canvasView);
-    model.bind(dashboardView);
-    controller.bind(dashboardView);
-    
-}());
