@@ -25,9 +25,9 @@ Monte Carlo simulations are a class of computational algorithms that involve
 multiple computational trials driven by random sampling to approximate the
 optimal solution. Each trial is called a **simulation**, which is a random
 realization of the model for a given set of parameters. Because each simulation
-is powered by random numbers, the results are often noisy. For that reason, it
-is usually necessary to run thousands of simulations in order to approximate the
-optimal solution.
+is powered by random numbers, the results are often noisy, and is usually
+necessary to run thousands of simulations in order to approximate the optimal
+solution.
 
 <script>
 (function() {
@@ -61,68 +61,33 @@ know two things:
 - The **area of the square** is \\( A\_{S} = (2r)^2 \\).
 
 Therefore, the ratio of the circle's area to the square's area is:
-
 $$
 \frac{A\_{C}}{A\_{S}} = \frac{\pi r^2}{(2r)^2}
                                 = \frac{\pi r^2}{4 r^2}
                                 = \frac{\pi}{4}
 $$
-
 Solving for \\( \pi \\) yields:
-
 $$
 { \pi = 4 \frac{A\_{C}}{A\_{S}} }
 $$
 
-This means that if we can calculate the ratio of \\(\frac{A\_{C}}{A\_{S}}\\) on
-the right hand side of the equation we also get the value of \\(\pi\\). So how
-can we get that ratio? We can generate random points in the range \\([-1, 1]\\).
-All of these points will count for the \
+This means that if we can find the ratio of \\(\frac{A\_{C}}{A\_{S}}\\) on the
+right hand side of the equation we also get the value of \\(\pi\\). So how can
+we get that ratio? Here is where Monte Carlo simulations come into play. If we
+randomly choose \\(\(x, y\)\\) points in the range \\([-1, 1]\\), we could
+calculate the distance of that points location \\( x^2 + y^2 )\\) from the
+origin. This would tell us if that point lay within a circle or outside the
+circle, by whtere the length was greater than our radius. The ratio of the
+points that fall within the circle relative that the square that bounds the
+circle gives us the ratio of the areas.
 
-The points that lie within the circle are part of 
-
-\\(\frac{A\_{C}}{A\_{S}}\\)
-
-In the simulation, you keep throwing darts at random onto the dartboard. All of
-the darts fall within the square, but not all of them fall within the circle.
-Here is the key. If you throw darts completely at random, this experiment
-estimate the ratio of the area of the circle to the area of the square, by
-counting the number of darts in each.
-
-As you'll see in a moment, we can easily simulate 100,000's of FILL to.
-
-Let's consider the problem of estimating Pi by using Monte Carlo simulations.
-
-### Steps
-
-This Demonstration approximates using the Monte Carlo method:
+This can be summarized as follows:
 
 1. Generate \\(N\\) pairs of random numbers drawn from the interval
    \\([-1, 1]\\).
-2. Determine the number of pari
-
-1. Randomly select points in a square with an inscribed circle.
-2. Multiply the number of points inside the circle by four.
-3. Divide by the total number of points in the square.
-
-### Demo
-
-Fill.
-
-### Programming language
-
----
-
-We generate random points and verify if they are inside or outside
-
-asymptotically approaching the real value of PI.
-
-### Hello
-
-Knowing this we can run a simulation in which we randomly place \\( n \\)
-number of dots, with the idea of approximating the value of \\( \pi \\) by
-counting the points **inside** the circle, \\( A\_{circle} \\), and
-**outside**, \\( A\_{square} \\).
+2. The number of points generated, \\(N\\), will be the value of \\(A\_{C}\\).
+3. The number of points that lie within the circle will be \\(A\_{S}\\).
+4. Find the value \\( \pi = 4 \frac{A\_{C}}{A\_{S}} \\).
 
 ### Demo
 
@@ -178,6 +143,8 @@ counting the points **inside** the circle, \\( A\_{circle} \\), and
 </div>
 
 <div style="clear: both;"></div>
+
+asymptotically approaching the real value of PI.
 
 ### View on Github
 
