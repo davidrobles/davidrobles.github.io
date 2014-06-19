@@ -60,7 +60,7 @@ know two things:
 
 - The **area of the square** is \\( A\_{S} = (2r)^2 \\).
 
-Therefore, the ratio of the circle area to square are is:
+Therefore, the ratio of the circle's area to the square's area is:
 
 $$
 \frac{A\_{C}}{A\_{S}} = \frac{\pi r^2}{(2r)^2}
@@ -68,11 +68,20 @@ $$
                                 = \frac{\pi}{4}
 $$
 
-With that, solving for \\( \pi \\) yields:
+Solving for \\( \pi \\) yields:
 
 $$
 { \pi = 4 \frac{A\_{C}}{A\_{S}} }
 $$
+
+This means that if we can calculate the ratio of \\(\frac{A\_{C}}{A\_{S}}\\) on
+the right hand side of the equation we also get the value of \\(\pi\\). So how
+can we get that ratio? We can generate random points in the range \\([-1, 1]\\).
+All of these points will count for the \
+
+The points that lie within the circle are part of 
+
+\\(\frac{A\_{C}}{A\_{S}}\\)
 
 In the simulation, you keep throwing darts at random onto the dartboard. All of
 the darts fall within the square, but not all of them fall within the circle.
