@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Estimating PI using Monte Carlo Simulations"
-date:       2014-05-26 09:48:16
+date:       2014-06-19 09:48:16
 comments:   true
 categories: [Evolutionary algorithms, Genetic Algorithms]
 style:      mcpi.scss
@@ -71,22 +71,22 @@ $$
 { \pi = 4 \frac{A\_{C}}{A\_{S}} }
 $$
 
-This means that if we can find the ratio of \\(\frac{A\_{C}}{A\_{S}}\\) on the
-right hand side of the equation we also get the value of \\(\pi\\). So how can
-we get that ratio? Here is where Monte Carlo simulations come into play. If we
-randomly choose \\(\(x, y\)\\) points in the range \\([-1, 1]\\), we could
-calculate the distance of that points location \\( x^2 + y^2 )\\) from the
-origin. This would tell us if that point lay within a circle or outside the
-circle, by whtere the length was greater than our radius. The ratio of the
-points that fall within the circle relative that the square that bounds the
-circle gives us the ratio of the areas.
+This means that if we can find the ratio \\(\frac{A\_{C}}{A\_{S}}\\) on the
+right hand side of the equation we can also get the value of \\(\pi\\). So how
+can we get that ratio? Here is where Monte Carlo simulations come into play. If
+we randomly choose \\(\(x, y\)\\) points in the range \\([-1, 1]\\), we could
+calculate the distance of that points location \\(\(x^2 + y^2\)\\) from the
+origin. This would tell us if that point lay within a circle, \\(x^2 + y^2 <
+1\\), or outside the circle, by whtere the length was greater than our radius.
+The ratio of the points that fall within the circle relative that the square
+that bounds the circle gives us the ratio of the areas.
 
 This can be summarized as follows:
 
-1. Generate \\(N\\) pairs of random numbers drawn from the interval
-   \\([-1, 1]\\).
-2. The number of points generated, \\(N\\), will be the value of \\(A\_{C}\\).
-3. The number of points that lie within the circle will be \\(A\_{S}\\).
+1. Generate \\(N\\) random points drawn from the interval \\([-1, 1]\\).
+2. The number of points generated, \\(N\\), will be the value of \\(A\_{S}\\).
+3. The number of points that lie within the circle, \\(x^2 + y^2 < 1\\), will be
+   \\(A\_{C}\\).
 4. Find the value \\( \pi = 4 \frac{A\_{C}}{A\_{S}} \\).
 
 ### Demo
