@@ -17,26 +17,17 @@ MathJax.Hub.Config({
 </script>
 <script src="/js/mcpi.js"></script>
 
-### Monte Carlo Simulations
-
-Monte Carlo simulations are a class of computational algorithms that involve
-multiple computational trials driven by random sampling to approximate the
-optimal solution. Each trial is called a **simulation**, which is a random
-realization of the model for a given set of parameters. When a batch of
-simulations is complete, the results are used to describe the likelihood, or
-probability, of reaching various results in the model.
-
 <canvas id="mcpiShortDemo">
     Your browser does not support HTML5 Canvas!
 </canvas>
 
-Because each simulation is powered by random numbers, the results are often
-noisy. For that reason, it is usually necessary to run thousands of simulations
-in order to approximate to the optimal solution. Monte Carlo simulations are
-used in a wide variety of applications, from problems too complex to solve
-analytically, to problems in which domain knowledge is either limited or hard to
-represent and formalize. One of the best examples to illustrate how Monte Carlo
-simulations work is approximating the value of \\(\pi\\).
+Monte Carlo simulations are a class of computational algorithms that involve
+multiple computational trials driven by random sampling to approximate the
+optimal solution. Each trial is called a **simulation**, which is a random
+realization of the model for a given set of parameters. Because each simulation
+is powered by random numbers, the results are often noisy. For that reason, it
+is usually necessary to run thousands of simulations in order to approximate the
+optimal solution.
 
 <script>
 (function() {
@@ -48,7 +39,7 @@ simulations work is approximating the value of \\(\pi\\).
     });
     var canvasView = new MCPI.CanvasView({
         canvas: document.getElementById("mcpiShortDemo"),
-        size: 180,
+        size: 200,
         colors: {
             bg: "#F2D6B3",      // light brown
             circle: "#D9B89C",  // brown
@@ -61,29 +52,33 @@ simulations work is approximating the value of \\(\pi\\).
 }());
 </script>
 
-### Solving Pi
+One of the best examples to illustrate how Monte Carlo simulations work is
+approximating the value of \\(\pi\\). So, how can we do that? First of all, we
+know two things:
 
-But, how do we estimate Pi by simulation? In the simulation, you keep throwing
-darts at random onto the dartboard. All of the darts fall within the square, but
-not all of them fall within the circle. Here is the key. If you throw darts
-completely at random, this experiment estimate the ratio of the area of the
-circle to the area of the square, by counting the number of darts in each.
+- The **area of the circle** is \\( A\_{C} = \pi r^2 \\).
 
-Well, we know that the **area of the circle** is \\( A\_{circle} = \pi r^2 \\)
-and the **area of the square** is \\( A\_{square} = (2r)^2 \\). Then, the ratio
-of both areas is:
+- The **area of the square** is \\( A\_{S} = (2r)^2 \\).
+
+Therefore, the ratio of the circle area to square are is:
 
 $$
-\frac{A\_{circle}}{A\_{square}} = \frac{\pi r^2}{(2r)^2}
+\frac{A\_{C}}{A\_{S}} = \frac{\pi r^2}{(2r)^2}
                                 = \frac{\pi r^2}{4 r^2}
                                 = \frac{\pi}{4}
 $$
 
-Solving for \\( \pi \\) yields:
+With that, solving for \\( \pi \\) yields:
 
 $$
-{ \pi = 4 \frac{A\_{circle}}{A\_{square}} }
+{ \pi = 4 \frac{A\_{C}}{A\_{S}} }
 $$
+
+In the simulation, you keep throwing darts at random onto the dartboard. All of
+the darts fall within the square, but not all of them fall within the circle.
+Here is the key. If you throw darts completely at random, this experiment
+estimate the ratio of the area of the circle to the area of the square, by
+counting the number of darts in each.
 
 As you'll see in a moment, we can easily simulate 100,000's of FILL to.
 
