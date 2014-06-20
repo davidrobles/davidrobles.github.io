@@ -49,7 +49,7 @@ MCPI.Model.prototype = {
             this.updateCounters(randomPoint);
             points.push(randomPoint);
         }
-        this.trigger("pointsAdded", [points]);
+        this.trigger("pointsAdded", points);
     },
 
     bind: function(handler) {
@@ -67,13 +67,14 @@ MCPI.Model.prototype = {
         this.counters.inside = 0;
         this.counters.outside = 0;
         this.counters.total = 0;
-        this.trigger("reset", []);
+        this.trigger("reset");
     },
 
-    trigger: function(event, params) {
+    trigger: function(event) {
+        var args = Array.prototype.slice.call(arguments, 1);
         this.handlers.forEach(function(handler) {
             if (event in handler) {
-                handler[event].apply(handler, [this].concat(params));
+                handler[event].apply(handler, [this].concat(args));
             }
         }, this);
     },
@@ -130,16 +131,17 @@ MCPI.Controller.prototype = {
     start: function() {
         this.model.reset();
         this.play = true;
-        this.trigger("start", []);
+        this.trigger("start");
         window.requestNextAnimationFrame(function() {
             this.next();
         }.bind(this));
     },
 
-    trigger: function(event, params) {
+    trigger: function(event) {
+        var args = Array.prototype.slice.call(arguments, 1);
         this.handlers.forEach(function(handler) {
             if (event in handler) {
-                handler[event].apply(handler, [this].concat(params));
+                handler[event].apply(handler, [this].concat(args));
             }
         }, this);
     },
