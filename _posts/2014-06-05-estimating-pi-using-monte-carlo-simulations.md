@@ -4,8 +4,7 @@ title:      "Estimating PI using Monte Carlo Simulations"
 date:       2014-06-19 09:48:16
 comments:   true
 categories: [Evolutionary algorithms, Genetic Algorithms]
-style:      mcpi.css
-js:         mcpi.js
+style:      /mcpi/mcpi.css
 ---
 
 <script type="text/x-mathjax-config">
