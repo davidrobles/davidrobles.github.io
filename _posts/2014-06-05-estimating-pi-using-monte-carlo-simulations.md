@@ -39,7 +39,7 @@ solution.
     });
     var canvasView = new MCPI.CanvasView({
         canvas: document.getElementById("mcpiShortDemo"),
-        size: 200,
+        size: 220,
         colors: {
             bg: "#F2D6B3",      // light brown
             circle: "#D9B89C",  // brown
@@ -58,7 +58,7 @@ that:
 
 - The **area of the circle** is \\( A\_{C} = \pi r^2 \\).
 
-- The **area of the square** is \\( A\_{S} = (2r)^2 \\).
+- And, the **area of the square** is \\( A\_{S} = (2r)^2 \\).
 
 Therefore, the ratio of the circle's area to the square's area is:
 $$
@@ -68,28 +68,31 @@ $$
 $$
 and solving for \\( \pi \\) yields:
 $$
-{ \pi = 4 \frac{A\_{C}}{A\_{S}} }
+\pi = 4 \frac{A\_{C}}{A\_{S}}
 $$
 
 This means that if we can find the ratio \\(\frac{A\_{C}}{A\_{S}}\\) on the
-right hand side of the equation we can also get the value of \\(\pi\\). So how
-can we get that ratio? Here is where Monte Carlo simulations come into play. If
-we randomly choose \\(\(x, y\)\\) points in the range \\([-1, 1]\\), we could
-calculate the distance of that points location \\(\(x^2 + y^2\)\\) from the
-origin. This would tell us if that point lay within a circle, \\(x^2 + y^2 <
-1\\), or outside the circle, by whtere the length was greater than our radius.
-The ratio of the points that fall within the circle relative that the square
-that bounds the circle gives us the ratio of the areas.
+right hand side of the equation, we can determine the value of \\(\pi\\). So how
+can we find the values for \\(A\_{C}\\) and \\(A\_{S}\\)? Here is where Monte
+Carlo simulations come into play.  If we randomly choose \\(\(x, y\)\\) points
+in the range \\([-1, 1]\\), we can calculate the distance of that point's
+location \\(\(x^2 + y^2\)\\) from the origin. This would tell us if the point
+lies inside the circle, \\(x^2 + y^2 < 1\\), or outside the circle,
+\\(x^2 + y^2 >= 1\\).
 
-This can be summarized as follows:
+The steps for this procedure can be summarized as follows:
 
 1. Generate \\(N\\) random points drawn from the interval \\([-1, 1]\\).
 2. The number of points generated, \\(N\\), will be the value of \\(A\_{S}\\).
-3. The number of points that lie within the circle, \\(x^2 + y^2 < 1\\), will be
+3. The number of points that lie inside the circle, \\(x^2 + y^2 < 1\\), will be
    \\(A\_{C}\\).
 4. Find the value \\( \pi = 4 \frac{A\_{C}}{A\_{S}} \\).
 
 ### Demo
+
+Here is a demo written in JavaScript for showing how a Monte Carlo simulation
+can estimate the value of \\(\pi\\). You can get the full source code of this
+tutorial on [Github](http://www.github.com/davidrobles/mcpi.js).
 
 <div class="mcpiDemo">
 
@@ -144,39 +147,6 @@ This can be summarized as follows:
 
 <div style="clear: both;"></div>
 
-asymptotically approaching the real value of PI.
-
-### View on Github
-
-The code for this tutorial is in
-[Github](http://www.github.com/davidrobles/mcpi.js). To run it just include the
-JavaScript file:
-
-{% highlight html %}
-<script src="mcpi.js"></script>
-{% endhighlight html %}
-
-This is how we can configure and run this example:
-
-{% highlight javascript %}
-var view = new MCPI.View({
-    canvas: document.getElementById("pi-mc"),
-    lineWidth: 3,
-    dotRadius: 2,
-    colors: {
-        bg: "something",
-        line: "rgb(154, 129, 61)",
-        inside: "rgb(67, 148, 145)",
-        outside: "rgb(216, 59, 55)"
-    }
-});
-var model = new MCPI.Model({
-    dotSims: 10000
-});
-model.addObserver(view);
-model.run();
-{% endhighlight %}
-
 <script>
 (function() {
 
@@ -223,18 +193,11 @@ model.run();
 }());
 </script>
 
-### Bibliography
-
-- Wikipedia.
-- Bandit Algorithms for Website Optimization
-
-<!--
-We created a program to estimate the value of PI using JavaScript. Why JavaScript? Simply because is
-the best programming language for demos! If you look for a tutorial or demo about any algorithm or
-technique you will find code in different programming languages that DO NOT run in a web browser,
-videos, or even worse, Java applets! With JavaScript we can create a program with beautiful
-interfaces that will load as you open a web page. No waiting for a video to load, or Java applets to
-load!.
--->
-
+<!-- We created a program to estimate the value of PI using JavaScript. Why
+JavaScript? Simply because is the best programming language for demos! If you
+look for a tutorial or demo about any algorithm or technique you will find code
+in different programming languages that DO NOT run in a web browser, videos, or
+even worse, Java applets! With JavaScript we can create a program with beautiful
+interfaces that will load as you open a web page. No waiting for a video to
+load, or Java applets to load!.  -->
 
