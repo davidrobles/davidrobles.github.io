@@ -4,7 +4,7 @@ title:      "Estimating PI using Monte Carlo Simulations"
 date:       2014-06-19 09:48:16
 comments:   true
 categories: [Evolutionary algorithms, Genetic Algorithms]
-style:      mcpi.scss
+style:      mcpi.css
 js:         mcpi.js
 ---
 
@@ -58,7 +58,7 @@ that:
 
 - The **area of the circle** is \\( A\_{C} = \pi r^2 \\).
 
-- And, the **area of the square** is \\( A\_{S} = (2r)^2 \\).
+- The **area of the square** is \\( A\_{S} = (2r)^2 \\).
 
 Therefore, the ratio of the circle's area to the square's area is:
 $$
