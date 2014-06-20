@@ -25,7 +25,7 @@ Monte Carlo simulations are a class of computational algorithms that involve
 multiple computational trials driven by random sampling to approximate the
 optimal solution. Each trial is called a **simulation**, which is a random
 realization of the model for a given set of parameters. Because each simulation
-is powered by random numbers, the results are often noisy, and is usually
+is powered by random numbers the results tend to be noisy, and is often
 necessary to run thousands of simulations in order to approximate the optimal
 solution.
 
@@ -53,8 +53,8 @@ solution.
 </script>
 
 One of the best examples to illustrate how Monte Carlo simulations work is
-approximating the value of \\(\pi\\). So, how can we do that? First of all, we
-know two things:
+estimating the value of \\(\pi\\). So how can we do that? First of all, we know
+that:
 
 - The **area of the circle** is \\( A\_{C} = \pi r^2 \\).
 
@@ -66,7 +66,7 @@ $$
                                 = \frac{\pi r^2}{4 r^2}
                                 = \frac{\pi}{4}
 $$
-Solving for \\( \pi \\) yields:
+and solving for \\( \pi \\) yields:
 $$
 { \pi = 4 \frac{A\_{C}}{A\_{S}} }
 $$
