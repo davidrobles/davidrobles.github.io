@@ -126,7 +126,7 @@ MCPI.Controller.prototype = {
                 handler[event].apply(handler, [this].concat(args));
             }
         }, this);
-    },
+    }
 
 };
 
@@ -222,7 +222,12 @@ MCPI.DashboardView.prototype = {
 
     renderEquation: function() {
         var pi = this.model.calculatePi();
-        if (this.model.counters.total % 50 == 0) {
+        if (this.model.counters.total == 0) {
+            var math = MathJax.Hub.getAllJax(this.equation.id)[0];
+            MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{" +
+                "A_C}{A_S}"]);
+
+        } else if (this.model.counters.total % 50 == 0) {
             var math = MathJax.Hub.getAllJax(this.equation.id)[0];
             MathJax.Hub.Queue(["Text",math,"\\pi \\approx 4 \\frac{"
                 + this.model.counters.inside + "}{" + this.model.counters.total
