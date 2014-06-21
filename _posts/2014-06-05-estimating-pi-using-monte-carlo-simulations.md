@@ -5,6 +5,7 @@ date:       2014-06-19 09:48:16
 comments:   true
 categories: [Evolutionary algorithms, Genetic Algorithms]
 style:      /mcpi/mcpi.css
+js:         /mcpi/mcpi.js
 ---
 
 <script type="text/x-mathjax-config">

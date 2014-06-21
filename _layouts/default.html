@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="/css/main.css">
 
 {% if page.style %}
-<link rel="stylesheet" href="/css/{{page.style}}">
+    <link rel="stylesheet" href="/css/{{page.style}}">
 {% endif %}
 
 </head>
@@ -108,5 +108,8 @@
         </div>
     </div>
 </div>
+{% if page.js %}
+    <script src="/js/{{page.js}}"></script>
+{% endif %}
 </body>
 </html>
