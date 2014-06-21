@@ -5,15 +5,15 @@ date:       2014-06-19 09:48:16
 comments:   true
 categories: [Evolutionary algorithms, Genetic Algorithms]
 style:      mcpi/mcpi.css
-js:         [mcpi/mcpi-model.js, mcpi/mcpi-controller.js, mcpi/mcpi-dashboard.js, mcpi/mcpi-canvas.js, mcpi/mcpi-post.js]
+js:         ["mcpi/mcpi-model.js", "mcpi/mcpi-controller.js", "mcpi/mcpi-dashboard.js",
+             "mcpi/mcpi-canvas.js", "mcpi/mcpi-post.js"]
+jsExternal: ["http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"]
 ---
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     showProcessingMessages: false
 });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 <canvas id="mcpiShortDemo">
@@ -105,11 +105,11 @@ tutorial on [Github](http://www.github.com/davidrobles/mcpi.js).
         <div class="mcpiConfigPanel">
             <label for="mcpiSelect">Sample size:</label>
             <select id="mcpiSampleSize" class="mcpiSelect">
-                <option value="10000" selected="selected">10000</option>
-                <option value="50000">50000</option>
+                <option value="50000" selected>50000</option>
                 <option value="100000">100000</option>
                 <option value="150000">150000</option>
                 <option value="250000">250000</option>
+                <option value="500000">500000</option>
                 <option value="1000000">1000000</option>
             </select>
             <br /><br />
