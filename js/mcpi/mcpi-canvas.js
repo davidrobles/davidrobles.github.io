@@ -4,9 +4,10 @@ MCPI.CanvasView = function(options) {
     this.canvas = options.canvas;
     this.ctx = this.canvas.getContext("2d");
     this.colors = options.colors;
-    this.pointSize = 1;
+    this.pointSize = options.pointSize;
     this.canvas.width = options.size;
     this.canvas.height = options.size;
+    this.canvasData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
 };
 
 MCPI.CanvasView.prototype = {
@@ -43,9 +44,8 @@ MCPI.CanvasView.prototype = {
     },
 
     renderBackground: function() {
-        this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.fillStyle = this.colors.bg;
-        this.ctx.fill();
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     },
 
     renderBorder: function() {
@@ -61,15 +61,14 @@ MCPI.CanvasView.prototype = {
         this.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
         this.ctx.fillStyle = this.colors.circle;
         this.ctx.fill();
+        this.ctx.closePath();
     },
 
     renderPoint: function(point, color) {
         var centerX = this.canvas.width * ((point.x + 1) / 2),
             centerY = this.canvas.height * ((point.y + 1) / 2);
-        this.ctx.beginPath();
-        this.ctx.arc(centerX, centerY, this.pointSize, 0, Math.PI * 2, false);
         this.ctx.fillStyle = color;
-        this.ctx.fill();
+        this.ctx.fillRect(centerX, centerY, this.pointSize, this.pointSize);
     }
 
 };

@@ -110,7 +110,7 @@ tutorial on [Github](http://www.github.com/davidrobles/mcpi.js).
                 <option value="100000">100000</option>
                 <option value="150000">150000</option>
                 <option value="250000">250000</option>
-                <option value="10000000">10000000</option>
+                <option value="1000000">1000000</option>
             </select>
             <br /><br />
             <button id="mcpiStartButton" class="mcpiStartStop mcpiStart" value="start">START</button>

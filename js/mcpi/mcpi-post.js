@@ -8,6 +8,7 @@
     var canvasView = new MCPI.CanvasView({
         canvas: document.getElementById("mcpiShortDemo"),
         size: 220,
+        pointSize: 2,
         colors: {
             bg: "#F2D6B3",      // light brown
             circle: "#D9B89C",  // brown
@@ -32,6 +33,7 @@
     var canvasView = new MCPI.CanvasView({
         canvas: document.getElementById("mcpiCanvasView"),
         size: 300,
+        pointSize: 1,
         colors: {
             bg: "#F2D6B3",      // light brown
             circle: "#D9B89C",  // brown
