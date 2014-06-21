@@ -17,12 +17,17 @@ MCPI.CanvasView.prototype = {
     // Callbacks
 
     pointsAdded: function(model, points) {
+        var pointsA = {
+            inside: [],
+            outside: []
+        };
         for (var i = 0; i < points.length; i++) {
             var point = points[i],
-                circleSide = MCPI.inside(point) ? "inside" : "outside",
-                color = this.colors[circleSide];
-            this.renderPoint(point, color);
+                circleSide = MCPI.inside(point) ? "inside" : "outside";
+            pointsA[circleSide].push(point);
         }
+        this.renderPoints(pointsA.inside, this.colors.inside);
+        this.renderPoints(pointsA.outside, this.colors.outside);
     },
 
     reset: function() {
@@ -69,6 +74,16 @@ MCPI.CanvasView.prototype = {
             centerY = this.canvas.height * ((point.y + 1) / 2);
         this.ctx.fillStyle = color;
         this.ctx.fillRect(centerX, centerY, this.pointSize, this.pointSize);
+    },
+
+    renderPoints: function(points, color) {
+        for (var i = 0; i < points.length; i++) {
+            var point = points[i],
+                centerX = this.canvas.width * ((point.x + 1) / 2),
+                centerY = this.canvas.height * ((point.y + 1) / 2);
+            this.ctx.fillStyle = color;
+            this.ctx.fillRect(centerX, centerY, this.pointSize, this.pointSize);
+        }
     }
 
 };
