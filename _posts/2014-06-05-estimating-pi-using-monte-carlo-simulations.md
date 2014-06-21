@@ -10,12 +10,6 @@ js:         ["mcpi/mcpi-model.js", "mcpi/mcpi-controller.js", "mcpi/mcpi-dashboa
 jsExternal: ["http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"]
 ---
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    showProcessingMessages: false
-});
-</script>
-
 <canvas id="mcpiShortDemo">
     Your browser does not support HTML5 Canvas!
 </canvas>
@@ -131,3 +125,8 @@ even worse, Java applets! With JavaScript we can create a program with beautiful
 interfaces that will load as you open a web page. No waiting for a video to
 load, or Java applets to load!.  -->
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    showProcessingMessages: false
+});
+</script>
