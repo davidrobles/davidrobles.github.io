@@ -68,4 +68,3 @@ MCPI.Model.prototype = {
     }
 
 };
-
