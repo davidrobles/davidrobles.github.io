@@ -17,17 +17,17 @@ MCPI.CanvasView.prototype = {
     // Callbacks
 
     pointsAdded: function(model, points) {
-        var pointsA = {
+        var pointsGroup = {
             inside: [],
             outside: []
         };
         for (var i = 0; i < points.length; i++) {
             var point = points[i],
                 circleSide = MCPI.inside(point) ? "inside" : "outside";
-            pointsA[circleSide].push(point);
+            pointsGroup[circleSide].push(point);
         }
-        this.renderPoints(pointsA.inside, this.colors.inside);
-        this.renderPoints(pointsA.outside, this.colors.outside);
+        this.renderPoints(pointsGroup.inside, this.colors.inside);
+        this.renderPoints(pointsGroup.outside, this.colors.outside);
     },
 
     reset: function() {
