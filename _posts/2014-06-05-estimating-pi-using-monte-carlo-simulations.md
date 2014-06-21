@@ -89,11 +89,7 @@ tutorial on [Github](http://www.github.com/davidrobles/mcpi.js).
             <span id="mcpiOutsideCounter">0</span></span>
             <br />
             <br />
-            <svg height="20" width="255" style="display: block;">
-                <rect x="0" y="0" width="255px" height="20" fill="#cecece" />
-                <rect id="mcpiRect" x="3" y="3" width="0" height="14" fill="#7f8c8d" />
-            </svg>
-
+            <meter id="mcpiDemoMeter" value="0" max="100" style="width: 255px"></meter>
         </div>
 
         <div class="mcpiConfigPanel">

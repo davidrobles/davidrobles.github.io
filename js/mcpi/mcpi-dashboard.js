@@ -3,7 +3,7 @@ var MCPI = MCPI || {};
 MCPI.DashboardView = function(options) {
     this.model = options.model;
     this.controller = options.controller;
-    this.completionBar = options.completionBar;
+    this.meter = options.meter;
     this.counters = {
         inside: options.counters.inside,
         outside: options.counters.outside
@@ -49,7 +49,7 @@ MCPI.DashboardView.prototype = {
     pointsAdded: function() {
         this.renderEquation();
         this.renderCounters();
-        this.renderCompletionBar();
+        this.renderMeter();
     },
 
     // Controller callbacks
@@ -61,7 +61,7 @@ MCPI.DashboardView.prototype = {
     reset: function(model) {
         this.renderEquation();
         this.renderCounters();
-        this.renderCompletionBar();
+        this.renderMeter();
         this.startButton.className = "mcpiStartStop mcpiStart";
         this.startButton.innerHTML = "START";
         this.startButton.value = "start";
@@ -77,12 +77,11 @@ MCPI.DashboardView.prototype = {
 
     // Rendering
 
-    renderCompletionBar: function() {
+    renderMeter: function() {
         var numPoints = this.model.counters.total;
         var sampleSize = parseInt(this.sampleSize.value, 10);
-        var barWidth = 249;
-        var completionbarWidth = (numPoints * barWidth) / sampleSize;
-        this.completionBar.setAttribute("width", "" + completionbarWidth);
+        var completionPercentage = Math.round((numPoints / sampleSize) * 100);
+        this.meter.setAttribute("value", "" + completionPercentage);
     },
 
     renderCounters: function() {

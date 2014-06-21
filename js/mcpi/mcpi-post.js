@@ -49,7 +49,7 @@
             inside: "#2980b9",  // blue
             outside: "#c0392b"  // red
         },
-        completionBar: document.getElementById("mcpiRect"),
+        meter: document.getElementById("mcpiDemoMeter"),
         counters: {
             inside: document.getElementById("mcpiInsideCounter"),
             outside: document.getElementById("mcpiOutsideCounter")
