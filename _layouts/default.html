@@ -109,7 +109,9 @@
     </div>
 </div>
 {% if page.js %}
-    <script src="/js/{{page.js}}"></script>
+    {% for js in page.js do %}
+        <script src="/js/{{js}}"></script>
+    {% endfor %}
 {% endif %}
 </body>
 </html>

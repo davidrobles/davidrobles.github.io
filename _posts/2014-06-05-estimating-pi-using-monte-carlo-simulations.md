@@ -4,8 +4,8 @@ title:      "Estimating PI using Monte Carlo Simulations"
 date:       2014-06-19 09:48:16
 comments:   true
 categories: [Evolutionary algorithms, Genetic Algorithms]
-style:      /mcpi/mcpi.css
-js:         /mcpi/mcpi.js
+style:      mcpi/mcpi.css
+js:         [mcpi/mcpi.js, mcpi/mcpi-post.js]
 ---
 
 <script type="text/x-mathjax-config">
@@ -15,7 +15,6 @@ MathJax.Hub.Config({
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<script src="/js/mcpi.js"></script>
 
 <canvas id="mcpiShortDemo">
     Your browser does not support HTML5 Canvas!
@@ -28,29 +27,6 @@ realization of the model for a given set of parameters. Because each simulation
 is powered by random numbers the results tend to be noisy, and is often
 necessary to run thousands of simulations in order to approximate the optimal
 solution.
-
-<script>
-(function() {
-    var model = new MCPI.Model();
-    var controller = new MCPI.Controller({
-        model: model,
-        sampleSize: 25000,
-        stepSize: 100
-    });
-    var canvasView = new MCPI.CanvasView({
-        canvas: document.getElementById("mcpiShortDemo"),
-        size: 220,
-        colors: {
-            bg: "#F2D6B3",      // light brown
-            circle: "#D9B89C",  // brown
-            inside: "#2980b9",  // blue
-            outside: "#c0392b"  // red
-        }
-    });
-    model.bind(canvasView);
-    controller.loop();
-}());
-</script>
 
 One of the best examples to illustrate how Monte Carlo simulations work is
 estimating the value of \\(\pi\\). So how can we do that? First of all, we know
@@ -146,52 +122,6 @@ tutorial on [Github](http://www.github.com/davidrobles/mcpi.js).
 </div>
 
 <div style="clear: both;"></div>
-
-<script>
-(function() {
-
-    var model = new MCPI.Model();
-
-    var controller = new MCPI.Controller({
-        model: model,
-        sampleSize: 50000,
-        stepSize: 500
-    });
-
-    var canvasView = new MCPI.CanvasView({
-        canvas: document.getElementById("mcpiCanvasView"),
-        size: 300,
-        colors: {
-            bg: "#F2D6B3",      // light brown
-            circle: "#D9B89C",  // brown
-            inside: "#2980b9",  // blue
-            outside: "#c0392b"  // red
-        }
-    });
-
-    var dashboardView = new MCPI.DashboardView({
-        model: model,
-        controller: controller,
-        colors: {
-            inside: "#2980b9",  // blue
-            outside: "#c0392b"  // red
-        },
-        completionBar: document.getElementById("mcpiRect"),
-        counters: {
-            inside: document.getElementById("mcpiInsideCounter"),
-            outside: document.getElementById("mcpiOutsideCounter")
-        },
-        equation: document.getElementById("mcpiEquation"),
-        sampleSize: document.getElementById("mcpiSampleSize"),
-        startButton: document.getElementById("mcpiStartButton")
-    });
-
-    model.bind(canvasView);
-    model.bind(dashboardView);
-    controller.bind(dashboardView);
-    
-}());
-</script>
 
 <!-- We created a program to estimate the value of PI using JavaScript. Why
 JavaScript? Simply because is the best programming language for demos! If you
