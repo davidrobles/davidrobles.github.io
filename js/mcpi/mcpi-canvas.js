@@ -31,18 +31,18 @@ MCPI.CanvasView.prototype = {
     },
 
     reset: function() {
-        this.renderAll();
+        this.renderReset();
     },
 
     // Model callbacks
 
     bound: function() {
-        this.renderAll();
+        this.renderReset();
     },
 
     // Rendering
 
-    renderAll: function() {
+    renderReset: function() {
         this.renderBackground();
         this.renderBorder();
         this.renderCircle();
