@@ -2,11 +2,11 @@ var MCPI = MCPI || {};
 
 MCPI.CanvasView = function(options) {
     this.canvas = options.canvas;
-    this.ctx = this.canvas.getContext("2d");
     this.colors = options.colors;
     this.pointSize = options.pointSize;
     this.canvas.width = options.size;
     this.canvas.height = options.size;
+    this.ctx = this.canvas.getContext("2d");
     this.canvasData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
 };
 
