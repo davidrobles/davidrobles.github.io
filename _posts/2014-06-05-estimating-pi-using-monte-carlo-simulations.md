@@ -97,7 +97,6 @@ tutorial on [Github](http://www.github.com/davidrobles/mcpi.js).
             <select id="mcpiSampleSize" class="mcpiSelect">
                 <option value="50000" selected>50000</option>
                 <option value="100000">100000</option>
-                <option value="150000">150000</option>
                 <option value="250000">250000</option>
                 <option value="500000">500000</option>
                 <option value="1000000">1000000</option>
@@ -112,14 +111,6 @@ tutorial on [Github](http://www.github.com/davidrobles/mcpi.js).
 </div>
 
 <div style="clear: both;"></div>
-
-<!-- We created a program to estimate the value of PI using JavaScript. Why
-JavaScript? Simply because is the best programming language for demos! If you
-look for a tutorial or demo about any algorithm or technique you will find code
-in different programming languages that DO NOT run in a web browser, videos, or
-even worse, Java applets! With JavaScript we can create a program with beautiful
-interfaces that will load as you open a web page. No waiting for a video to
-load, or Java applets to load!.  -->
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
