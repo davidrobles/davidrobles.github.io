@@ -7,7 +7,7 @@ MCPI.DashboardView = function(options) {
         inside: options.elems.insideCounter,
         outside: options.elems.outsideCounter
     };
-    this.elems = options.elms;
+    this.elems = options.elems;
     this.addListeners();
 };
 
