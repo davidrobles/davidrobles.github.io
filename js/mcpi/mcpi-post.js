@@ -52,10 +52,10 @@
             outside: "#c0392b"  // red
         },
         elems: {
-            meter: document.getElementById("mcpiDemoMeter"),
+            equation: document.getElementById("mcpiEquation"),
             insideCounter: document.getElementById("mcpiInsideCounter"),
             outsideCounter: document.getElementById("mcpiOutsideCounter"),
-            equation: document.getElementById("mcpiEquation"),
+            meter: document.getElementById("mcpiDemoMeter"),
             sampleSize: document.getElementById("mcpiSampleSize"),
             startButton: document.getElementById("mcpiStartButton")
         }
