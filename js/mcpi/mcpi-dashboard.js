@@ -3,10 +3,6 @@ var MCPI = MCPI || {};
 MCPI.DashboardView = function(options) {
     this.model = options.model;
     this.controller = options.controller;
-    this.counters = {
-        inside: options.elems.insideCounter,
-        outside: options.elems.outsideCounter
-    };
     this.elems = options.elems;
     this.addListeners();
 };
@@ -82,8 +78,8 @@ MCPI.DashboardView.prototype = {
     },
 
     renderCounters: function() {
-        this.counters.inside.innerHTML = this.model.counters.inside;
-        this.counters.outside.innerHTML = this.model.counters.outside;
+        this.elems.insideCounter.innerHTML = this.model.counters.inside;
+        this.elems.outsideCounter.innerHTML = this.model.counters.outside;
     },
 
     renderEquation: function() {
