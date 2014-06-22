@@ -20,6 +20,7 @@ MCPI.Model = function(options) {
         total: 0
     };
     this.handlers = [];
+    this.validateSampleAndStepSizes();
 };
 
 MCPI.Model.prototype = {
@@ -71,6 +72,12 @@ MCPI.Model.prototype = {
         var side = MCPI.inside(point) ? "inside" : "outside";
         this.counters[side]++;
         this.counters.total++;
+    },
+
+    validateSampleAndStepSizes: function() {
+        if (this.sampleSize % this.stepSize != 0) {
+            throw new Error("The step size must be a multiple of the sample size.");
+        }
     }
 
 };
