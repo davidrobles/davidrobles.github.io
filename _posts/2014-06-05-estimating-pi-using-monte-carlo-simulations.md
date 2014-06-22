@@ -104,7 +104,7 @@ tutorial on [Github](http://www.github.com/davidrobles/mcpi).
                 <option value="500000">500000</option>
                 <option value="1000000">1000000</option>
             </select>
-            <br /><br />
+            <br><br>
             <button id="mcpiStartButton" class="mcpiStartStop mcpiStart" value="start">START</button>
         </div>
     </div>
