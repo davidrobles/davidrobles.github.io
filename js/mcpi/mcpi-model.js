@@ -14,13 +14,13 @@ MCPI.randomPoint = function() {
 MCPI.Model = function(options) {
     this.sampleSize = options.sampleSize;
     this.stepSize = options.stepSize;
+    this.validateSampleAndStepSizes();
     this.counters = {
         inside: 0,
         outside: 0,
         total: 0
     };
     this.handlers = [];
-    this.validateSampleAndStepSizes();
 };
 
 MCPI.Model.prototype = {
