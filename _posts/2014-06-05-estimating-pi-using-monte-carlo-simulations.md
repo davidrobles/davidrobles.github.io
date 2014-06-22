@@ -62,7 +62,7 @@ The steps for this procedure can be summarized as follows:
 
 Here is a demo written in JavaScript for showing how a Monte Carlo simulation
 can estimate the value of \\(\pi\\). You can get the full source code of this
-tutorial on [Github](http://www.github.com/davidrobles/mcpi.js).
+tutorial on [Github](http://www.github.com/davidrobles/mcpi).
 
 <div class="mcpiDemo">
 
