@@ -201,6 +201,8 @@ span.code {
 .post {
     a.read-more {
         font-weight: bold;
+        display: block;
+        text-align: right;
     }
     img.excerpt {
         float: left;
