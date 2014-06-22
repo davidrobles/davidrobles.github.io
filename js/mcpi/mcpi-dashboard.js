@@ -79,7 +79,7 @@ MCPI.DashboardView.prototype = {
 
     renderMeter: function() {
         var numPoints = this.model.counters.total;
-        var sampleSize = parseInt(this.sampleSize.value, 10);
+        var sampleSize = this.model.sampleSize;
         var completionPercentage = Math.round((numPoints / sampleSize) * 100);
         this.meter.setAttribute("value", "" + completionPercentage);
     },
