@@ -28,7 +28,7 @@
 
 </head>
 <body>
-<div class="header">
+<header>
     <div class="container">
         <div id="title"><a href="/">DAVID ROBLES</a></div>
         <div id="menu">
@@ -37,7 +37,7 @@
             <a {% if page.url != '/about/index.html' and page.url != '/projects/index.html' %}class="current" {% endif %}href="/">BLOG</a>
         </div>
     </div>
-</div>
+</header>
 <div class="menu-bar"></div>
 <!-- <div style="clear: both;"></div> -->
 <div class="container">
@@ -45,9 +45,9 @@
         <div class="widget">
             <div class="name">
                 <div style="text-align: center; margin-bottom: 10px;">
-                    <a href="http://facebook.com/davidrobles">
-                        <img src="/img/social-icons/rss.png"style="width: 30px; height: 30px;" />
-                    </a>
+                    <!-- <a href="http://facebook.com/davidrobles"> -->
+                    <!--     <img src="/img/social-icons/rss.png"style="width: 30px; height: 30px;" /> -->
+                    <!-- </a> -->
                     <a href="http://facebook.com/davidrobles">
                         <img src="/img/social-icons/facebook.png"style="width: 30px; height: 30px;" />
                     </a>
@@ -67,11 +67,8 @@
             </div>
             <div class="con">
                 <img src="/img/david.jpg" class="about" style="width: 50%; height: 50%" />
-
-                <p class="about">David Robles</p>
-                <p class="about">Software Engineer at <a href="http://hearsaysocial.com/">Hearsay
-                    Social</a></p>
-
+                <p class="about">Hi, I'm David Robles, Software Engineer at <a href="http://hearsaysocial.com/">Hearsay
+                    Social</a>.</p>
             </div>
         </div>
         <div class="widget">
@@ -80,16 +77,6 @@
                 <ul>
                     {% for post in site.posts offset: 0 limit: 10  %}
                     <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div class="widget">
-            <div class="name">Categories</div>
-            <div>
-                <ul>
-                    {% for category in site.categories  %}
-                    <li><a href="{{ post. }}">{{ category | first }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -109,7 +96,7 @@
         {{ content }}
     </div>
 </div> <!-- content -->
-<div class="footer">
+<footer>
     <div class="container">
         <div class="contact">
             <p>
@@ -125,7 +112,7 @@
             </p>
         </div>
     </div>
-</div>
+</footer>
 
 {% if page.jsExternal %}
     {% for js in page.jsExternal do %}
