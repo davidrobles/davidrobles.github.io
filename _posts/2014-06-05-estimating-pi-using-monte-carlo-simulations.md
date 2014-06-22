@@ -3,6 +3,7 @@ layout:     post
 title:      "Estimating PI using Monte Carlo Simulations"
 date:       2014-06-19 09:48:16
 comments:   true
+excerpt:    "this is just a test"
 categories: [JavaScript, Monte Carlo]
 tags:       [JavaScript, Monte Carlo]
 style:      ["mcpi/mcpi.css", "mcpi/mcpi-post.css"]
