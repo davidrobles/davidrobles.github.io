@@ -1,8 +1,9 @@
 (function() {
-    var model = new MCPI.Model();
+    var model = new MCPI.Model({
+        sampleSize: 25000
+    });
     var controller = new MCPI.Controller({
         model: model,
-        sampleSize: 25000,
         stepSize: 100
     });
     var canvasView = new MCPI.CanvasView({
@@ -22,11 +23,12 @@
 
 (function() {
 
-    var model = new MCPI.Model();
+    var model = new MCPI.Model({
+        sampleSize: 50000
+    });
 
     var controller = new MCPI.Controller({
         model: model,
-        sampleSize: 50000,
         stepSize: 500
     });
 
@@ -66,10 +68,11 @@
 }());
 
 (function() {
-    var model = new MCPI.Model();
+    var model = new MCPI.Model({
+        sampleSize: 10000000
+    });
     var controller = new MCPI.Controller({
         model: model,
-        sampleSize: 10000000,
         stepSize: 10000000
     });
     controller.start();

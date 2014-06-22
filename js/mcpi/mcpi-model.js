@@ -11,7 +11,8 @@ MCPI.randomPoint = function() {
     };
 };
 
-MCPI.Model = function() {
+MCPI.Model = function(options) {
+    this.sampleSize = options.sampleSize;
     this.counters = {
         inside: 0,
         outside: 0,
