@@ -41,12 +41,6 @@ MCPI.CanvasView.prototype = {
 
     // Rendering
 
-    renderReset: function() {
-        this.renderBackground();
-        this.renderBorder();
-        this.renderCircle();
-    },
-
     renderBackground: function() {
         this.ctx.fillStyle = this.colors.bg;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -83,6 +77,12 @@ MCPI.CanvasView.prototype = {
             this.ctx.fillStyle = color;
             this.ctx.fillRect(centerX, centerY, this.pointSize, this.pointSize);
         }
+    },
+
+    renderReset: function() {
+        this.renderBackground();
+        this.renderBorder();
+        this.renderCircle();
     }
 
 };
