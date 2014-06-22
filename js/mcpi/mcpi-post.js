@@ -7,7 +7,7 @@
         model: model
     });
     var canvasView = new MCPI.CanvasView({
-        canvas: document.getElementById("mcpiShortDemo"),
+        canvasEl: document.getElementById("mcpiShortDemo"),
         size: 220,
         pointSize: 2,
         colors: {
@@ -33,7 +33,7 @@
     });
 
     var canvasView = new MCPI.CanvasView({
-        canvas: document.getElementById("mcpiCanvasView"),
+        canvasEl: document.getElementById("mcpiCanvasView"),
         size: 300,
         pointSize: 1,
         colors: {

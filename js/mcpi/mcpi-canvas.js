@@ -1,12 +1,12 @@
 var MCPI = MCPI || {};
 
 MCPI.CanvasView = function(options) {
-    this.canvas = options.canvas;
+    this.canvasEl = options.canvasEl;
     this.colors = options.colors;
     this.pointSize = options.pointSize;
-    this.canvas.width = options.size;
-    this.canvas.height = options.size;
-    this.ctx = this.canvas.getContext("2d");
+    this.canvasEl.width = options.size;
+    this.canvasEl.height = options.size;
+    this.ctx = this.canvasEl.getContext("2d");
 };
 
 MCPI.CanvasView.prototype = {
@@ -41,18 +41,18 @@ MCPI.CanvasView.prototype = {
 
     renderBackground: function() {
         this.ctx.fillStyle = this.colors.bg;
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillRect(0, 0, this.canvasEl.width, this.canvasEl.height);
     },
 
     renderBorder: function() {
-        var borderSize = Math.round(this.canvas.width * 0.05);
-        this.canvas.style.border = borderSize + "px solid " + this.colors.circle;
+        var borderSize = Math.round(this.canvasEl.width * 0.05);
+        this.canvasEl.style.border = borderSize + "px solid " + this.colors.circle;
     },
 
     renderCircle: function() {
-        var centerX = this.canvas.width / 2,
-            centerY = this.canvas.height / 2,
-            radius = this.canvas.width / 2;
+        var centerX = this.canvasEl.width / 2,
+            centerY = this.canvasEl.height / 2,
+            radius = this.canvasEl.width / 2;
         this.ctx.beginPath();
         this.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
         this.ctx.fillStyle = this.colors.circle;
@@ -61,8 +61,8 @@ MCPI.CanvasView.prototype = {
     },
 
     renderPoint: function(point, color) {
-        var centerX = this.canvas.width * ((point.x + 1) / 2),
-            centerY = this.canvas.height * ((point.y + 1) / 2);
+        var centerX = this.canvasEl.width * ((point.x + 1) / 2),
+            centerY = this.canvasEl.height * ((point.y + 1) / 2);
         this.ctx.fillStyle = color;
         this.ctx.fillRect(centerX, centerY, this.pointSize, this.pointSize);
     },
@@ -70,8 +70,8 @@ MCPI.CanvasView.prototype = {
     renderPoints: function(points, color) {
         for (var i = 0; i < points.length; i++) {
             var point = points[i],
-                centerX = this.canvas.width * ((point.x + 1) / 2),
-                centerY = this.canvas.height * ((point.y + 1) / 2);
+                centerX = this.canvasEl.width * ((point.x + 1) / 2),
+                centerY = this.canvasEl.height * ((point.y + 1) / 2);
             this.ctx.fillStyle = color;
             this.ctx.fillRect(centerX, centerY, this.pointSize, this.pointSize);
         }
