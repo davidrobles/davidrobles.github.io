@@ -57,7 +57,7 @@ MCPI.Model.prototype = {
         var args = Array.prototype.slice.call(arguments, 1);
         this.handlers.forEach(function(handler) {
             if (event in handler) {
-                handler[event].apply(handler, [this].concat(args));
+                handler[event].apply(handler, args);
             }
         }, this);
     },

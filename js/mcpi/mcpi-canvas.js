@@ -13,9 +13,13 @@ MCPI.CanvasView.prototype = {
 
     constructor: MCPI.CanvasView,
 
-    // Callbacks
+    // Model Callbacks
 
-    pointsAdded: function(model, points) {
+    bound: function() {
+        this.renderReset();
+    },
+
+    pointsAdded: function(points) {
         var pointsGroup = {
             inside: [],
             outside: []
@@ -30,12 +34,6 @@ MCPI.CanvasView.prototype = {
     },
 
     reset: function() {
-        this.renderReset();
-    },
-
-    // Model callbacks
-
-    bound: function() {
         this.renderReset();
     },
 
