@@ -64,3 +64,14 @@
     controller.bind(dashboardView);
     
 }());
+
+(function() {
+    var model = new MCPI.Model();
+    var controller = new MCPI.Controller({
+        model: model,
+        sampleSize: 10000000,
+        stepSize: 10000000
+    });
+    controller.start();
+    console.log(model.calculatePi());
+}());
