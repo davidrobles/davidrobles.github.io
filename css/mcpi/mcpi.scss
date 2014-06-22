@@ -1,6 +1,77 @@
 ---
 ---
 
-body {
+div.mcpiDemo {
+    margin: 0 auto;
+    background-color: #eaeaea;
+    padding: 15px;
+    width: 600px;
+    div.mcpiCanvasPanel {
+        float: left;
+    }
+    div.rightPanel {
+        display: table;
+        height: 330px;
+        width: 255px;
+        float: right;
+        div.mcpiEquation {
+            font-size: 1.3em;
+            border-bottom: 2px solid #cecece;
+            height: 40px;
+            padding: 20px 0;
+            text-align: center;
+            div.pi {
+                vertical-align: middle;
+            }
+        }
+        div.mcpiStatsPanel {
+            border-bottom: 2px solid #cecece;
+            text-align: center;
+            padding: 25px 0;
+        }
+        div.mcpiConfigPanel {
+            float: right;
+            padding-top: 30px;
+            width: 255px;
+        }
+    }
 
+    button.mcpiStartStop {
+        cursor: pointer;
+        border: 0;
+        display: block;
+        font-size: 1.2em;
+        margin: 0 auto;
+        outline: none;
+        padding: 6px 10px;
+        &.mcpiStart {
+            background-color: #27ae60;
+            color: #ffffff;
+            &:hover {
+                background-color: #2cc36b;
+            }
+        }
+        &.mcpiStop {
+            background-color: #c0392b;
+            color: #ffffff;
+            &:hover {
+                background-color: #d14233;
+            }
+        }
+    }
+}
+
+select.mcpiSelect {
+    border: 2px solid #cecece;
+    padding: 6px;
+    font-size: 1em;
+    outline: none;
+    float: left;
+}
+
+label {
+    float: left;
+    min-width: 115px;
+    padding: 0 20px 0 0;
+    text-align: right
 }
