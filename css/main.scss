@@ -175,6 +175,7 @@ header {
 }
 
 footer {
+    @extend .container;
     clear: both;
     font-size: 80%;
     color: #666;
