@@ -54,9 +54,6 @@ MCPI.Controller.prototype = {
         this.play = true;
         this.trigger("start");
         while (this.model.counters.total < this.model.sampleSize) {
-            console.log('Total:       ' + this.model.counters.total);
-            console.log('Sample size: ' + this.model.sampleSize);
-            console.log("-----");
             this.model.addRandomPoints(this.stepSize);
         }
     },
