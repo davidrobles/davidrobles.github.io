@@ -199,6 +199,15 @@ span.code {
 }
 
 .post {
+    a.read-more {
+        font-weight: bold;
+    }
+    img.excerpt {
+        float: left;
+        margin-right: 15px;
+        height: 150px;
+        width: 150px;
+    }
     p.date {
         font-size: 0.9em;
         margin: 0;

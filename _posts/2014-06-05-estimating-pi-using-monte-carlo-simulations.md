@@ -3,7 +3,14 @@ layout:     post
 title:      "Estimating PI using Monte Carlo Simulations"
 date:       2014-06-19 09:48:16
 comments:   true
-excerpt:    "this is just a test"
+excerpt:    "Monte Carlo simulations are a class of computational algorithms
+             that involve multiple computational trials driven by random
+             sampling to approximate the optimal solution. One of the best
+             examples to illustrate how Monte Carlo simulations work is
+             estimating the value of &pi;. In this post we describe how Monte
+             Carlo simulations work and demo how use this method to estimate the
+             value of &pi; with a JavaScript program."
+img:        "mcpi/mcpi.gif"
 categories: [JavaScript, Monte Carlo]
 tags:       [JavaScript, Monte Carlo]
 style:      ["mcpi/mcpi.css", "mcpi/mcpi-post.css"]
