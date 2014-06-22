@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Estimating PI using Monte Carlo Simulations"
-date:       2014-06-19 09:48:16
+date:       2014-06-22 16:48:16
 comments:   true
 excerpt:    "Monte Carlo simulations are a class of computational algorithms
              that involve multiple computational trials driven by random
