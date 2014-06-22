@@ -68,7 +68,7 @@ tutorial on [Github](http://www.github.com/davidrobles/mcpi).
 <div class="mcpiDemo">
 
     <div class="mcpiCanvasPanel">
-        <canvas id="mcpiCanvasView" style="margin: 0 auto; display: block;">
+        <canvas id="mcpiCanvasView">
             Your browser does not support HTML5 Canvas!
         </canvas>
     </div>
@@ -80,16 +80,18 @@ tutorial on [Github](http://www.github.com/davidrobles/mcpi).
         </div>
 
         <div class="mcpiStatsPanel">
-            <svg height="24" width="24" style="vertical-align: middle;">
-                <circle cx="12" cy="12" r="12" fill="#2980b9" />
-            </svg><span style="height: 24px; margin: 0; padding: 0; font-size: 1.1em; vertical-align: middle;">
-            <span id="mcpiInsideCounter" style="width: 40px; display: inline-block; text-align: left;">0</span></span>
-            <svg height="24" width="24" style="vertical-align: middle;">
-                <circle cx="12" cy="12" r="12" fill="#c0392b" />
-            </svg><span style="font-size: 1.1em; vertical-align: middle;">
-            <span id="mcpiOutsideCounter">0</span></span>
-            <br />
-            <br />
+            <div class="mcpiCounter">
+                <svg height="24" width="24" style="vertical-align: middle;">
+                    <circle cx="12" cy="12" r="12" fill="#2980b9" />
+                </svg>
+                <span id="mcpiInsideCounter" class="mcpiCounter">0</span>
+            </div>
+            <div class="mcpiCounter">
+                <svg height="24" width="24" style="vertical-align: middle;">
+                    <circle cx="12" cy="12" r="12" fill="#c0392b" />
+                </svg>
+                <span id="mcpiOutsideCounter">0</span></span>
+            </div>
             <meter id="mcpiDemoMeter" value="0" max="100" style="width: 255px"></meter>
         </div>
 
