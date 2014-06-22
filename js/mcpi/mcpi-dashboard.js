@@ -43,7 +43,7 @@ MCPI.DashboardView.prototype = {
 
     updateSampleSize: function() {
         this.model.sampleSize = parseInt(this.elems.sampleSize.value, 10);
-        this.controller.stepSize = this.model.sampleSize / 100;
+        this.model.stepSize = this.model.sampleSize / 100;
     },
 
     // Model callbacks

@@ -13,6 +13,7 @@ MCPI.randomPoint = function() {
 
 MCPI.Model = function(options) {
     this.sampleSize = options.sampleSize;
+    this.stepSize = options.stepSize;
     this.counters = {
         inside: 0,
         outside: 0,
@@ -44,6 +45,10 @@ MCPI.Model.prototype = {
 
     calculatePi: function() {
         return (4.0 * this.counters.inside) / this.counters.total;
+    },
+
+    next: function() {
+        this.addRandomPoints(this.stepSize);
     },
 
     reset: function() {

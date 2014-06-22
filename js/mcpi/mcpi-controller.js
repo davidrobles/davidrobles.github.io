@@ -2,7 +2,6 @@ var MCPI = MCPI || {};
 
 MCPI.Controller = function(options) {
     this.model = options.model;
-    this.stepSize = options.stepSize;
     this.play = false;
     this.handlers = [];
 };
@@ -25,7 +24,7 @@ MCPI.Controller.prototype = {
 
     next: function() {
         if (this.play && this.model.counters.total < this.model.sampleSize) {
-            this.model.addRandomPoints(this.stepSize);
+            this.model.next();
             window.requestNextAnimationFrame(function() {
                 this.next();
             }.bind(this));
@@ -54,7 +53,7 @@ MCPI.Controller.prototype = {
         this.play = true;
         this.trigger("start");
         while (this.model.counters.total < this.model.sampleSize) {
-            this.model.addRandomPoints(this.stepSize);
+            this.model.addRandomPoints(this.model.stepSize);
         }
     },
 
