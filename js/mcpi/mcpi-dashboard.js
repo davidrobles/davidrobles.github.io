@@ -3,14 +3,14 @@ var MCPI = MCPI || {};
 MCPI.DashboardView = function(options) {
     this.model = options.model;
     this.controller = options.controller;
-    this.meter = options.meter;
     this.counters = {
-        inside: options.counters.inside,
-        outside: options.counters.outside
+        inside: options.elems.insideCounter,
+        outside: options.elems.outsideCounter
     };
-    this.equation = options.equation;
-    this.sampleSize = options.sampleSize;
-    this.startButton = options.startButton;
+    this.meter = options.elems.meter;
+    this.equation = options.elems.equation;
+    this.sampleSizeEl = options.elems.sampleSize;
+    this.startButton = options.elems.startButton;
     this.addListeners();
 };
 
@@ -24,7 +24,7 @@ MCPI.DashboardView.prototype = {
     },
 
     addSampleSizeListener: function() {
-        this.sampleSize.addEventListener("change", function(event) {
+        this.sampleSizeEl.addEventListener("change", function(event) {
             this.updateSampleSize();
         }.bind(this));
     },
@@ -40,7 +40,7 @@ MCPI.DashboardView.prototype = {
     },
 
     updateSampleSize: function() {
-        this.model.sampleSize = parseInt(this.sampleSize.value, 10);
+        this.model.sampleSize = parseInt(this.sampleSizeEl.value, 10);
         this.controller.stepSize = this.model.sampleSize / 100;
     },
 
@@ -65,11 +65,11 @@ MCPI.DashboardView.prototype = {
         this.startButton.className = "mcpiStartStop mcpiStart";
         this.startButton.innerHTML = "START";
         this.startButton.value = "start";
-        this.sampleSize.disabled = false;
+        this.sampleSizeEl.disabled = false;
     },
 
     start: function() {
-        this.sampleSize.disabled = true;
+        this.sampleSizeEl.disabled = true;
         this.startButton.className = "mcpiStartStop mcpiStop";
         this.startButton.innerHTML = "RESET";
         this.startButton.value = "stop";

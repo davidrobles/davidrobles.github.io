@@ -51,14 +51,14 @@
             inside: "#2980b9",  // blue
             outside: "#c0392b"  // red
         },
-        meter: document.getElementById("mcpiDemoMeter"),
-        counters: {
-            inside: document.getElementById("mcpiInsideCounter"),
-            outside: document.getElementById("mcpiOutsideCounter")
-        },
-        equation: document.getElementById("mcpiEquation"),
-        sampleSize: document.getElementById("mcpiSampleSize"),
-        startButton: document.getElementById("mcpiStartButton")
+        elems: {
+            meter: document.getElementById("mcpiDemoMeter"),
+            insideCounter: document.getElementById("mcpiInsideCounter"),
+            outsideCounter: document.getElementById("mcpiOutsideCounter"),
+            equation: document.getElementById("mcpiEquation"),
+            sampleSize: document.getElementById("mcpiSampleSize"),
+            startButton: document.getElementById("mcpiStartButton")
+        }
     });
 
     model.bind(canvasView);
