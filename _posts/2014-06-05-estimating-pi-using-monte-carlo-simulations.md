@@ -5,7 +5,7 @@ date:       2014-06-19 09:48:16
 comments:   true
 categories: [JavaScript, Monte Carlo]
 tags:       [JavaScript, Monte Carlo]
-style:      mcpi/mcpi.css
+style:      ["mcpi/mcpi.css", "mcpi/mcpi-post.css"]
 js:         ["mcpi/mcpi.js", "mcpi/mcpi-model.js", "mcpi/mcpi-controller.js",
              "mcpi/mcpi-dashboard.js", "mcpi/mcpi-canvas.js", "mcpi/mcpi-post.js"]
 jsExternal: ["http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"]

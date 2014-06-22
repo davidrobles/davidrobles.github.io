@@ -15,7 +15,15 @@
 <link rel="stylesheet" href="/css/main.css">
 
 {% if page.style %}
-    <link rel="stylesheet" href="/css/{{page.style}}">
+    {% for style in page.style do %}
+        <link rel="stylesheet" href="/css/{{style}}">
+    {% endfor %}
+{% endif %}
+
+{% if page.js %}
+    {% for js in page.js do %}
+        <script src="/js/{{js}}"></script>
+    {% endfor %}
 {% endif %}
 
 </head>

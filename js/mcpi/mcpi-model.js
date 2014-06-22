@@ -37,6 +37,10 @@ MCPI.Model.prototype = {
         return (4.0 * this.counters.inside) / this.counters.total;
     },
 
+    isFinished: function() {
+        return this.model.counters.total >= this.model.sampleSize;
+    },
+
     next: function() {
         this.addRandomPoints(this.stepSize);
     },
