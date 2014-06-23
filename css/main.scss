@@ -135,7 +135,7 @@ header {
     background-color: $bg-color;
     height: 100px;
     border-bottom: 1px solid #515953;
-    #title {
+    .title {
         display: inline-block;
         margin-top: 28px;
         margin-bottom: 2em;
@@ -149,7 +149,7 @@ header {
             }
         }
     }
-    #menu {
+    .menu {
         width: 550px;
         float: right;
         a {
