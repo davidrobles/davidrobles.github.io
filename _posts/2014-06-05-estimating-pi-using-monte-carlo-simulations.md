@@ -18,9 +18,7 @@ js:         ["mcpi/mcpi.js", "mcpi/mcpi-model.js", "mcpi/mcpi-controller.js",
 jsExternal: ["http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"]
 ---
 
-<canvas id="mcpiShortDemo">
-    Your browser does not support HTML5 Canvas!
-</canvas>
+<img src="/img/mcpi/mcpi.gif" id="mcpiShortDemo" />
 
 Monte Carlo simulations are a class of computational algorithms that involve
 multiple computational trials driven by random sampling to approximate the

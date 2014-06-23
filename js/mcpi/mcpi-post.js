@@ -1,33 +1,5 @@
 (function() {
 
-    var initShortDemo = function() {
-
-        var model = new MCPI.Model({
-            sampleSize: 75000,
-            stepSize: 500
-        });
-
-        var controller = new MCPI.Controller({
-            model: model
-        });
-
-        var canvasView = new MCPI.CanvasView({
-            canvasEl: document.getElementById("mcpiShortDemo"),
-            size: 220,
-            pointSize: 1,
-            colors: {
-                bg: "#F2D6B3",      // light brown
-                circle: "#D9B89C",  // brown
-                inside: "#2980b9",  // blue
-                outside: "#c0392b"  // red
-            }
-        });
-
-        model.bind(canvasView);
-        // controller.loop();
-        
-    };
-
     var initFullDemo = function() {
 
         var model = new MCPI.Model({
@@ -75,7 +47,6 @@
     };
 
     window.onload = function() {
-        initShortDemo();
         initFullDemo();
     };
 
