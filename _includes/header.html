@@ -1,0 +1,14 @@
+<header>
+    <div class="container">
+        <div class="title">
+            <a href="/">DAVID ROBLES</a>
+        </div>
+        <div class="menu">
+            <a {% if page.url == '/about/index.html' %}class="current" {% endif %}href="/about">ABOUT</a>
+            <!-- <a {% if page.url == '/projects/index.html' %}class="current" {% endif %}href="/projects">PROJECTS</a> -->
+            <a {% if page.url != '/about/index.html' and page.url != '/projects/index.html' %}class="current" {% endif %}href="/">BLOG</a>
+        </div>
+    </div>
+</header>
+
+<div class="menu-bar"></div>
