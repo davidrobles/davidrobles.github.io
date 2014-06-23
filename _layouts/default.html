@@ -6,7 +6,6 @@
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,700,800,600" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="/css/syntax.css">
 <link rel="stylesheet" href="/css/main.css">
-
 {% if page.style %}
     {% for style in page.style do %}
         <link rel="stylesheet" href="/css/{{style}}">
@@ -18,25 +17,11 @@
         <script src="/js/{{js}}"></script>
     {% endfor %}
 {% endif %}
-
 </head>
 
 <body>
 
-<header>
-    <div class="container">
-        <div class="title">
-            <a href="/">DAVID ROBLES</a>
-        </div>
-        <div class="menu">
-            <a {% if page.url == '/about/index.html' %}class="current" {% endif %}href="/about">ABOUT</a>
-            <!-- <a {% if page.url == '/projects/index.html' %}class="current" {% endif %}href="/projects">PROJECTS</a> -->
-            <a {% if page.url != '/about/index.html' and page.url != '/projects/index.html' %}class="current" {% endif %}href="/">BLOG</a>
-        </div>
-    </div>
-</header>
-
-<div class="menu-bar"></div>
+{% include header.html %}
 
 <div class="container">
     <div class="sidebar">
