@@ -81,7 +81,7 @@ tutorial on [Github](http://www.github.com/davidrobles/mcpi).
     <div class="rightPanel">
 
         <div id="mcpiEquation" class="mcpiEquation">
-            <div class="pi" id="pi">\( \pi \approx 4 \frac{A_{circle}}{A_{square}} \)</div>
+            <div class="pi" id="pi">\( \pi \approx 4 \frac{A_{C}}{A_{S}} \)</div>
         </div>
 
         <div class="mcpiStatsPanel">
