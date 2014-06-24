@@ -10,7 +10,6 @@ excerpt:    "Monte Carlo simulations are a class of computational algorithms
             JavaScript program how to use this method to estimate the value of
             &pi;."
 img:        "mcpi/mcpi.gif"
-categories: [JavaScript, Monte Carlo]
 tags:       [JavaScript, Monte Carlo]
 style:      ["mcpi/mcpi.css", "mcpi/mcpi-post.css"]
 js:         ["mcpi/mcpi.js", "mcpi/mcpi-model.js", "mcpi/mcpi-controller.js",
