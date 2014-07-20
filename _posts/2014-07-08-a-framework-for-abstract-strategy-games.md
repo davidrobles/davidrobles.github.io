@@ -56,7 +56,7 @@ Here is a simple example of the most basic game we can create with this framewor
 
 <button id="restart-button">Reset</button>
 
-### Game Interface
+## Game Interface
 
 <span class="code" style="font-weight: bold">.copy()</span>
 
@@ -208,7 +208,7 @@ render(tic);
 </script>
 
 {% highlight javascript %}
-tic.isOver();    // false;
+tic.isOver();     // false
 tic.move("5");
 tic.move("4");
 tic.move("1");
