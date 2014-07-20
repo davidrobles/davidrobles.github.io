@@ -612,30 +612,6 @@ We can define the basic interface of a turn-based games as,
 
 Now let's put an example of what the implementation of Tic Tac Toe would return with the given API.
 
-#### Copy
-
-{% highlight python %}
-tic = TicTacToe()
-tic.move(5)
-tic.move(4)
-print tic
-tic_copy = tic.copy()
-print tic_copy
-print id(tic)
-print id(tic_copy)
-{% endhighlight %}
-
-#### Current player
-
-{% highlight python %}
-tic = TicTacToe()
-print tic.current_player()
-tic.move(1)
-print tic.current_player()
-tic.move(2)
-print tic.current_player()
-{% endhighlight %}
-
 Note: Of course, the efficiency of the game is not the priority, because well, we wouldn't be using
 Python in the first place. But for illustrative purposes I think Python is a great prototyping
 programming language. All the examples presented here are 
@@ -729,48 +705,4 @@ print game
 #=> O O X
 #=> - X O
 #=> X - X
-{% endhighlight %}
-
-We can pass the verbose option in the play() method,
-
-{% highlight python %}
-game = TicTacToe()
-players = [RandomPlayer(), RandomPlayer()]
-match = Match(game, players)
-match.play(verbose=true)
-
-#=> Player in turn: 1
-#=> Legal moves: ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-#=> - - -
-#=> - - -
-#=> - - -
-#=>
-#=> Player in turn: 2
-#=> Legal moves: ['2', '3', '4', '5', '6', '7', '8', '9']
-#=> X - -
-#=> - - -
-#=> - - -
-#=>
-#=> Player in turn: 1
-#=> Legal moves: ['2', '3', '4', '6', '7', '8', '9']
-#=> X - -
-#=> - O -
-#=> - - -
-#=>
-#=> Player in turn: 2
-#=> Legal moves: ['2', '4', '6', '7', '8', '9']
-#=> X - X
-#=> - O -
-#=> - - -
-#=>
-#=> Player in turn: 1
-#=> Legal moves: ['2', '4', '7', '8', '9']
-#=> X - X
-#=> - O O
-#=> - - -
-#=>
-#=> Player 1 wins!
-#=> X X X
-#=> - O O
-#=> - - -
 {% endhighlight %}

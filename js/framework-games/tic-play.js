@@ -8,8 +8,8 @@
 
     var canvasView = new mauler.games.tic.CanvasView({
         model: tic,
-        width: 250,
-        height: 250,
+        width: 200,
+        height: 200,
         canvas: document.getElementById("tic-canvas")
     });
 
