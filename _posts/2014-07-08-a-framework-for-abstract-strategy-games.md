@@ -10,7 +10,7 @@ excerpt:    "Monte Carlo simulations are a class of computational algorithms
             JavaScript program how to use this method to estimate the value of
             &pi;."
 img:        "tic-tac-toe.png"
-style:      ["framework-games/styles.css", "framework-games-styles.css"]
+style:      ["framework-games/styles.css"]
 js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
              "lib/mauler-0.0.1.js", framework-games/tic-play.js]
 ---
@@ -18,6 +18,16 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 One topic in which I've been very interested and studied for the last few years is games. I think
 games are the perfect testbed for Artificial Intelligence. Games provide a perfect framework
 with well defined rules and outcomes.
+
+Add comment about render();
+
+mention that we call rows and cols as a's and numbers.
+
+I'm going to number the squares in Tic-tac-toe board this way
+
+1 2 3
+4 5 6
+7 8 9
 
 I think that before going to complex games like 3D shooters, we know know to understand games in
 their simplest form, which I think are turn-based games (or abstract strategy games). I don't
@@ -34,7 +44,9 @@ Two player: [Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe),
             
 Multi-player: Find a few examples
 
----
+## Example: Tic-Tac-Toe
+
+Here is a simple example of the most basic game we can create with this framework:
 
 <div id="info-view"></div>
 
@@ -43,6 +55,458 @@ Multi-player: Find a few examples
 </canvas>
 
 <button id="restart-button">Reset</button>
+
+### Game Interface
+
+<span class="code" style="font-weight: bold">.move(move)</span>
+
+Makes a move for the player whose turn it is.
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-move-1" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', ' ', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-move-1")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.move("5");
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-move-2" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', 'X', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-move-2")
+    });
+    }());
+</script>
+
+---
+
+<span class="code" style="font-weight: bold">.copy()</span>
+
+Returns a copy of the game.
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+tic.move(5);
+tic.move(4);
+console.log(tic);
+tic_copy = tic.copy()
+print tic_copy
+print id(tic)
+print id(tic_copy)
+{% endhighlight %}
+
+---
+
+<span class="code" style="font-weight: bold">.currentPlayer()</span>
+
+Returns the player whose turn it is.
+
+**Example**
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-current-player-1" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', ' ', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-current-player-1")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.currentPlayer();    // "1"
+tic.move("5");
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-current-player-2" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', 'X', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-current-player-2")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.currentPlayer();    // "2"
+{% endhighlight %}
+
+---
+
+<span class="code" style="font-weight: bold">.isOver()</span>
+
+Returns true if the game is over, false otherwise.
+
+**Example**
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-over-1" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', ' ', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-over-1")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.isOver();    // false;
+tic.move("5");
+tic.move("4");
+tic.move("1");
+tic.move("9");
+tic.move("3");
+tic.move("2");
+tic.move("7");
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-over-2" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [['X', 'O', 'X'],
+                ['O', 'X', ' '],
+                ['X', ' ', 'O']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-over-2")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.isOver();    // true
+{% endhighlight %}
+
+---
+
+<span class="code" style="font-weight: bold">.moves()</span>
+
+Returns a list of legal moves for the player in turn.
+
+**Examples**
+
+**Example: new game**
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-1" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe();
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-1")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.moves();    // ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+{% endhighlight %}
+
+**Example: Some moves**
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+tic.move("5");
+tic.move("4");
+tic.move("1");
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-some" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [['X', ' ', ' '],
+                ['O', 'X', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-some")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.moves();    // ["2", "3", "6", "7", "8", "9"]
+{% endhighlight %}
+
+**Example: Game is over**
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+tic.move("5");
+tic.move("4");
+tic.move("1");
+tic.move("9");
+tic.move("3");
+tic.move("2");
+tic.move("7");
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-over" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [['X', 'O', 'X'],
+                ['O', 'X', ' '],
+                ['X', ' ', 'O']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-over")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.moves();    // []
+{% endhighlight %}
+
+---
+
+<span class="code" style="font-weight: bold">.newGame()</span>
+
+Returns a new game.
+
+**Example: new game**
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+tic.move("5");
+tic.move("9");
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-new-game-1" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', 'X', ' '],
+                [' ', ' ', 'O']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-new-game-1")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+var newGame = tic.newGame();
+render(newGame);
+{% endhighlight %}
+
+<canvas id="moves-new-game-2" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', ' ', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-new-game-2")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-new-game-3" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', 'X', ' '],
+                [' ', ' ', 'O']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-new-game-3")
+    });
+    }());
+</script>
+
+---
+
+<span class="code" style="font-weight: bold">.outcomes()</span>
+
+Returns a dictionary with the outcomes for each of the players.
+
+---
+
+<span class="code" style="font-weight: bold">.restart()</span>
+
+Restarts the game.
+
+**Example**
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+tic.move("5");
+tic.move("9");
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-restart-1" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', 'X', ' '],
+                [' ', ' ', 'O']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-restart-1")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.restart();
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-restart-2" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', ' ', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-restart-2")
+    });
+    }());
+</script>
+
+---
+
+### Old code
 
 We will define an API for turn-based players. This can be games of n-number of players, as long as
 only one player can move per turn. A few examples of this games are
@@ -62,64 +526,6 @@ the players can take and the players’ interests, but does not specify the acti
 do take (Rasmusen, 2006).
 
 We can define the basic interface of a turn-based games as,
-
-{% highlight python %}
-class Game:
-
-    def copy(self):
-        """
-        Returns a copy of the game.
-        """
-        pass
-
-    def current_player(self):
-        """
-        Returns the player whose turn it is. (e.g. 1)
-        """
-        pass
-
-    def is_over(self):
-        """
-        Returns true if the game is over, false otherwise.
-        """
-        pass
-
-    def get_moves(self):
-        """
-        Returns the legal moves for the player in turn.
-        """
-
-    def move(self, move):
-        """
-        Makes a move for the player whose turn it is.
-        """
-        pass
-
-    def new_game(self):
-        """
-        Returns a new game.
-        """
-        pass
-
-    def num_moves(self):
-        """
-        Returns the number of legal moves for the player in turn.
-        """
-        pass
-
-    def outcomes(self):
-        """
-        Returns a dictionary with the outcomes for each of the players.
-        """
-        pass
-
-    def reset(self):
-        """
-        Restarts the game.
-        """
-        pass
-
-{% endhighlight %}
 
 Now let's put an example of what the implementation of Tic Tac Toe would return with the given API.
 
@@ -211,6 +617,23 @@ This simple framework allows us
 The game interface that we previously defined represent the current state of the game, which is the
 only thing needed to take a game. For simplicity, we will define a *match* class to play games until
 the end.
+
+<canvas id="david">
+</canvas>
+
+<script>
+var tic = new mauler.games.tic.TicTacToe({
+    board: [['X', ' ', 'O'],
+            ['O', 'X', 'O'],
+            [' ', ' ', ' ']]
+});
+var canvasView = new mauler.games.tic.CanvasView({
+    model: tic,
+    width: 100,
+    height: 100,
+    canvas: document.getElementById("david")
+});
+</script>
 
 {% highlight python %}
 game = TicTacToe()

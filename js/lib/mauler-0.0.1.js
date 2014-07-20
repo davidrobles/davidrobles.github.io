@@ -117,7 +117,7 @@ var mauler = {
         },
 
         getCurPlayerColor: function() {
-            return this.model.curPlayer() === 0 ? this.colors.crossLight : this.colors.noughtLight;
+            return this.model.currentPlayer() === 0 ? this.colors.crossLight : this.colors.noughtLight;
         },
 
         drawBackground: function() {
@@ -154,9 +154,9 @@ var mauler = {
                         this.drawNought(row, col, this.colors.nought);
                     } else if (!this.model.frozen && !this.model.isOver() && _.contains(this.highlightedMoves, hello)) {
                         var color = this.getCurPlayerColor();
-                        if (this.model.curPlayer() === 0) {
+                        if (this.model.currentPlayer() === 0) {
                             this.drawCross(row, col, color);
-                        } else if (this.model.curPlayer() === 1) {
+                        } else if (this.model.currentPlayer() === 1) {
                             this.drawNought(row, col, color);
                         }
                     }
@@ -244,10 +244,14 @@ var mauler = {
 
 (function() {
 
-    var TicTacToe = function() {
+    var TicTacToe = function(options) {
         this.size = 3;
         this.crosses = 0;
         this.noughts = 0;
+        options = options || {};
+        if (options.board) {
+            this.setBoard(options.board);
+        }
     };
 
     TicTacToe.PATTERNS = [7, 56, 448, 73, 146, 292, 273, 84];
@@ -267,7 +271,7 @@ var mauler = {
             return tic;
         },
 
-        curPlayer: function() {
+        currentPlayer: function() {
             return (this.emptyCells() + 1) % 2;
         },
 
@@ -343,7 +347,7 @@ var mauler = {
         toString: function() {
             var builder = '';
             if (!this.isOver()) {
-                builder += 'Player: ' + this.curPlayer() + '\n';
+                builder += 'Player: ' + this.currentPlayer() + '\n';
                 builder += 'Moves: ' + this.moves() + '\n';
             } else {
                 builder += 'Game Over!\n';
@@ -427,14 +431,27 @@ var mauler = {
         },
 
         getCurBitboard: function() {
-            return this.curPlayer() === 0 ? this.crosses : this.noughts;
+            return this.currentPlayer() === 0 ? this.crosses : this.noughts;
         },
 
         setCurBitboard: function(bitboard) {
-            if (this.curPlayer() === 0) {
+            if (this.currentPlayer() === 0) {
                 this.crosses = bitboard;
             } else {
                 this.noughts = bitboard;
+            }
+        },
+
+        setBoard: function(board) {
+            for (var row = 0; row < board.length; row++) {
+                for (var col = 0; col < board[row].length; col++) {
+                    var value = board[row][col];
+                    if (value === 'X') {
+                        this.crosses |= (1 << ((row * this.size) + col));
+                    } else if (value === 'O') {
+                        this.noughts |= (1 << ((row * this.size) + col));
+                    }
+                }
             }
         }
 
@@ -539,7 +556,7 @@ var mauler = {
             }
             var gameCopy = this.gameHistory[this.gameHistory.length - 1].copy();
             if (this.currentGameIndex === this.gameHistory.length - 1) {
-                var moveIndex = this.players[gameCopy.curPlayer()].move(gameCopy);
+                var moveIndex = this.players[gameCopy.currentPlayer()].move(gameCopy);
                 var moveString = gameCopy.moves()[moveIndex];
                 gameCopy.move(moveIndex);
                 if (!this.gameHistory[this.gameHistory.length - 1].equals(gameCopy)) {
@@ -587,7 +604,7 @@ mauler.players.AlphaBeta.prototype = {
 
     ab: function(game, curDepth, alpha, beta) {
         if (game.isOver() || curDepth === this.maxDepth) {
-            return { move: -1, score: this.utilFunc(game, game.curPlayer()) }; // TODO remove move? or change to null?
+            return { move: -1, score: this.utilFunc(game, game.currentPlayer()) }; // TODO remove move? or change to null?
         }
         var bestMove = -1,
             bestScore = -Number.MAX_VALUE;
@@ -676,7 +693,7 @@ mauler.players.MCTS.prototype = {
     move: function(game) {
         game = game.copy();
         var root = new mauler.players.MCTSNode(game);
-        var curPlayer = game.curPlayer();
+        var curPlayer = game.currentPlayer();
         for (var i = 0; i < this.numSims; i++) {
             this.simulate(root, curPlayer);
         }
@@ -734,7 +751,7 @@ mauler.players.UCB1.prototype = {
 
     move: function(node, player) {
         var bestMove = -1,
-            max = node.game.curPlayer() === player,
+            max = node.game.currentPlayer() === player,
             bestValue = max ? -Number.MAX_VALUE : Number.MAX_VALUE,
             nb = 0;
         for (var move = 0; move < node.game.numMoves(); move++) {
@@ -789,12 +806,12 @@ mauler.players.Minimax.prototype = {
             return { move: -1, score: this.utilFunc(game, player) };
         }
         var bestMove = -1,
-            bestScore = game.curPlayer() === player ? -Number.MAX_VALUE : Number.MAX_VALUE;
+            bestScore = game.currentPlayer() === player ? -Number.MAX_VALUE : Number.MAX_VALUE;
         for (var move = 0; move < game.numMoves(); move++) { // TODO use 'n' variable
             var newGame = game.copy();
             newGame.move(move);
             var curMoveScore = this.minimax(newGame, player, curDepth + 1);
-            if (game.curPlayer() === player) {
+            if (game.currentPlayer() === player) {
                 if (curMoveScore.score > bestScore) {
                     bestMove = move;
                     bestScore = curMoveScore.score;
@@ -808,7 +825,7 @@ mauler.players.Minimax.prototype = {
     },
 
     move: function(game) {
-        return this.minimax(game.copy(), game.curPlayer(), 0).move;
+        return this.minimax(game.copy(), game.currentPlayer(), 0).move;
     }
 
 };
@@ -837,7 +854,7 @@ mauler.players.MonteCarlo.prototype = {
                 var randMove = Math.floor(Math.random() * newGame.numMoves());
                 newGame.move(randMove);
             }
-            outcomes[move] += this.utilFunc(newGame, game.curPlayer());
+            outcomes[move] += this.utilFunc(newGame, game.currentPlayer());
         }
         return mauler.utils.argMax(outcomes);
     }
@@ -856,7 +873,7 @@ mauler.players.Negamax.prototype = {
 
     negamax: function(game, curDepth) {
         if (game.isOver() || curDepth === this.maxDepth) {
-            return { move: -1, score: this.utilFunc(game, game.curPlayer()) };
+            return { move: -1, score: this.utilFunc(game, game.currentPlayer()) };
         }
         var bestMove = -1,
             bestScore = -Number.MAX_VALUE;
@@ -928,7 +945,7 @@ mauler.players.Random.prototype = {
             for (var i = 0; i < numGames; i++) {
                 var newGame = game.copy();
                 while (!newGame.isOver()) {
-                    var curPlayer = players[newGame.curPlayer()];
+                    var curPlayer = players[newGame.currentPlayer()];
                     var move = curPlayer.move(newGame);
                     newGame.move(move);
                 }
@@ -1055,7 +1072,7 @@ mauler.players.Random.prototype = {
                     this.el.innerHTML = "Draw!";
                 }
             } else {
-                var curPlayer = this.model.curPlayer() + 1;
+                var curPlayer = this.model.currentPlayer() + 1;
                 this.el.innerHTML = "Turn: Player " + curPlayer;
             }
         }

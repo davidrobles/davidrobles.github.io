@@ -26,3 +26,8 @@ button#restart-button {
 button#restart-button:hover {
     background-color: #d14233;
 }
+
+canvas.small-board {
+    display: block;
+    margin: 0 auto;
+}
