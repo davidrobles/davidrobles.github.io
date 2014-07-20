@@ -10,7 +10,39 @@ excerpt:    "Monte Carlo simulations are a class of computational algorithms
             JavaScript program how to use this method to estimate the value of
             &pi;."
 img:        "tic-tac-toe.png"
+style:      ["framework-games/styles.css", "framework-games-styles.css"]
+js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
+             "lib/mauler-0.0.1.js", framework-games/tic-play.js]
 ---
+
+One topic in which I've been very interested and studied for the last few years is games. I think
+games are the perfect testbed for Artificial Intelligence. Games provide a perfect framework
+with well defined rules and outcomes.
+
+I think that before going to complex games like 3D shooters, we know know to understand games in
+their simplest form, which I think are turn-based games (or abstract strategy games). I don't
+necessarily refer to games to two players, but also to one player games such as 8-queens.
+
+The types of games that I want to cover with this framework is
+
+One-player: 8 queens puzzle
+
+Two player: [Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe),
+            [Checkers](http://en.wikipedia.org/wiki/Checkers),
+            [Chess](http://en.wikipedia.org/wiki/Chess),
+            [Reversi](http://en.wikipedia.org/wiki/Reversi).
+            
+Multi-player: Find a few examples
+
+---
+
+<div id="info-view"></div>
+
+<canvas id="tic-canvas" width="150" height="150">
+    Your browser does not support the canvas element.
+</canvas>
+
+<button id="restart-button">Reset</button>
 
 We will define an API for turn-based players. This can be games of n-number of players, as long as
 only one player can move per turn. A few examples of this games are
