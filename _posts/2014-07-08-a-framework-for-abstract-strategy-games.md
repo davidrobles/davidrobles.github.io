@@ -58,60 +58,6 @@ Here is a simple example of the most basic game we can create with this framewor
 
 ### Game Interface
 
-<span class="code" style="font-weight: bold">.move(move)</span>
-
-Makes a move for the player whose turn it is.
-
-{% highlight javascript %}
-var tic = new TicTacToe();
-render(tic);
-{% endhighlight %}
-
-<canvas id="moves-board-move-1" class="small-board">
-</canvas>
-
-<script>
-    (function() {
-    var tic = new mauler.games.tic.TicTacToe({
-        board: [[' ', ' ', ' '],
-                [' ', ' ', ' '],
-                [' ', ' ', ' ']]
-    });
-    var canvasView = new mauler.games.tic.CanvasView({
-        model: tic,
-        width: 100,
-        height: 100,
-        canvas: document.getElementById("moves-board-move-1")
-    });
-    }());
-</script>
-
-{% highlight javascript %}
-tic.move("5");
-render(tic);
-{% endhighlight %}
-
-<canvas id="moves-board-move-2" class="small-board">
-</canvas>
-
-<script>
-    (function() {
-    var tic = new mauler.games.tic.TicTacToe({
-        board: [[' ', ' ', ' '],
-                [' ', 'X', ' '],
-                [' ', ' ', ' ']]
-    });
-    var canvasView = new mauler.games.tic.CanvasView({
-        model: tic,
-        width: 100,
-        height: 100,
-        canvas: document.getElementById("moves-board-move-2")
-    });
-    }());
-</script>
-
----
-
 <span class="code" style="font-weight: bold">.copy()</span>
 
 Returns a copy of the game.
@@ -298,13 +244,65 @@ tic.isOver();    // true
 
 ---
 
+<span class="code" style="font-weight: bold">.move(move)</span>
+
+Makes a move for the player whose turn it is.
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-move-1" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', ' ', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-move-1")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.move("5");
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-move-2" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', 'X', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-move-2")
+    });
+    }());
+</script>
+
+---
+
 <span class="code" style="font-weight: bold">.moves()</span>
 
 Returns an <span class="code">Array</span> of legal moves for the player in turn.
 
-**Examples**
-
-**Example: new game**
+**Example**
 
 {% highlight javascript %}
 var tic = new TicTacToe();
@@ -328,12 +326,6 @@ render(tic);
 
 {% highlight javascript %}
 tic.moves();    // ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-{% endhighlight %}
-
-**Example: Some moves**
-
-{% highlight javascript %}
-var tic = new TicTacToe();
 tic.move("5");
 tic.move("4");
 tic.move("1");
@@ -361,15 +353,6 @@ render(tic);
 
 {% highlight javascript %}
 tic.moves();    // ["2", "3", "6", "7", "8", "9"]
-{% endhighlight %}
-
-**Example: Game is over**
-
-{% highlight javascript %}
-var tic = new TicTacToe();
-tic.move("5");
-tic.move("4");
-tic.move("1");
 tic.move("9");
 tic.move("3");
 tic.move("2");
@@ -486,6 +469,65 @@ render(tic);
 <span class="code" style="font-weight: bold">.outcomes()</span>
 
 Returns a dictionary with the outcomes for each of the players.
+
+{% highlight javascript %}
+var tic = new TicTacToe();
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-outcomes-1" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', ' ', ' '],
+                [' ', ' ', ' ']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-outcomes-1")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.move("5");
+tic.move("4");
+tic.move("1");
+tic.move("9");
+tic.move("3");
+tic.move("2");
+tic.move("7");
+render(tic);
+{% endhighlight %}
+
+<canvas id="moves-board-outcomes-2" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [['X', 'O', 'X'],
+                ['O', 'X', ' '],
+                ['X', ' ', 'O']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-outcomes-2")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+tic.isOver();      // true
+tic.outcomes();    // { "1": "WIN", "2": "LOSS" }
+{% endhighlight %}
 
 ---
 
