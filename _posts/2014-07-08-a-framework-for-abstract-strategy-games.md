@@ -116,16 +116,57 @@ render(tic);
 
 Returns a copy of the game.
 
+**Example**
+
 {% highlight javascript %}
 var tic = new TicTacToe();
-tic.move(5);
-tic.move(4);
-console.log(tic);
-tic_copy = tic.copy()
-print tic_copy
-print id(tic)
-print id(tic_copy)
+tic.move("5");
+tic.move("9");
+render(tic);
 {% endhighlight %}
+
+<canvas id="moves-board-copy-1" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', 'X', ' '],
+                [' ', ' ', 'O']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-copy-1")
+    });
+    }());
+</script>
+
+{% highlight javascript %}
+var ticCopy = tic.copy();
+render(ticCopy);
+{% endhighlight %}
+
+<canvas id="moves-board-copy-2" class="small-board">
+</canvas>
+
+<script>
+    (function() {
+    var tic = new mauler.games.tic.TicTacToe({
+        board: [[' ', ' ', ' '],
+                [' ', 'X', ' '],
+                [' ', ' ', 'O']]
+    });
+    var canvasView = new mauler.games.tic.CanvasView({
+        model: tic,
+        width: 100,
+        height: 100,
+        canvas: document.getElementById("moves-board-copy-2")
+    });
+    }());
+</script>
 
 ---
 
@@ -259,7 +300,7 @@ tic.isOver();    // true
 
 <span class="code" style="font-weight: bold">.moves()</span>
 
-Returns a list of legal moves for the player in turn.
+Returns an <span class="code">Array</span> of legal moves for the player in turn.
 
 **Examples**
 
