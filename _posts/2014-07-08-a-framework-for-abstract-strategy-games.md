@@ -45,9 +45,11 @@ algorithms can be developed to play any kind of game.
 
 ## Example: Tic-Tac-Toe
 
-One of the simplest game we can describe with the framework described later is
-[Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe). Everybody knows the rules of this game and is a perfect
-example to describe this framework. Here is the game that you can play:
+In order to describe the framework we will be using the game of [Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe)
+as an example. Tic-Tac-Toe is one of the simplest and most popular abstract strategy board games, and most people is
+familiar with its the rules. Here you can play the game, however, you will be playing against a
+[perfect player](http://en.wikipedia.org/wiki/Solved_game#Perfect_play)
+([Alpha-Beta pruning](http://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)), so the best you can expect is a draw:
 
 <div id="info-view"></div>
 
@@ -60,7 +62,7 @@ example to describe this framework. Here is the game that you can play:
 ## Game Interface Overview
 
 This is the game interface that can be used to play this type of games. This are the methods necessary for 
-any game-playing algorithm such as Alpha-Beta pruning. The details for each method is described later.
+any game-playing algorithm such as Alpha-Beta pruning. Each method is described in detail later.
 
 - <span class="code" style="font-weight: bold">.copy()</span> Returns a copy of the game. 
 

@@ -1054,6 +1054,7 @@ mauler.players.Random.prototype = {
     var InfoView = function(options) {
         this.model = options.model;
         this.el = options.el;
+        this.update(null, this.model);
     };
 
     InfoView.prototype = {
@@ -1088,6 +1089,7 @@ mauler.players.Random.prototype = {
     var RestartView = function(options) {
         this.match = options.match;
         this.el = options.el;
+        this.update();
         this.addListener();
     };
 
@@ -1104,11 +1106,7 @@ mauler.players.Random.prototype = {
         // Match Events
 
         update: function() {
-            if (!this.match.isStart()) {
-                this.el.style.display = "none";
-            } else {
-                this.el.style.display = "block";
-            }
+            this.el.disabled = !this.match.isStart();
         }
 
     };
