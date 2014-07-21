@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "An Interface for Abstract Strategy Games"
+title:      "An Framework for Abstract Strategy Games"
 date:       2014-07-08 16:48:16
 comments:   true
 excerpt:    "Monte Carlo simulations are a class of computational algorithms
