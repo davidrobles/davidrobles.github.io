@@ -23,11 +23,7 @@ Add comment about render();
 
 mention that we call rows and cols as a's and numbers.
 
-I'm going to number the squares in Tic-tac-toe board this way
 
-1 2 3
-4 5 6
-7 8 9
 
 I think that before going to complex games like 3D shooters, we know know to understand games in
 their simplest form, which I think are turn-based games (or abstract strategy games). I don't
@@ -44,9 +40,14 @@ Two player: [Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe),
             
 Multi-player: Find a few examples
 
+The idea of this blog post is to describe a general framework for describing abstract strategy games in a way that
+algorithms can be developed to play any kind of game.
+
 ## Example: Tic-Tac-Toe
 
-Here is a simple example of the most basic game we can create with this framework:
+One of the simplest game we can describe with the framework described later is
+[Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe). Everybody knows the rules of this game and is a perfect
+example to describe this framework. Here is the game that you can play:
 
 <div id="info-view"></div>
 
@@ -56,7 +57,29 @@ Here is a simple example of the most basic game we can create with this framewor
 
 <button id="restart-button">Reset</button>
 
-## Game Interface
+## Game Interface Overview
+
+This is the game interface that can be used to play this type of games. This are the methods necessary for 
+any game-playing algorithm such as Alpha-Beta pruning. The details for each method is described later.
+
+- <span class="code" style="font-weight: bold">.copy()</span> Returns a copy of the game. 
+
+- <span class="code" style="font-weight: bold">.currentPlayer()</span> Returns the player whose turn it is.
+
+- <span class="code" style="font-weight: bold">.isOver()</span> Returns true if the game is over, false otherwise.
+
+- <span class="code" style="font-weight: bold">.move(move)</span> Makes a move for the player whose turn it is.
+
+- <span class="code" style="font-weight: bold">.moves()</span> Returns an Array of legal moves for the player in turn.
+
+- <span class="code" style="font-weight: bold">.newGame()</span> Returns a new game.
+
+- <span class="code" style="font-weight: bold">.outcomes()</span> Returns the outcome for each of player.
+
+- <span class="code" style="font-weight: bold">.restart()</span> Restarts the game.
+
+
+## Game Interface Methods
 
 <span class="code" style="font-weight: bold">.copy()</span>
 
