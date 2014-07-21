@@ -690,3 +690,11 @@ print tic
 #=> X - -
 #=> - - -
 {% endhighlight %}
+
+## Source Code
+
+The source code used for this blog post is located in a repository in Github of a project that I'm currently working  
+
+Here is a demo written in JavaScript for showing how a Monte Carlo simulation can estimate the value of π. 
+
+You can get the full source code of this blog post on Github.
