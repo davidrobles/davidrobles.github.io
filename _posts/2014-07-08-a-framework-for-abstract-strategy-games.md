@@ -19,11 +19,7 @@ One topic in which I've been very interested and studied for the last few years 
 games are the perfect testbed for Artificial Intelligence. Games provide a perfect framework
 with well defined rules and outcomes.
 
-Add comment about render();
-
 mention that we call rows and cols as a's and numbers.
-
-
 
 I think that before going to complex games like 3D shooters, we know know to understand games in
 their simplest form, which I think are turn-based games (or abstract strategy games). I don't
