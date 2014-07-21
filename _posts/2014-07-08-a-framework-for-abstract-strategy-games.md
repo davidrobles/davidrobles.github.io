@@ -45,9 +45,10 @@ algorithms can be developed to play any kind of game.
 
 ## Example: Tic-Tac-Toe
 
-In order to describe the framework we will be using the game of [Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe)
-as an example. Tic-Tac-Toe was chosen because is one of the simplest, yet most popular abstract strategy board games,
-and most people are familiar with the rules. Here you can play the game, however, you will be playing against a
+In order to describe the framework presented here, we will be using the game of
+[Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe) as an example. Tic-Tac-Toe was chosen because is one of the
+simplest, yet most popular abstract strategy board games, and most people are familiar with the rules. Here you can
+play the game, however, you will be playing against a
 [perfect player](http://en.wikipedia.org/wiki/Solved_game#Perfect_play)
 ([Alpha-Beta pruning](http://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)), so the best you can expect is a draw:
 
