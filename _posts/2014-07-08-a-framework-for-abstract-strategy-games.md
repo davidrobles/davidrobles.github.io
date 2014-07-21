@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "A Framework for Abstract Strategy Games"
+title:      "An Interface for Abstract Strategy Games"
 date:       2014-07-08 16:48:16
 comments:   true
 excerpt:    "Monte Carlo simulations are a class of computational algorithms
@@ -45,8 +45,8 @@ algorithms can be developed to play any kind of game.
 
 ## Example: Tic-Tac-Toe
 
-In order to describe the framework we will be using the game of [Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe)
-as an example. Tic-Tac-Toe is one of the simplest and most popular abstract strategy board games, and most people is
+In order to describe the interface we will be using the game of [Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe)
+as an example. Tic-Tac-Toe is one of the simplest and most popular abstract strategy board games, and most people are
 familiar with its the rules. Here you can play the game, however, you will be playing against a
 [perfect player](http://en.wikipedia.org/wiki/Solved_game#Perfect_play)
 ([Alpha-Beta pruning](http://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)), so the best you can expect is a draw:
@@ -61,8 +61,13 @@ familiar with its the rules. Here you can play the game, however, you will be pl
 
 ## Game Interface Overview
 
-This is the game interface that can be used to play this type of games. This are the methods necessary for 
-any game-playing algorithm such as Alpha-Beta pruning. Each method is described in detail later.
+First of all, what is a game? From the game theoretical point of view a game is a description of strategic interaction
+that includes the constraints on the actions that the players can take and the players’ interests, but does not specify
+the actions that the players do take
+([Rasmusen, 2006](http://www.wiley.com/WileyCDA/WileyTitle/productCd-EHEP001009.html)).
+
+Knowing that, here we describe an interface that can be used to describe most of these games. Each method is described
+in detail later.
 
 - <span class="code" style="font-weight: bold">.copy()</span> Returns a copy of the game. 
 
@@ -628,14 +633,6 @@ A player only needs to be a function such as:
   be assumed it is the index of the list of moves. If is a string, it is the string representation.
 
 ### Game
-
-A game is a description of strategic interaction that includes the constraints on the actions that
-the players can take and the players’ interests, but does not specify the actions that the players
-do take (Rasmusen, 2006).
-
-We can define the basic interface of a turn-based games as,
-
-Now let's put an example of what the implementation of Tic Tac Toe would return with the given API.
 
 Note: Of course, the efficiency of the game is not the priority, because well, we wouldn't be using
 Python in the first place. But for illustrative purposes I think Python is a great prototyping
