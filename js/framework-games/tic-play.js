@@ -36,6 +36,8 @@
         canvasView: canvasView
     });
 
-    match.players = [canvasPlayer, canvasPlayer];
+    var alphaBeta = new mauler.players.AlphaBeta();
+
+    match.players = [canvasPlayer, alphaBeta];
 
 }());
