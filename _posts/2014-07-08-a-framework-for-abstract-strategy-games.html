@@ -18,27 +18,29 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 <div id="toc"></div>
 
 <a name="introduction"></a>
-        
+
+<p>
+    In this blog post I'll describe a very basic framework for describing abstract strategy games and algorithms to play
+    those games.
+</p>
+
 <p>One topic in which I've been very interested and studied for the last few years is games. I think
 games are the perfect testbed for Artificial Intelligence. Games provide a perfect framework
 with well defined rules and outcomes.</p>
 
-<p></p>
 
 <p>I think that before going to complex games like 3D shooters, we know know to understand games in
 their simplest form, which I think are turn-based games (or abstract strategy games). I don't
 necessarily refer to games to two players, but also to one player games such as 8-queens.</p>
 
-<p>The types of games that I want to cover with this framework is</p>
+<p>These are a few games of the types of games that this framework would cover:</p>
 
-<p>One-player: 8 queens puzzle</p>
-
-Two player: [Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe),
-            [Checkers](http://en.wikipedia.org/wiki/Checkers),
-            [Chess](http://en.wikipedia.org/wiki/Chess),
-            [Reversi](http://en.wikipedia.org/wiki/Reversi).
-            
-<p>Multi-player: Find a few examples</p>
+<ul>
+    <li><a href="http://en.wikipedia.org/wiki/Tic-tac-toe">Tic-Tac-Toe</a></li>
+    <li><a href="http://en.wikipedia.org/wiki/Checkers">Checkers</a></li>
+    <li><a href="http://en.wikipedia.org/wiki/Chess">Chess</a></li>
+    <li><a href="http://en.wikipedia.org/wiki/Reversi">Othello (Reversi)</a></li>
+</ul>
 
 <p>The idea of this blog post is to describe a general framework for describing abstract strategy games in a way that
 algorithms can be developed to play any kind of game.</p>
@@ -70,8 +72,8 @@ is a draw:</p>
     <li>Player</li>
 </ul>
 
-<a name="game-interface"></a>
-<h2 data-name="game-interface">Game Interface</h2>
+<a name="game"></a>
+<h2 data-name="game-interface">Game</h2>
 
 <p>First of all, what is a game? From the game theoretical point of view a game is a description of strategic interaction
 that includes the constraints on the actions that the players can take and the players’ interests, but does not specify
@@ -87,11 +89,18 @@ described in detail later.</p>
 
     <li><span class="code" style="font-weight: bold">.currentPlayer()</span> Returns the player whose turn it is.</li>
 
-    <li><span class="code" style="font-weight: bold">.isOver()</span> Returns true if the game is over, false otherwise.</li>
+    <li>
+        <span class="code" style="font-weight: bold">.isOver()</span> Returns true if the game is over, false otherwise.
+    </li>
 
-    <li><span class="code" style="font-weight: bold">.move(move)</span> Makes a move for the player whose turn it is.</li>
+    <li>
+        <span class="code" style="font-weight: bold">.move(move)</span> Makes a move for the player whose turn it is.
+    </li>
 
-    <li><span class="code" style="font-weight: bold">.moves()</span> Returns an Array of legal moves for the player in turn.</li>
+    <li>
+        <span class="code" style="font-weight: bold">.moves()</span> Returns an Array of legal moves for the player in
+        turn.
+    </li>
 
     <li><span class="code" style="font-weight: bold">.newGame()</span> Returns a new game.</li>
 
@@ -101,10 +110,12 @@ described in detail later.</p>
     
 </ul>
 
-<hr/>
+<hr>
 
 <!-------------------------------------------------------- .copy() ---------------------------------------------------->
-        
+
+
+
 <span class="code" style="font-weight: bold">.copy()</span>
 
 <p>Returns a copy of the game.</p>
@@ -640,19 +651,6 @@ render(tic);
 
 <hr/>
 
-### Old code
-
-We will define an API for turn-based players. This can be games of n-number of players, as long as
-only one player can move per turn. A few examples of this games are
-[Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe), Checkers, Chess, etc. 
-
-Here we define a simple API that will allow us to play basically any game with a generic algorithm:
-
-A player only needs to be a function such as:
-
-- .move(game). It takes a game state and returns the move to take. If it returns a number, it will
-  be assumed it is the index of the list of moves. If is a string, it is the string representation.
-
 ### Game
 
 Note: Of course, the efficiency of the game is not the priority, because well, we wouldn't be using
@@ -686,32 +684,6 @@ class RandomPlayer:
         return random.choice(game.get_moves())
 {% endhighlight %}
 
-Let's start a Tic-tac-toe game as an example:
-
-{% highlight python %}
-tic = TicTacToe()
-print tic
-#=> Player in turn: 1
-#=> Legal moves: ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-#=> - - -
-#=> - - -
-#=> - - -
-{% endhighlight %}
-
-We can use the random player to take a random move,
-
-{% highlight python %}
-rand_player = RandomPlayer()
-move = rand_player.move(tic) # e.g. move = '4'
-tic.move(move)
-print tic
-#=> Player in turn: 2
-#=> Legal moves: ['1', '2', '3', '5', '6', '7', '8', '9']
-#=> - - -
-#=> X - -
-#=> - - -
-{% endhighlight %}
-
 ## Source Code
 
 The source code used for this blog post is located in a repository in Github of a project that I'm currently working  
@@ -729,7 +701,7 @@ render(tic);
 {% endhighlight %}
 
 <canvas id="play-match-1" class="small-board">
-</canvas>n
+</canvas>
 
 <script>
 (function() {
@@ -749,6 +721,7 @@ while (!tic.isOver()) {
     var randomMove = Math.floor(Math.random() * this.numMoves());
     tic.move(randomMove);
 }
+render(tic);
 {% endhighlight %}
         
 <canvas id="play-match-2" class="small-board">
@@ -769,7 +742,10 @@ while (!tic.isOver()) {
     });
 }());
 </script>
-        
+
+
+<h2>Player</h2>
+
 <h2>Random Player</h2>
         
 Also, we can easily create a random player function that is agnostic of the game. As long as the game follows the
