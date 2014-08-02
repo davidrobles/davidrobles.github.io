@@ -18,14 +18,14 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 <a name="introduction"></a>
 
 <p>
-    In this post I'll describe a simple API for <strong>abstract strategy games</strong> and algorithms to play these
-    games. Almost all abstract strategy games conform to the strictest definition of: a gameboard, card, or tile game in
-    which there is no hidden information, no non-deterministic elements, and (usually) two players or teams taking a
-    finite number of alternating turns. However, the API I'll describe works for games and puzzles that consist of any
-    number of players taking a finite number of alternating turns.
+    In this post I'll present a simple API for describing <strong>abstract strategy games</strong> and algorithms to
+    play these games. Almost all abstract strategy games conform to the strictest definition of: a gameboard, card, or
+    tile game in which there is no hidden information, no non-deterministic elements, and (usually) two players or teams
+    taking a finite number of alternating turns. However, the API I'll describe works for games and puzzles that consist
+    of any number of players taking a finite number of alternating turns.
 </p>
 
-<p>These are a few games that can integrate with this API:</p>
+<p>Here are a few games that can integrate with this API:</p>
 
 <ul>
     <li><a href="http://en.wikipedia.org/wiki/Eight_queens_puzzle">Eight queens puzzle</a> (1 Player)</li>
@@ -34,9 +34,6 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
     <li><a href="http://en.wikipedia.org/wiki/Reversi">Othello</a> (2 Players)</li>
     <li><a href="http://en.wikipedia.org/wiki/Chinese_checkers">Chinese Checkers</a> (2–4 or 6 Players)</li>
 </ul>
-
-<a name="example-tic-tac-toe"></a>
-<h2 data-name="example-tic-tac-toe">Example: Tic-Tac-Toe</h2>
 
 <p>
     The game of <a href="http://en.wikipedia.org/wiki/Tic-tac-toe">Tic-Tac-Toe</a> will be used as an example to
@@ -55,7 +52,15 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 
 <button id="restart-button">Restart</button>
 
-<a name="game"></a>
+<h2 data-name="game-interface">API</h2>
+
+<p>The API consists of two main interfaces:</p>
+
+<ul>
+    <li>Game</li>
+    <li>Player</li>
+</ul>
+
 <h2 data-name="game-interface">Game Interface</h2>
 
 <p>
