@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "An Framework for Abstract Strategy Games"
-date:       2014-07-08 16:48:16
+date:       2014-08-01 16:48:16
 comments:   true
 excerpt:    "Monte Carlo simulations are a class of computational algorithms
             that involve multiple computational trials driven by random
@@ -14,8 +14,6 @@ style:      ["framework-games/styles.css"]
 js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
              "lib/mauler-0.0.1.js", framework-games/tic-play.js]
 ---
-
-<div id="toc"></div>
 
 <a name="introduction"></a>
 
@@ -823,25 +821,3 @@ while (!tic.isOver()) {
     Defining a Game Interface like the one before is the base of a game-playing framework and it will be used in
     following blog posts describing game-playing algorithms such as Minimax, Alpha-Beta and Monte-Carlo Tree Search.
 </p>
-        
-<script>
-    $(document).ready(function() {
-        var h2s = $('.post h2');
-        var toc = $('#toc');
-        toc.append("<ul>");
-        toc.append('<li><a href="#introduction">' + 'Introduction</li>');
-        h2s.each(function() { 
-            toc.append('<li><a href="#' + $(this).data("name") +'">' + $(this).text() + '</a>');
-            var h3s = $(this).find("h3");
-            if (h3s.size() > 0) {
-                toc.append("<ul>");
-                h3s.each(function() {
-                    toc.append("<li>" + $(this).text() + "</li>");
-                });
-                toc.append("</ul>");
-            }
-            toc.append("</li>");
-        });
-        toc.append("</ul>");
-    });
-</script>
