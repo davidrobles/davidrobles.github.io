@@ -26,6 +26,10 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 games are the perfect testbed for Artificial Intelligence. Games provide a perfect framework
 with well defined rules and outcomes.</p>
 
+<ul>
+    <li>Game</li>
+    <li>Player</li>
+</ul>
 
 <p>I think that before going to complex games like 3D shooters, we know know to understand games in
 their simplest form, which I think are turn-based games (or abstract strategy games). I don't
@@ -62,16 +66,8 @@ is a draw:</p>
 
 <button id="restart-button">Restart</button>
 
-<a name="interfaces"></a>
-<h2 data-name="interfaces">Interfaces</h2>
-
-<ul>
-    <li>Game</li>
-    <li>Player</li>
-</ul>
-
 <a name="game"></a>
-<h2 data-name="game-interface">Game</h2>
+<h2 data-name="game-interface">Game Interface</h2>
 
 <p>
     First of all, what is a game? From the game theoretical point of view a game is a description of strategic
@@ -90,7 +86,7 @@ described in detail later.</p>
     <li><span class="code" style="font-weight: bold">.currentPlayer()</span> Returns the player whose turn it is.</li>
 
     <li>
-        <span class="code" style="font-weight: bold">.isOver()</span> Returns true if the game is over, false otherwise.
+        <span class="code" style="font-weight: bold">.isGameOver()</span> Returns true if the game is over, false otherwise.
     </li>
 
     <li>
@@ -233,9 +229,9 @@ tic.currentPlayer();    // "2"
 
 <hr/>
 
-<!------------------------------------------------------ .isOver() ---------------------------------------------------->
+<!--------------------------------------------------- .isGameOver() --------------------------------------------------->
         
-<span class="code" style="font-weight: bold">.isOver()</span>
+<span class="code" style="font-weight: bold">.isGameOver()</span>
 
 <p>Returns true if the game is over, false otherwise.</p>
 
@@ -262,7 +258,7 @@ render(tic);
 </script>
 
 {% highlight javascript %}
-tic.isOver();     // false
+tic.isGameOver();     // false
 tic.move("5");
 tic.move("4");
 tic.move("1");
@@ -293,7 +289,7 @@ render(tic);
 </script>
 
 {% highlight javascript %}
-tic.isOver();    // true
+tic.isGameOver();    // true
 {% endhighlight %}
 
 <hr/>
@@ -589,7 +585,7 @@ render(tic);
 </script>
 
 {% highlight javascript %}
-tic.isOver();      // true
+tic.isGameOver();      // true
 tic.outcomes();    // { "1": "WIN", "2": "LOSS" }
 {% endhighlight %}
 
@@ -716,8 +712,7 @@ render(tic);
 </script>
 
 {% highlight javascript %}
-var tic = new TicTacToe();
-while (!tic.isOver()) {
+while (!tic.isGameOver()) {
     var randomMove = Math.floor(Math.random() * this.numMoves());
     tic.move(randomMove);
 }
@@ -783,7 +778,7 @@ render(tic);
         
 {% highlight javascript %}
 var tic = new TicTacToe();
-while (!tic.isOver()) {
+while (!tic.isGameOver()) {
     tic.move(randomPlayer(tic));
 }
 {% endhighlight %}
