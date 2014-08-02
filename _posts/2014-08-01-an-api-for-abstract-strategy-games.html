@@ -18,14 +18,14 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 <a name="introduction"></a>
 
 <p>
-    In this post I'll present a simple framework for describing <strong>abstract strategy games</strong> and algorithms
-    to play these games. Almost all abstract strategy games conform to the strictest definition of: a gameboard, card,
-    or tile game in which there is no hidden information, no non-deterministic elements, and (usually) two players or
-    teams taking a finite number of alternating turns. However, the framework I'll describe works for games and puzzles
-    that consist of any number of players taking a finite number of alternating turns.
+    In this post I'll describe a simple API for <strong>abstract strategy games</strong> and algorithms to play these
+    games. Almost all abstract strategy games conform to the strictest definition of: a gameboard, card, or tile game in
+    which there is no hidden information, no non-deterministic elements, and (usually) two players or teams taking a
+    finite number of alternating turns. However, the API I'll describe works for games and puzzles that consist of any
+    number of players taking a finite number of alternating turns.
 </p>
 
-<p>These are a few games that could be described with this framework:</p>
+<p>These are a few games that can integrate with this API:</p>
 
 <ul>
     <li><a href="http://en.wikipedia.org/wiki/Eight_queens_puzzle">Eight queens puzzle</a> (1 Player)</li>
@@ -38,13 +38,14 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 <a name="example-tic-tac-toe"></a>
 <h2 data-name="example-tic-tac-toe">Example: Tic-Tac-Toe</h2>
 
-<p>In order to describe the framework presented here, we will be using the game of
-<a href="http://en.wikipedia.org/wiki/Tic-tac-toe">Tic-Tac-Toe</a> as an example. Tic-Tac-Toe was chosen because is one
-of the simplest, yet most popular abstract strategy board games, and most people are familiar with the rules. Here you
-can play the game, however, you will be playing against a
-<a href="http://en.wikipedia.org/wiki/Solved_game#Perfect_play">perfect player</a>
-(<a href="http://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Alpha-Beta pruning</a>), so the best you can expect
-is a draw:</p>
+<p>
+    The game of <a href="http://en.wikipedia.org/wiki/Tic-tac-toe">Tic-Tac-Toe</a> will be used as an example to
+    describe the functionality of the API. Tic-Tac-Toe was chosen because is one of the simplest, yet most popular
+    abstract strategy board games, and most people are familiar with the rules. Here you can play the game, however, you
+    will be playing against a <a href="http://en.wikipedia.org/wiki/Solved_game#Perfect_play">perfect player</a>
+    (<a href="http://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Alpha-Beta pruning</a>), so the best you can
+    expect is a draw:
+</p>
 
 <div id="info-view"></div>
 
