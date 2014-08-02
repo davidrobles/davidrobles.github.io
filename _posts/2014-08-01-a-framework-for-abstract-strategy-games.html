@@ -18,29 +18,22 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 <a name="introduction"></a>
 
 <p>
-    In this post I'll present a simple framework for creating <strong>abstract strategy games</strong> and algorithms to
-    play those games. Almost all abstract strategy games conform to the strictest definition of: a gameboard, card, or
-    tile game in which there is no hidden information, no non-deterministic elements, and (usually) two players or teams
-    taking a finite number of alternating turns. However, I'll refer to games that involve any number of players taking
-    a finite number of alternating turns.
+    In this post I'll present a simple framework for describing <strong>abstract strategy games</strong> and algorithms
+    to play these games. Almost all abstract strategy games conform to the strictest definition of: a gameboard, card,
+    or tile game in which there is no hidden information, no non-deterministic elements, and (usually) two players or
+    teams taking a finite number of alternating turns. However, the framework I'll describe works for games and puzzles
+    that consist of any number of players taking a finite number of alternating turns.
 </p>
 
-<ul>
-    <li>Game</li>
-    <li>Player</li>
-</ul>
-
-<p>These are a few games of the types of games that this framework would cover:</p>
+<p>These are a few games that could be described with this framework:</p>
 
 <ul>
-    <li><a href="http://en.wikipedia.org/wiki/Tic-tac-toe">Tic-Tac-Toe</a></li>
-    <li><a href="http://en.wikipedia.org/wiki/Checkers">Checkers</a></li>
-    <li><a href="http://en.wikipedia.org/wiki/Chess">Chess</a></li>
-    <li><a href="http://en.wikipedia.org/wiki/Reversi">Othello (Reversi)</a></li>
+    <li><a href="http://en.wikipedia.org/wiki/Eight_queens_puzzle">Eight queens puzzle</a> (1 Player)</li>
+    <li><a href="http://en.wikipedia.org/wiki/Tic-tac-toe">Tic-Tac-Toe</a> (2 Players)</li>
+    <li><a href="http://en.wikipedia.org/wiki/Chess">Chess</a> (2 Players)</li>
+    <li><a href="http://en.wikipedia.org/wiki/Reversi">Othello</a> (2 Players)</li>
+    <li><a href="http://en.wikipedia.org/wiki/Chinese_checkers">Chinese Checkers</a> (2–4 or 6 Players)</li>
 </ul>
-
-<p>The idea of this blog post is to describe a general framework for describing abstract strategy games in a way that
-algorithms can be developed to play any kind of game.</p>
 
 <a name="example-tic-tac-toe"></a>
 <h2 data-name="example-tic-tac-toe">Example: Tic-Tac-Toe</h2>
