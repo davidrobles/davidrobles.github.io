@@ -92,7 +92,7 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 
     <li><span class="code" style="font-weight: bold">.newGame()</span> Returns a new game.</li>
 
-    <li><span class="code" style="font-weight: bold">.outcomes()</span> Returns the outcome for each of player.</li>
+    <li><span class="code" style="font-weight: bold">.outcomes()</span> Returns the outcome for each player.</li>
 
     <li><span class="code" style="font-weight: bold">.restart()</span> Restarts the game.</li>
 
@@ -577,8 +577,8 @@ render(tic);
 </script>
 
 {% highlight javascript %}
-tic.isGameOver();      // true
-tic.outcomes();    // { "1": "WIN", "2": "LOSS" }
+tic.isGameOver();    // true
+tic.outcomes();      // { "1": "WIN", "2": "LOSS" }
 {% endhighlight %}
 
 <hr/>
@@ -648,12 +648,12 @@ function player(game) {
 }
 {% endhighlight %}
 
-A player is asked for the move to be taken and are provided with the current state of the game.
+A player is asked for the move to be taken and is provided with the current state of the game. The player can analyze
+the current state of the game (e.g. search algorithm) and return the move to be taken.
 
 <h3>Random Player</h3>
 
-We can easily create a uniformly random player that can be used in any game that follows the Game interface described
-before as follows:
+We can easily create a uniformly random player that can be used in any game that follows the Game interface as follows:
 
 {% highlight javascript %}
 function randomPlayer(game) {
@@ -717,12 +717,15 @@ while (!tic.isGameOver()) {
 <h2>Summary</h2>
 
 <p>
-    The framework presented in this blog post is very simple, yet very powerful to have a library of genera game-playing
-    algorithms that can be used to play in any game. Evidently, each game will require custom heuristic when used with
-    such algorithms, however, the algorithms don't have to change if they are coded in a very abstract way.
+    The API presented in this post is very simple, yet very powerful to create game-playing algorithms that
+    can be used to play in any game that follows the Game interface. Evidently, to find the optimal (or near optimal)
+    moves the algorithms will use game-specific heuristics, however, if they
+
+    the actual algorithms don't need to change much
+    as long as the heuristics are independent of the behaviour of the algorithms.
 </p>
 
 <p>
-    Defining a Game Interface like the one before is the base of a game-playing framework and it will be used in
+    Defining a Game interface like the one before is the base of a game-playing framework and it will be used in
     following blog posts describing game-playing algorithms such as Minimax, Alpha-Beta and Monte-Carlo Tree Search.
 </p>
