@@ -40,8 +40,8 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
     describe the functionality of the API. Tic-Tac-Toe was chosen because is one of the simplest, yet most popular
     abstract strategy board games, and most people are familiar with the rules. Here you can play the game, however, you
     will be playing against a <a href="http://en.wikipedia.org/wiki/Solved_game#Perfect_play">perfect player</a>
-    (<a href="http://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Alpha-Beta pruning</a>), so the best you can
-    expect is a draw:
+    (using the <a href="http://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Alpha-Beta pruning</a> algorithm), so
+    the best you can expect is a draw:
 </p>
 
 <div id="info-view"></div>
@@ -64,7 +64,7 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 <h2 data-name="game-interface">Game Interface</h2>
 
 <p>
-    First of all, what is a game? From the game theoretical point of view a game is a description of strategic
+    What is a game? From the game theoretical point of view a game is a description of strategic
     interaction that includes the constraints on the actions that the players can take and the players’ interests, but
     does not specify the actions that the players do take
     (<a href="http://www.wiley.com/WileyCDA/WileyTitle/productCd-EHEP001009.html">Rasmusen, 2006</a>). Based on this
@@ -98,7 +98,7 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 
 </ul>
 
-<hr>
+<p>Now here is a more detailed description of each of these methods with examples of their behavior.</p>
 
 <!-------------------------------------------------------- .copy() ---------------------------------------------------->
 
@@ -637,6 +637,30 @@ render(tic);
 }());
 </script>
 
+<h2>Player</h2>
+
+Players are the individuals who make decisions (making moves). We can define an interface for a player as simple as
+this:
+
+{% highlight javascript %}
+function player(game) {
+    return "Take Move 1";
+}
+{% endhighlight %}
+
+A player is asked for the move to be taken and are provided with the current state of the game.
+
+<h3>Random Player</h3>
+
+We can easily create a uniformly random player that can be used in any game that follows the Game interface described
+before as follows:
+
+{% highlight javascript %}
+function randomPlayer(game) {
+    return Math.floor(Math.random() * game.moves().length);
+}
+{% endhighlight %}
+
 <a name="play-a-match"></a>
 <h2 data-name="play-a-match">Play a Match</h2>
 
@@ -690,23 +714,7 @@ render(tic);
 
 <h2>Player</h2>
 
-<h2>Random Player</h2>
-        
-Also, we can easily create a random player function that is agnostic of the game. As long as the game follows the
-interface we described earlier, we can return a random move from the list of <span class="code">.moves()</span>:
 
-{% highlight javascript %}
-function randomPlayer(game) {
-    return Math.floor(Math.random() * game.moves().length);
-}
-{% endhighlight %}
-
-Now we can just create a game:
-
-{% highlight javascript %}
-var tic = new TicTacToe();
-render(tic);
-{% endhighlight %}
 
 <canvas id="random-player-1" class="small-board">
 </canvas>
