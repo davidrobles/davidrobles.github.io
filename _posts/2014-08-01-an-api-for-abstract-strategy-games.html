@@ -61,14 +61,14 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
     <li>Player</li>
 </ul>
 
-<h2 data-name="game-interface">Game Interface</h2>
+<h2 data-name="game-interface">Game</h2>
 
 <p>
     What is a game? From the game theoretical point of view a game is a description of strategic
     interaction that includes the constraints on the actions that the players can take and the players’ interests, but
     does not specify the actions that the players do take
     (<a href="http://www.wiley.com/WileyCDA/WileyTitle/productCd-EHEP001009.html">Rasmusen, 2006</a>). Based on this
-    definition, we can now define an interface for abstract strategy games as follows:
+    definition, we can define an interface for abstract strategy games as follows:
 </p>
 
 <ul>
@@ -664,6 +664,8 @@ function randomPlayer(game) {
 <a name="play-a-match"></a>
 <h2 data-name="play-a-match">Play a Match</h2>
 
+Now that we have described the Game and Player interfaces we can use them to play a full match of Tic-Tac-Toe:
+
 {% highlight javascript %}
 var tic = new TicTacToe();
 render(tic);
@@ -683,55 +685,6 @@ render(tic);
     });
 }());
 </script>
-
-{% highlight javascript %}
-while (!tic.isGameOver()) {
-    var randomMove = Math.floor(Math.random() * this.numMoves());
-    tic.move(randomMove);
-}
-render(tic);
-{% endhighlight %}
-        
-<canvas id="play-match-2" class="small-board">
-</canvas>
-
-<script>
-(function() {
-    var tic = new mauler.games.tic.TicTacToe();
-    while (!tic.isOver()) {
-        var randomMove = Math.floor(Math.random() * tic.numMoves());
-        tic.move(randomMove);
-    }
-    new mauler.games.tic.CanvasView({
-        model: tic,
-        width: 100,
-        height: 100,
-        canvas: document.getElementById("play-match-2")
-    });
-}());
-</script>
-
-
-<h2>Player</h2>
-
-
-
-<canvas id="random-player-1" class="small-board">
-</canvas>
-
-<script>
-    (function() {
-        var tic = new mauler.games.tic.TicTacToe();
-        new mauler.games.tic.CanvasView({
-            model: tic,
-            width: 100,
-            height: 100,
-            canvas: document.getElementById("random-player-1")
-        });
-    }());
-</script>
-
-<p>And use the random player function to play the game until the end:</p>
         
 {% highlight javascript %}
 var tic = new TicTacToe();
