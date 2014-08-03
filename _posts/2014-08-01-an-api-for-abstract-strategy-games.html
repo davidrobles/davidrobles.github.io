@@ -17,15 +17,6 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 
 <a name="introduction"></a>
 
-<ul style="float: right; width: 200px; border: 1px solid #000080;">
-    <li>Introduction</li>
-    <li>API</li>
-    <li>Game</li>
-    <li>Player</li>
-    <li>Play a Match</li>
-    <li>Summary</li>
-</ul>
-
 <p>
     In this post I'll describe a simple API for <strong>abstract strategy games</strong> and algorithms to
     play these games. Almost all abstract strategy games conform to the strictest definition of: a gameboard, card, or
@@ -61,7 +52,9 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 
 <button id="restart-button">Restart</button>
 
-<p>The API consists of two main interfaces:</p>
+<p>
+    The API consists of two interfaces that will be described next:
+</p>
 
 <ul>
     <li>Game</li>
@@ -74,14 +67,12 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
     First of all, what is a game? From the game theoretical point of view a game is a description of strategic
     interaction that includes the constraints on the actions that the players can take and the players’ interests, but
     does not specify the actions that the players do take
-    (<a href="http://www.wiley.com/WileyCDA/WileyTitle/productCd-EHEP001009.html">Rasmusen, 2006</a>).
+    (<a href="http://www.wiley.com/WileyCDA/WileyTitle/productCd-EHEP001009.html">Rasmusen, 2006</a>). Based on this
+    definition, we can now define an interface for abstract strategy games as follows:
 </p>
 
-<p>Knowing that, here we describe an interface that can be used to describe most of these games. Each method is
-described in detail later.</p>
-
 <ul>
-    
+
     <li><span class="code" style="font-weight: bold">.copy()</span> Returns a copy of the game.</li>
 
     <li><span class="code" style="font-weight: bold">.currentPlayer()</span> Returns the player whose turn it is.</li>
@@ -104,7 +95,7 @@ described in detail later.</p>
     <li><span class="code" style="font-weight: bold">.outcomes()</span> Returns the outcome for each of player.</li>
 
     <li><span class="code" style="font-weight: bold">.restart()</span> Restarts the game.</li>
-    
+
 </ul>
 
 <hr>
@@ -645,14 +636,6 @@ render(tic);
     });
 }());
 </script>
-
-<hr/>
-
-The source code used for this blog post is located in a repository in Github of a project that I'm currently working  
-
-Here is a demo written in JavaScript for showing how a Monte Carlo simulation can estimate the value of π. 
-
-You can get the full source code of this blog post on Github.
 
 <a name="play-a-match"></a>
 <h2 data-name="play-a-match">Play a Match</h2>
