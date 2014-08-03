@@ -17,8 +17,17 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 
 <a name="introduction"></a>
 
+<ul style="float: right; width: 200px; border: 1px solid #000080;">
+    <li>Introduction</li>
+    <li>API</li>
+    <li>Game</li>
+    <li>Player</li>
+    <li>Play a Match</li>
+    <li>Summary</li>
+</ul>
+
 <p>
-    In this post I'll present a simple API for describing <strong>abstract strategy games</strong> and algorithms to
+    In this post I'll describe a simple API for <strong>abstract strategy games</strong> and algorithms to
     play these games. Almost all abstract strategy games conform to the strictest definition of: a gameboard, card, or
     tile game in which there is no hidden information, no non-deterministic elements, and (usually) two players or teams
     taking a finite number of alternating turns. However, the API I'll describe works for games and puzzles that consist
@@ -51,8 +60,6 @@ js:         ["lib/jquery-2.1.1.js", "lib/underscore.js", "lib/backbone.js",
 </canvas>
 
 <button id="restart-button">Restart</button>
-
-<h2 data-name="game-interface">API</h2>
 
 <p>The API consists of two main interfaces:</p>
 
@@ -640,41 +647,6 @@ render(tic);
 </script>
 
 <hr/>
-
-### Game
-
-Note: Of course, the efficiency of the game is not the priority, because well, we wouldn't be using
-Python in the first place. But for illustrative purposes I think Python is a great prototyping
-programming language. All the examples presented here are 
-
-### Players
-
-Players are the individuals who make decisions. A player can be defined as a class that has a
-*move()* method that takes that current state of the game and returns the move to take for the
-player in turn.
-
-{% highlight python %}
-class Player:
-
-    def move(self, game, time_due=0):
-        return "Move 1"
-{% endhighlight %}
-
-As we can see, we also have an optional "timedue" argument that contains the time the player has to
-computation.
-
-For example, we can create a player that makes a random move,
-
-{% highlight python %}
-import random
-
-class RandomPlayer:
-
-    def move(self, game, time_due=0):
-        return random.choice(game.get_moves())
-{% endhighlight %}
-
-## Source Code
 
 The source code used for this blog post is located in a repository in Github of a project that I'm currently working  
 
