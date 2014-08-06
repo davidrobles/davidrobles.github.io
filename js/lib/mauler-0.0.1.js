@@ -157,7 +157,7 @@ var mauler = {
                         this.drawCross(row, col, this.colors.cross);
                     } else if (cellType === 'NOUGHT') {
                         this.drawNought(row, col, this.colors.nought);
-                    } else if (!this.model.frozen && !this.model.isOver() && _.contains(this.highlightedMoves, hello)) {
+                    } else if (!this.model.frozen && !this.model.isGameOver() && _.contains(this.highlightedMoves, hello)) {
                         var color = this.getCurPlayerColor();
                         if (this.model.currentPlayer() === 0) {
                             this.drawCross(row, col, color);
@@ -253,7 +253,7 @@ var mauler = {
         this.size = 3;
         this.crosses = 0;
         this.noughts = 0;
-        options = options || {};
+        options || (options = {});
         if (options.board) {
             this.setBoard(options.board);
         }
@@ -280,12 +280,12 @@ var mauler = {
             return (this.emptyCells() + 1) % 2;
         },
 
-        isOver: function() {
+        isGameOver: function() {
             return this.numMoves() === 0;
         },
 
         move: function(move) {
-            if (this.isOver()) {
+            if (this.isGameOver()) {
                 throw new Error("Can't make more moves, the game is over!");
             }
             // Make random move if no move given
@@ -332,7 +332,7 @@ var mauler = {
         },
 
         outcomes: function() {
-            if (!this.isOver()) {
+            if (!this.isGameOver()) {
                 return ['NA', 'NA'];
             }
             if (this.checkWin(this.crosses)) {
@@ -351,7 +351,7 @@ var mauler = {
 
         toString: function() {
             var builder = '';
-            if (!this.isOver()) {
+            if (!this.isGameOver()) {
                 builder += 'Player: ' + this.currentPlayer() + '\n';
                 builder += 'Moves: ' + this.moves() + '\n';
             } else {
@@ -525,12 +525,12 @@ var mauler = {
         },
 
         isOver: function() {
-            return this.gameHistory[this.gameHistory.length - 1].isOver();
+            return this.gameHistory[this.gameHistory.length - 1].isGameOver();
         },
 
         isNext: function() {
             return (this.currentGameIndex !== this.gameHistory.length - 1) ||
-                (!this.gameHistory[this.gameHistory.length - 1].isOver());
+                (!this.gameHistory[this.gameHistory.length - 1].isGameOver());
         },
 
         isPrev: function() {
@@ -608,7 +608,7 @@ mauler.players.AlphaBeta.prototype = {
     constructor: mauler.players.AlphaBeta,
 
     ab: function(game, curDepth, alpha, beta) {
-        if (game.isOver() || curDepth === this.maxDepth) {
+        if (game.isGameOver() || curDepth === this.maxDepth) {
             return { move: -1, score: this.utilFunc(game, game.currentPlayer()) }; // TODO remove move? or change to null?
         }
         var bestMove = -1,
@@ -661,7 +661,7 @@ mauler.players.MCTS.prototype = {
     simTree: function(curPos, player) {
         var nodes = [],
             curNode = curPos;
-        while (!curNode.game.isOver()) {
+        while (!curNode.game.isGameOver()) {
             nodes.push(curNode);
             var lastNode = nodes[nodes.length - 1];
             if (lastNode.count === 0) {
@@ -677,7 +677,7 @@ mauler.players.MCTS.prototype = {
 
     simDefault: function(node, player) {
         var copy = node.game.copy();
-        while (!copy.isOver()) {
+        while (!copy.isGameOver()) {
             copy.move(this.defaultPolicy.move(copy));
         }
         return this.utilFunc(copy, player);
@@ -807,7 +807,7 @@ mauler.players.Minimax.prototype = {
     constructor: mauler.players.Minimax,
 
     minimax: function(game, player, curDepth) {
-        if (game.isOver() || curDepth === this.maxDepth) {
+        if (game.isGameOver() || curDepth === this.maxDepth) {
             return { move: -1, score: this.utilFunc(game, player) };
         }
         var bestMove = -1,
@@ -855,7 +855,7 @@ mauler.players.MonteCarlo.prototype = {
             var newGame = game.copy(); // TODO refactor copy method
             var move = i % numMoves;
             newGame.move(move);
-            while (!newGame.isOver()) {
+            while (!newGame.isGameOver()) {
                 var randMove = Math.floor(Math.random() * newGame.numMoves());
                 newGame.move(randMove);
             }
@@ -877,7 +877,7 @@ mauler.players.Negamax.prototype = {
     constructor: mauler.players.Negamax,
 
     negamax: function(game, curDepth) {
-        if (game.isOver() || curDepth === this.maxDepth) {
+        if (game.isGameOver() || curDepth === this.maxDepth) {
             return { move: -1, score: this.utilFunc(game, game.currentPlayer()) };
         }
         var bestMove = -1,
@@ -935,7 +935,7 @@ mauler.players.Random.prototype = {
 
         playRandomGame: function(game) {
             console.log(game.toString());
-            while (!game.isOver()) {
+            while (!game.isGameOver()) {
                 game.move();
                 console.log(game.toString());
             }
@@ -949,7 +949,7 @@ mauler.players.Random.prototype = {
             };
             for (var i = 0; i < numGames; i++) {
                 var newGame = game.copy();
-                while (!newGame.isOver()) {
+                while (!newGame.isGameOver()) {
                     var curPlayer = players[newGame.currentPlayer()];
                     var move = curPlayer.move(newGame);
                     newGame.move(move);
@@ -975,7 +975,7 @@ mauler.players.Random.prototype = {
         },
 
         utilFunc: function(game, player) {
-            if (game.isOver()) {
+            if (game.isGameOver()) {
                 var outcomes = game.outcomes();
                 switch (outcomes[player]) {
                     case "WIN":
@@ -1068,7 +1068,7 @@ mauler.players.Random.prototype = {
 
         update: function(event, model) {
             this.model = model;
-            if (this.model.isOver()) {
+            if (this.model.isGameOver()) {
                 var outcomes = this.model.outcomes();
                 if (outcomes[0] === "WIN") {
                     this.el.innerHTML = "Player 1 Wins!";

@@ -698,7 +698,7 @@ while (!tic.isGameOver()) {
             return Math.floor(Math.random() * game.moves().length);
         }
         var tic = new mauler.games.tic.TicTacToe();
-        while (!tic.isOver()) {
+        while (!tic.isGameOver()) {
             tic.move(randomPlayer(tic));
         }
         new mauler.games.tic.CanvasView({
