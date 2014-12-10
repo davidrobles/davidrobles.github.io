@@ -1,0 +1,28 @@
+---
+layout:     post
+title:      "Visualizing Game Trees with D3.js"
+date:       2014-12-11 10:00:00
+comments:   true
+excerpt:    "In this post I describe a simple API for abstract strategy games and algorithms to play these games. An
+interface like this one is the base of a game-playing framework and it will be used in following blog posts
+to describe algorithms such as Minimax, Alpha-Beta and Monte-Carlo Tree Search."
+img:        "visualizing-game-trees-with-d3/copy.png"
+style:      ["visualizing-game-trees-with-d3/styles.css"]
+js:         ["visualizing-game-trees-with-d3/d3.js",
+             "visualizing-game-trees-with-d3/mauler.js",
+             "visualizing-game-trees-with-d3/utils.js",
+             "visualizing-game-trees-with-d3/svg.js",
+             "visualizing-game-trees-with-d3/tic-tac-toe.js",
+             "visualizing-game-trees-with-d3/tree.js"]
+---
+
+<p>
+    D3.js is a fantastic JavaScript library for data visualization. In this post I'll present how to visualize
+    a a game tree.
+</p>
+
+<h2>What is a game tree?</h2>
+
+<p>In game theory, a game tree is a directed graph whose nodes are positions in a game and whose edges are moves.</p>
+
+<div id="here"></div>
