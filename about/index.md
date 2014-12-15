@@ -4,19 +4,37 @@ title:  About
 date:   2014-01-18 09:48:16
 ---
 
-## About
+# About
 
 Hi! I'm David Robles, I'm a Software Engineer from Hermosillo, Mexico. I'm
 currently working as a Software Engineer at [Hearsay Social] (
 http://www.hearsaysocial.com/), in San Francisco.
 
-### Specialties
+## Experience
 
-- **Programming languages**: Java, Python, Ruby, PHP, JavaScript.
-- **Web Development**: J2EE, Ruby on Rails, Spring MVC, JSP/Servlets, JQuery, CSS.
-- **Testing**: JUnit, RSpec, Mockito.
-- **Databases**: MySQL, PostgreSQL.
-- **Cloud**: Amazon AWS, Heroku.
-- **Version Control**: Git, SVN.
-- **Editors/IDEs**: Vim, IntelliJ
-- **OS**: Mac OS X, Unix/Linux.
+**Software Engineer**<br>
+[Hearsay Social](http://www.hearsaysocial.com)<br>
+March 2014 - Present
+
+**Software Engineer**<br>
+[Dotloop](https://www.dotloop.com)<br>
+January 2013 - February 2014
+
+**Teaching Assistant**<br>
+[University of Essex](http://www.essex.ac.uk)<br>
+October 2009 - March 2012
+
+
+## Education
+
+**University of Essex**<br>
+Doctor of Philosophy (PhD), Computer Science<br>
+2009 - 2013
+
+**University of Essex**<br>
+MSc, Computer Science<br>
+2007 - 2008
+
+**Tecnológico de Monterrey**<br>
+BSc, Information Systems Engineering<br>
+2001 - 2006
