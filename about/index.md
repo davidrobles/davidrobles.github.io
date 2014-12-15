@@ -6,8 +6,7 @@ date:   2014-12-14 18:38:00
 
 # About
 
-Hi! I'm David Robles, I'm a Software Engineer from Hermosillo, Mexico. I'm
-currently working as a Software Engineer at [Hearsay Social] (
+Hi! I'm David Robles, I'm from Hermosillo, Mexico. I'm currently working as a Software Engineer at [Hearsay Social] (
 http://www.hearsaysocial.com/), in San Francisco.
 
 ## Experience
