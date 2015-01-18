@@ -237,46 +237,145 @@ document.write((function() {
 }()));
 </script>
 
-<h2>Depth-first search</h2>
+<h2>Generate the tree</h2>
+
+<p>Define a root node of the tree:</p>
+
+{% highlight javascript %}
+var root = {
+    game: tic
+};
+{% endhighlight %}
 
 <p>
+    Create an algorithm that will generate the tree. In this case we are using a depth-first search algorithm.
     Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. One starts at
     the root (selecting some arbitrary node as the root in the case of a graph) and explores as far as possible along
     each branch before backtracking.
 </p>
 
-<h3>Pre-order</h3>
+{% highlight javascript %}
+var depthFirstTreeGenerator = function(node) {
+    var moves = node.game.moves();
+    if (moves.length > 0) {
+        node.children = [];
+        for (var i = 0; i < moves.length; i++) {
+            var newGameNode = { game: node.game.copy().move(i) };
+            node.children.push(newGameNode);
+            depthFirstTreeGenerator(newGameNode);
+        }
+    }
+};
+{% endhighlight %}
 
-aasdfa
+<p>And generate the tree by passing the root node to the algorithm:</p>
 
-<h3>In-order</h3>
+{% highlight javascript %}
+depthFirstTreeGenerator(root);
+{% endhighlight %}
 
-aasdfa
+<h2>Visualizing the game tree</h2>
 
-<h3>Post-order</h3>
+{% highlight javascript %}
+var diagonal = d3.svg.diagonal().projection(function(d) { return [d.x, d.y]; });
 
-aasdfa
+var svg = d3.select("#full-static-game-tree")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .attr("style", "background-color: #eeeeee")
+    .append("g")
+    .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
-<h2>Breadth-first search</h2>
+var tree = d3.layout.tree().size([width, height]);
 
-<p>
-    In graph theory, breadth-first search (BFS) is a strategy for searching in a graph when search is limited to
-    essentially two operations: (a) visit and inspect a node of a graph; (b) gain access to visit the nodes that
-    neighbor the currently visited node.
-</p>
+tree.separation(function() {
+    return 2;
+});
 
-<h2>Summary</h2>
+var nodes = tree(root);
 
-<p>
-    Some random summary here.
-</p>
+var drawNodes = function() {
 
-<h2>Generating random trees</h2>
+    // Draw edges
+    svg.selectAll("path")
+        .data(tree.links(nodes))
+        .enter().append("path")
+        .attr("d", diagonal)
+        .attr("fill", "none")
+        .attr("stroke", "#666666")
+        .attr("stroke-width", 2);
 
-<p>
-    Random positions here. Add a button that generates the trees.
-</p>
+    svg.selectAll("g.node-group")
+        .data(nodes)
+        .enter()
+        .append("g")
+        .attr("class", "node-group")
+        .attr("transform", function(d) {
+            return "translate(" + (d.x - 25) + ", " + (d.y - 25) + ")"
+        });
 
-<h2>Play the game looking at the game tree?</h2>
+    // Draw nodes
+    svg.selectAll(".node-group")
+        .each(function(node) {
+            svgView.model = node.game;
+            svgView.svg = d3.select(this);
+            svgView.render();
+        });
 
-<p>This is interesting.</p>
+    // Resize game nodes
+    svg.selectAll(".node-group")
+        .attr("transform", function() {
+            return this.getAttribute("transform") + " scale(0.6)";
+        });
+
+};
+
+drawNodes();
+{% endhighlight %}
+
+
+
+<!--<h2>Depth-first search</h2>-->
+
+<!--<p>-->
+    <!--Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. One starts at-->
+    <!--the root (selecting some arbitrary node as the root in the case of a graph) and explores as far as possible along-->
+    <!--each branch before backtracking.-->
+<!--</p>-->
+
+<!--<h3>Pre-order</h3>-->
+
+<!--aasdfa-->
+
+<!--<h3>In-order</h3>-->
+
+<!--aasdfa-->
+
+<!--<h3>Post-order</h3>-->
+
+<!--aasdfa-->
+
+<!--<h2>Breadth-first search</h2>-->
+
+<!--<p>-->
+    <!--In graph theory, breadth-first search (BFS) is a strategy for searching in a graph when search is limited to-->
+    <!--essentially two operations: (a) visit and inspect a node of a graph; (b) gain access to visit the nodes that-->
+    <!--neighbor the currently visited node.-->
+<!--</p>-->
+
+<!--<h2>Summary</h2>-->
+
+<!--<p>-->
+    <!--Some random summary here.-->
+<!--</p>-->
+
+<!--<h2>Generating random trees</h2>-->
+
+<!--<p>-->
+    <!--Random positions here. Add a button that generates the trees.-->
+<!--</p>-->
+
+<!--<h2>Play the game looking at the game tree?</h2>-->
+
+<!--<p>This is interesting.</p>-->
