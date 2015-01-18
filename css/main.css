@@ -205,12 +205,12 @@ a.read-more {
     width: 150px;
 }
 
-.post p.date {
+.post .date {
     font-size: 0.9em;
     margin: 0;
     padding: 0;
     text-align: left;
-    color: #585858;
+    color: #989898;
 }
 
 .post pre {
