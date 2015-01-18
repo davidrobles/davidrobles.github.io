@@ -82,6 +82,7 @@
                 svgView.render();
             });
 
+        // Resize game nodes
         svg.selectAll(".node-group")
             .attr("transform", function() {
                 return this.getAttribute("transform") + " scale(0.6)";
