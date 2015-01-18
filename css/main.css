@@ -140,20 +140,20 @@ header {
     border-bottom: 1px solid #1199C3;
 }
 
-header .title {
+.title {
     display: inline-block;
-    margin-top: 28px;
+    margin-top: 34px;
     margin-bottom: 2em;
-    font-size: 2.4em;
+    font-size: 2.2em;
     float: left;
     font-weight: 500;
 }
 
-header .title a {
+.title a {
     color: #ffffff;
 }
 
-header .title a:hover {
+.title a:hover {
     text-decoration: none;
 }
 
