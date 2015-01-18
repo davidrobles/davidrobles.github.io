@@ -34,8 +34,7 @@
 
     depthFirstTreeGenerator(root);
 
-    var diagonal = d3.svg.diagonal()
-        .projection(function(d) { return [d.x, d.y]; });
+    var diagonal = d3.svg.diagonal().projection(function(d) { return [d.x, d.y]; });
 
     var svg = d3.select("#full-static-game-tree")
         .append("svg")
