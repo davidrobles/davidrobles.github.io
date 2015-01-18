@@ -68,7 +68,7 @@ span.code {
 
 .menu-bar {
     height: 10px;
-    background-color: #2ecc71;
+    background-color: #1199C3;
 }
 
 .container, footer {
@@ -128,9 +128,9 @@ span.code {
 }
 
 header {
-    background-color: #384047;
+    background-color: #294860;
     height: 100px;
-    border-bottom: 1px solid #515953;
+    border-bottom: 1px solid #1199C3;
 }
 
 header .title {
@@ -170,7 +170,7 @@ header .menu a:hover {
 }
 
 header .menu a.current {
-    color: #2ecc71;
+    color: #1199C3;
     text-decoration: none;
 }
 
