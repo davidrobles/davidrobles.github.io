@@ -1,9 +1,10 @@
 var generateSVGTree = function(tic, mysel, options) {
 
     var margin = { top: 50, right: 30, bottom: 60, left: 30 },
-        width = 675 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom,
-        nodeSize = options.nodeSize || 85;
+        width = (options.width || 675) - margin.left - margin.right,
+        height = (options.height || 400) - margin.top - margin.bottom,
+        nodeSize = options.nodeSize || 85,
+        edgeWidth = options.edgeWidth || 2;
 
     var root = {
         game: tic
@@ -56,7 +57,7 @@ var generateSVGTree = function(tic, mysel, options) {
             .attr("d", diagonal)
             .attr("fill", "none")
             .attr("stroke", "#666666")
-            .attr("stroke-width", 2);
+            .attr("stroke-width", edgeWidth);
 
         svg.selectAll("g.node-group")
             .data(nodes)
@@ -96,12 +97,50 @@ var generateSVGTree = function(tic, mysel, options) {
     generateSVGTree(tic, "#full-static-game-tree", {
         nodeSize: 85
     });
+
+    // Two ply
+
     var tic = new ma.games.TicTacToe({
         board: [['O', 'X', 'O'],
-                [' ', ' ', 'X'],
-                [' ', ' ', 'X']]
+                ['X', ' ', ' '],
+                ['O', 'X', 'X']]
     });
-    generateSVGTree(tic, "#final-game-tree", {
-        nodeSize: 30
+
+    generateSVGTree(tic, "#final-game-tree-2-ply", {
+        height: 300,
+        nodeSize: 80
     });
+
+    // Three ply
+
+    var tic = new ma.games.TicTacToe({
+        board: [['O', 'X', 'O'],
+                [' ', 'X', ' '],
+                ['X', 'O', ' ']]
+    });
+    generateSVGTree(tic, "#final-game-tree-3-ply", {
+        nodeSize: 80
+    });
+
+    // Four ply
+
+    var tic = new ma.games.TicTacToe({
+        board: [['O', 'X', 'O'],
+                [' ', 'X', ' '],
+                ['X', ' ', ' ']]
+    });
+    generateSVGTree(tic, "#final-game-tree-4-ply", {
+        nodeSize: 40
+    });
+
+    var tic = new ma.games.TicTacToe({
+        board: [['O', 'X', 'O'],
+                [' ', 'X', ' '],
+                [' ', ' ', ' ']]
+    });
+    generateSVGTree(tic, "#final-game-tree-5-ply", {
+        nodeSize: 12,
+        edgeWidth: 1
+    });
+
 }());
