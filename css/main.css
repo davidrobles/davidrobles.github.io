@@ -53,7 +53,7 @@ ul {
 
 hr {
     border: 1px solid #e0dddd;
-    margin: 20px 0px;
+    margin: 20px 0;
 }
 
 img.center {
@@ -79,7 +79,7 @@ span.code {
 .content {
     float: left;
     width: 675px;
-    padding: 0px 15px 20px 0px;
+    padding: 0 15px 20px 0;
     line-height: 1.6em;
 }
 
@@ -98,24 +98,30 @@ span.code {
     padding-top: 30px;
 }
 
-.sidebar .widget {
+.widget {
     font-size: 0.9em;
     margin-bottom: 15px;
 }
 
-.sidebar .widget ul {
-    margin: 10px 0 10px 30px;
+.widget ul {
+    margin: 10px 0;
+    font-size: 1.1em;
+    list-style-type: none;
 }
 
-.sidebar .widget .name {
+.widget li {
+    margin-bottom: 10px;
+}
+
+.widget .name {
     font-weight: 600;
     font-size: 1.4em;
     letter-spacing: -1px;
     text-shadow: 1px 1px 0 #fff;
-    padding: 0px 15px 5px 0;
+    padding: 0 15px 5px 0;
 }
 
-.sidebar .widget .con img.about {
+img.about {
     display: block;
     margin: 0 auto;
     height: 150px;
@@ -123,7 +129,7 @@ span.code {
     border: 4px solid #cecece;
 }
 
-.sidebar .widget .con p.about {
+.widget .con p.about {
     text-align: center;
 }
 
