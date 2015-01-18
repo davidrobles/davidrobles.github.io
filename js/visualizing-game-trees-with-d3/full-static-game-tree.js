@@ -12,7 +12,6 @@
     });
 
     var root = {
-        name: "root",
         game: tic
     };
 
