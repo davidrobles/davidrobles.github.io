@@ -1,0 +1,282 @@
+---
+layout:     post
+title:      "Visualizing Game Trees with D3.js"
+date:       2015-01-17 22:00:00
+comments:   true
+excerpt:    "In this post I describe a simple API for abstract strategy games and algorithms to play these games. An
+interface like this one is the base of a game-playing framework and it will be used in following blog posts
+to describe algorithms such as Minimax, Alpha-Beta and Monte-Carlo Tree Search."
+img:        "visualizing-game-trees-with-d3/copy.png"
+style:      ["visualizing-game-trees-with-d3/style.css"]
+js:         ["visualizing-game-trees-with-d3/d3.js",
+             "visualizing-game-trees-with-d3/underscore.js",
+             "visualizing-game-trees-with-d3/backbone.js",
+             "visualizing-game-trees-with-d3/mauler-0.0.4.js",
+             "visualizing-game-trees-with-d3/full-static-game-tree.js"]
+---
+
+<p>
+    <a href="http://d3js.org/">D3.js</a> is a JavaScript library for data visualization. In this post I will
+    use D3.js to visualize game trees using <a href="https://github.com/davidrobles/mauler">Mauler</a>, the abstract
+    strategy games framework that I described in a
+    <a href="/blog/2014/08/01/mauler-a-javascript-framework-for-abstract-strategy-games/"> previous post</a>.
+</p>
+
+<h2>What is a game tree?</h2>
+
+<p>
+    In game theory, a game tree is a directed graph whose nodes are positions in a game and whose edges are moves.
+    Using the game of Tic-Tac-Toe as an example, we can clearly see in the next figure a game tree of a game position.
+</p>
+
+<div id="full-static-game-tree"></div>
+
+<p>So how did I generate such a graph. I will describe it next.</p>
+
+<h2>Drawing the board</h2>
+
+<p>I will be using a game position that is near the end of the game so it can represent the whole game tree in such a
+    small space.</p>
+
+<p>First of all, we need to can create a Tic-Tac-Toe game:</p>
+
+{% highlight javascript %}
+var ticTacToe = new TicTacToe({
+    board: [['O', 'X', 'O'],
+            ['O', 'X', ' '],
+            [' ', ' ', 'X']]
+});
+{% endhighlight %}
+
+<script>
+var svgEl = document.createElement("svg");
+var svg = d3.select(svgEl);
+var tic = new ma.games.TicTacToe({
+    board: [['O', 'X', 'O'],
+            ['O', 'X', ' '],
+            [' ', ' ', 'X']]
+});
+</script>
+
+<p>Create the SVG element:</p>
+
+{% highlight javascript %}
+var svg = d3.select(document.createElement("svg"));
+{% endhighlight %}
+
+<p>Drawing the background:</p>
+
+{% highlight javascript %}
+var bgColor = "rgb(255, 219, 122)";
+svg.append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", 300)
+    .attr("height", 300)
+    .attr("fill", bgColor)
+    .attr("stroke", "none");
+{% endhighlight %}
+
+<script>
+document.write((function() {
+    var bgColor = "rgb(255, 219, 122)";
+    svg.attr("class", "board")
+        .append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", 300)
+        .attr("height", 300)
+        .attr("fill", bgColor)
+        .attr("stroke", "none");
+    return svgEl.outerHTML;
+}()));
+</script>
+
+<p>Drawing the lines:</p>
+
+{% highlight javascript %}
+var borderColor = "rgb(229, 197, 110)";
+
+// Draw lines
+for (var i = 1; i < 3; i++) {
+    svg.append("line")
+        .attr("x1", (150 / 3) * i)
+        .attr("y1", 0)
+        .attr("x2", (150 / 3) * i)
+        .attr("y2", 150)
+        .attr("stroke", borderColor)
+        .attr("stroke-linecap", "butt")
+        .attr("stroke-width", 3);
+    svg.append("line")
+        .attr("x1", 0)
+        .attr("y1", (150 / 3) * i)
+        .attr("x2", 150)
+        .attr("y2", (150 / 3) * i)
+        .attr("stroke", borderColor)
+        .attr("stroke-width", 3);
+}
+
+// Draw border
+svg.append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", 150)
+    .attr("height", 150)
+    .attr("fill", "none")
+    .attr("stroke", borderColor)
+    .attr("stroke-width", 6);
+{% endhighlight %}
+
+<script>
+document.write((function() {
+    var borderColor = "rgb(229, 197, 110)";
+
+    // draw lines
+    for (var i = 1; i < 3; i++) {
+        svg.append("line")
+                .attr("x1", (150 / 3) * i)
+                .attr("y1", 0)
+                .attr("x2", (150 / 3) * i)
+                .attr("y2", 150)
+                .attr("stroke", borderColor)
+                .attr("stroke-linecap", "butt")
+                .attr("stroke-width", 3);
+        svg.append("line")
+                .attr("x1", 0)
+                .attr("y1", (150 / 3) * i)
+                .attr("x2", 150)
+                .attr("y2", (150 / 3) * i)
+                .attr("stroke", borderColor)
+                .attr("stroke-width", 3);
+    }
+
+    // draw border
+    svg.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", 150)
+        .attr("height", 150)
+        .attr("fill", "none")
+        .attr("stroke", borderColor)
+        .attr("stroke-width", 6);
+
+    return svgEl.outerHTML;
+}()));
+</script>
+
+<h2>Draw Xs and Os</h2>
+
+{% highlight javascript %}
+var scale = d3.scale.ordinal().domain([0, 1, 2]).rangeRoundBands([0, 150], 1, 0.5);
+var crossColor = "rgba(231, 76, 60, 1.0)";
+var noughtColor = "rgba(41, 128, 185,1.0)";
+for (var row = 0; row < 3; row++) {
+    for (var col = 0; col < 3; col++) {
+        var cellType = tic.cell(row, col);
+        if (cellType === "CROSS") {
+            var cellSize = 150 / 11;
+            svg.append("line")
+                .attr("x1", scale(col) - cellSize)
+                .attr("y1", scale(row) - cellSize)
+                .attr("x2", scale(col) + cellSize)
+                .attr("y2", scale(row) + cellSize)
+                .attr("stroke", crossColor)
+                .attr("stroke-width", 150 / 30);
+            svg.append("line")
+                .attr("x1", scale(col) - cellSize)
+                .attr("y1", scale(row) + cellSize)
+                .attr("x2", scale(col) + cellSize)
+                .attr("y2", scale(row) - cellSize)
+                .attr("stroke", crossColor)
+                .attr("stroke-width", 150 / 30);
+        } else if (cellType === "NOUGHT") {
+            svg.append("circle")
+                .attr("cx", scale(col))
+                .attr("cy", scale(row))
+                .attr("r", 150 * 0.1)
+                .attr("fill", noughtColor);
+        }
+    }
+}
+{% endhighlight %}
+
+<script>
+document.write((function() {
+    var scale = d3.scale.ordinal().domain([0, 1, 2]).rangeRoundBands([0, 150], 1, 0.5);
+    var crossColor = "rgba(231, 76, 60, 1.0)";
+    var noughtColor = "rgba(41, 128, 185,1.0)";
+    for (var row = 0; row < 3; row++) {
+        for (var col = 0; col < 3; col++) {
+            var cellType = tic.cell(row, col);
+            if (cellType === "CROSS") {
+                var cellSize = 150 / 11;
+                svg.append("line")
+                    .attr("x1", scale(col) - cellSize)
+                    .attr("y1", scale(row) - cellSize)
+                    .attr("x2", scale(col) + cellSize)
+                    .attr("y2", scale(row) + cellSize)
+                    .attr("stroke", crossColor)
+                    .attr("stroke-width", 150 / 30);
+                svg.append("line")
+                    .attr("x1", scale(col) - cellSize)
+                    .attr("y1", scale(row) + cellSize)
+                    .attr("x2", scale(col) + cellSize)
+                    .attr("y2", scale(row) - cellSize)
+                    .attr("stroke", crossColor)
+                    .attr("stroke-width", 150 / 30);
+            } else if (cellType === "NOUGHT") {
+                svg.append("circle")
+                    .attr("cx", scale(col))
+                    .attr("cy", scale(row))
+                    .attr("r", 150 * 0.1)
+                    .attr("fill", noughtColor);
+            }
+        }
+    }
+    return svgEl.outerHTML;
+}()));
+</script>
+
+<h2>Depth-first search</h2>
+
+<p>
+    Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. One starts at
+    the root (selecting some arbitrary node as the root in the case of a graph) and explores as far as possible along
+    each branch before backtracking.
+</p>
+
+<h3>Pre-order</h3>
+
+aasdfa
+
+<h3>In-order</h3>
+
+aasdfa
+
+<h3>Post-order</h3>
+
+aasdfa
+
+<h2>Breadth-first search</h2>
+
+<p>
+    In graph theory, breadth-first search (BFS) is a strategy for searching in a graph when search is limited to
+    essentially two operations: (a) visit and inspect a node of a graph; (b) gain access to visit the nodes that
+    neighbor the currently visited node.
+</p>
+
+<h2>Summary</h2>
+
+<p>
+    Some random summary here.
+</p>
+
+<h2>Generating random trees</h2>
+
+<p>
+    Random positions here. Add a button that generates the trees.
+</p>
+
+<h2>Play the game looking at the game tree?</h2>
+
+<p>This is interesting.</p>

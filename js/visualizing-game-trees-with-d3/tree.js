@@ -1,56 +1,34 @@
-var depthFirstIteration = function(node) {
-    if (node === undefined) {
-        return undefined;
-    }
-    // go to parent node
-    if (node.game.numMoves() === 0 ||
-        (node.children !== undefined && node.children.length === node.game.numMoves())) {
-        return depthFirstIteration(node.parent);
-    }
-    else {
-        if (node.children === undefined) {
-            node.children = [];
-        }
-        var child = {
-            game: node.game.copy().move(node.children.length),
-            parent: node,
-            id: nodes.length
-        };
-        node.children.push(child);
-        return child;
-    }
-};
-
-var breadthFirstIteration = function() {
-    var node = undefined;
-    if (queue.length > 0) {
-        node = queue.shift();
-        if (node.parent !== undefined && node.parent != node) {
-            if (node.parent.children === undefined) {
-                node.parent.children = [];
-            }
-            node.parent.children.push(node);
-        }
-        var numMoves = node.game.numMoves();
-        for (var i = 0; i < numMoves; i++) {
-            var child = {
-                game: node.game.copy().move(i),
-                parent: node,
-                id: counter++
-            };
-            queue.push(child);
-        }
-    }
-    return node;
-};
+//
+//var breadthFirstIteration = function() {
+//    var node = undefined;
+//    if (queue.length > 0) {
+//        node = queue.shift();
+//        if (node.parent !== undefined && node.parent != node) {
+//            if (node.parent.children === undefined) {
+//                node.parent.children = [];
+//            }
+//            node.parent.children.push(node);
+//        }
+//        var moves = node.game.moves();
+//        for (var i = 0; i < moves.length; i++) {
+//            var child = {
+//                game: node.game.copy().move(i),
+//                parent: node,
+//                id: counter++
+//            };
+//            queue.push(child);
+//        }
+//    }
+//    return node;
+//};
 
 var counter = 1;
 
-var tic = new mauler.games.tic.TicTacToe().move(4).move(0).move(6).move(2).move(0).move(0);
+var tic = new ma.games.TicTacToe().move(4).move(0).move(6).move(2).move(0).move(0);
 
 var nodeSize = 50;
 
-var svgView = new mauler.games.tic.TicTacToeSVGView({
+var svgView = new ma.views.TicTacToeSVG({
     model: tic,
     sideLength: nodeSize
 });
@@ -66,7 +44,7 @@ var svg = d3.select("#here")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-    .attr("style", "background-color: wheat")
+    .attr("style", "background-color: #eeeeee")
     .append("g")
     .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
@@ -145,8 +123,8 @@ var update = function() {
         });
 
     //curNode = depthFirstIteration(curNode);
-    curNode = breadthFirstIteration();
+    //curNode = breadthFirstIteration();
 };
 
-var duration = 500,
-    timer = setInterval(update, duration);
+//var duration = 500,
+//    timer = setInterval(update, duration);
