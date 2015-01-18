@@ -1,15 +1,9 @@
-(function() {
+var generateSVGTree = function(tic, mysel, options) {
 
     var margin = { top: 50, right: 30, bottom: 60, left: 30 },
         width = 675 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom,
-        nodeSize = 85;
-
-    var tic = new ma.games.TicTacToe({
-        board: [['O', 'X', 'O'],
-                ['O', 'X', ' '],
-                [' ', ' ', 'X']]
-    });
+        nodeSize = options.nodeSize || 85;
 
     var root = {
         game: tic
@@ -36,7 +30,7 @@
 
     var diagonal = d3.svg.diagonal().projection(function(d) { return [d.x, d.y]; });
 
-    var svg = d3.select("#full-static-game-tree")
+    var svg = d3.select(mysel)
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -54,7 +48,8 @@
 
     var drawNodes = function() {
 
-        // Draw edges
+        var nodeMargin = nodeSize / 3.4;
+
         svg.selectAll("path")
             .data(tree.links(nodes))
             .enter().append("path")
@@ -69,7 +64,7 @@
             .append("g")
             .attr("class", "node-group")
             .attr("transform", function(d) {
-                return "translate(" + (d.x - 25) + ", " + (d.y - 25) + ")"
+                return "translate(" + (d.x - nodeMargin) + ", " + (d.y - nodeMargin) + ")"
             });
 
         // Draw nodes
@@ -89,5 +84,24 @@
     };
 
     drawNodes();
+    return svg;
+};
 
+(function() {
+    var tic = new ma.games.TicTacToe({
+        board: [['O', 'X', 'O'],
+                ['O', 'X', ' '],
+                [' ', ' ', 'X']]
+    });
+    generateSVGTree(tic, "#full-static-game-tree", {
+        nodeSize: 85
+    });
+    var tic = new ma.games.TicTacToe({
+        board: [['O', 'X', 'O'],
+                [' ', ' ', 'X'],
+                [' ', ' ', 'X']]
+    });
+    generateSVGTree(tic, "#final-game-tree", {
+        nodeSize: 30
+    });
 }());
