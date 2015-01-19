@@ -80,8 +80,15 @@ var ticTacToe = new TicTacToe({
 {% endhighlight %}
 
 <script>
+var boardLength = 150,
+    squareLength = Math.floor(boardLength / 3),
+    bgColor = "rgb(255, 219, 122)",
+    gridColor = "rgb(229, 197, 110)";
 var svgEl = document.createElement("svg");
-var svg = d3.select(svgEl);
+var svg = d3.select(svgEl)
+            .attr("class", "board")
+            .attr("width", boardLength)
+            .attr("height", boardLength);
 var tic = new ma.games.TicTacToe({
     board: [['O', 'X', 'O'],
             ['O', 'X', ' '],
@@ -89,107 +96,114 @@ var tic = new ma.games.TicTacToe({
 });
 </script>
 
-<p>Create the SVG element:</p>
+<p>Then, we need to define the constants used in the SVG element for the game board:</p>
 
 {% highlight javascript %}
-var svg = d3.select(document.createElement("svg"));
+var boardLength = 150,
+    squareLength = Math.floor(boardLength / 3),
+    bgColor = "rgb(255, 219, 122)",
+    gridColor = "rgb(229, 197, 110)";
 {% endhighlight %}
 
-<p>Drawing the background:</p>
+<p>Next, create the SVG element and set the dimensions. We will save it as a d3 selection to make things easier later:</p>
 
 {% highlight javascript %}
-var bgColor = "rgb(255, 219, 122)";
+var svg = d3.select(document.createElement("svg"))
+                .attr("width", boardLength)
+                .attr("height", boardLength);
+{% endhighlight %}
+
+<p>Fill the background:</p>
+
+{% highlight javascript %}
 svg.append("rect")
     .attr("x", 0)
     .attr("y", 0)
-    .attr("width", 300)
-    .attr("height", 300)
+    .attr("width", boardLength)
+    .attr("height", boardLength)
     .attr("fill", bgColor)
     .attr("stroke", "none");
 {% endhighlight %}
 
 <script>
 document.write((function() {
-    var bgColor = "rgb(255, 219, 122)";
-    svg.attr("class", "board")
-        .append("rect")
+    svg.append("rect")
         .attr("x", 0)
         .attr("y", 0)
-        .attr("width", 300)
-        .attr("height", 300)
+        .attr("width", boardLength)
+        .attr("height", boardLength)
         .attr("fill", bgColor)
         .attr("stroke", "none");
     return svgEl.outerHTML;
 }()));
 </script>
 
-<p>Drawing the lines:</p>
+<p>Draw the grid:</p>
 
 {% highlight javascript %}
-var borderColor = "rgb(229, 197, 110)";
-
-// Draw lines
-for (var i = 1; i < 3; i++) {
-    svg.append("line")
-        .attr("x1", (150 / 3) * i)
-        .attr("y1", 0)
-        .attr("x2", (150 / 3) * i)
-        .attr("y2", 150)
-        .attr("stroke", borderColor)
-        .attr("stroke-linecap", "butt")
-        .attr("stroke-width", 3);
-    svg.append("line")
-        .attr("x1", 0)
-        .attr("y1", (150 / 3) * i)
-        .attr("x2", 150)
-        .attr("y2", (150 / 3) * i)
-        .attr("stroke", borderColor)
-        .attr("stroke-width", 3);
-}
-
-// Draw border
+// border
 svg.append("rect")
     .attr("x", 0)
     .attr("y", 0)
-    .attr("width", 150)
-    .attr("height", 150)
+    .attr("width", boardLength)
+    .attr("height", boardLength)
     .attr("fill", "none")
-    .attr("stroke", borderColor)
+    .attr("stroke", gridColor)
     .attr("stroke-width", 6);
+
+// lines
+for (var i = 1; i < 3; i++) {
+    // vertical
+    svg.append("line")
+        .attr("x1", squareLength * i)
+        .attr("y1", 0)
+        .attr("x2", squareLength * i)
+        .attr("y2", boardLength)
+        .attr("stroke", borderColor)
+        .attr("stroke-width", 3);
+    // horizontal
+    svg.append("line")
+        .attr("x1", 0)
+        .attr("y1", squareLength * i)
+        .attr("x2", boardLength)
+        .attr("y2", squareLength * i)
+        .attr("stroke", borderColor)
+        .attr("stroke-width", 3);
+}
 {% endhighlight %}
 
 <script>
 document.write((function() {
-    var borderColor = "rgb(229, 197, 110)";
 
-    // draw lines
+    // border
+    svg.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", boardLength)
+            .attr("height", boardLength)
+            .attr("fill", "none")
+            .attr("stroke", gridColor)
+            .attr("stroke-width", 6);
+
+    // lines
     for (var i = 1; i < 3; i++) {
+        // vertical
         svg.append("line")
-                .attr("x1", (150 / 3) * i)
+                .attr("x1", squareLength * i)
                 .attr("y1", 0)
-                .attr("x2", (150 / 3) * i)
+                .attr("x2", squareLength * i)
                 .attr("y2", 150)
-                .attr("stroke", borderColor)
-                .attr("stroke-linecap", "butt")
+                .attr("stroke", gridColor)
                 .attr("stroke-width", 3);
+        // horizontal
         svg.append("line")
                 .attr("x1", 0)
-                .attr("y1", (150 / 3) * i)
-                .attr("x2", 150)
-                .attr("y2", (150 / 3) * i)
-                .attr("stroke", borderColor)
+                .attr("y1", squareLength * i)
+                .attr("x2", boardLength)
+                .attr("y2", squareLength * i)
+                .attr("stroke", gridColor)
                 .attr("stroke-width", 3);
     }
-
-    // draw border
-    svg.append("rect")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("width", 150)
-        .attr("height", 150)
-        .attr("fill", "none")
-        .attr("stroke", borderColor)
-        .attr("stroke-width", 6);
 
     return svgEl.outerHTML;
 }()));
