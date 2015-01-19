@@ -31,7 +31,7 @@ js:         ["visualizing-game-trees-with-d3/d3.js",
 
 <p>
     In game theory, <strong>a game tree</strong> is a directed graph whose nodes are positions in a game and whose edges
-    are moves. Here is an example of a game tree in which the root node is a Tic-Tac-Toe game position in which the
+    are moves. Here is a figure of a game tree in which the root node is a Tic-Tac-Toe game position and the
     first player, <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>, is about to move next:
 </p>
 
@@ -39,14 +39,19 @@ js:         ["visualizing-game-trees-with-d3/d3.js",
 
 <p>
     Being able to visualize game trees like this one is very useful to analyze the possible moves and outcomes to make
-    better decisions. In the case of this particular figure, we can observe the following:
+    better decisions. For example, in this particular figure we can make the following observations:
 </p>
 
 <ul>
     <li>There are three possible moves for <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>.</li>
-    <li>There are 10 possible game positions that can be reached from the current position.</li>
-    <li>There are five leaf nodes, which means five possible endgame positions. Two are wins for <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>,
-        one is a win for <span style="font-weight: bold; color: rgba(41, 128, 185, 1.0)">&#11044;</span>, and two draws.
+    <li>There are 10 game positions that can be potentially reached from the current position.</li>
+    <li>There are five leaf nodes, which means five possible endgame positions.</li>
+    <li>The outcomes for the five endgame positions are:
+        <ul>
+            <li>Two wins for <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>.</li>
+            <li>One win for <span style="font-weight: bold; color: rgba(41, 128, 185, 1.0)">&#11044;</span>.</li>
+            <li>Two draws.</li>
+        </ul>
     </li>
     <li>
         If we assume perfect play by the second player, only the middle-bottom square guarantees a win for the first
@@ -55,9 +60,18 @@ js:         ["visualizing-game-trees-with-d3/d3.js",
 </ul>
 
 <p>
-    If I had told you all those points without a tree, it would probably take you more time to understand why. But
-    visualizing the trees is very easy to understand my points.
+    Even in a trivial example as this one, if I had told you all those points without a visualization of the game tree,
+    it would probably take you more time to understand why. But visualizing the trees is very easy to understand my points. This is why visualization is so important, it enables
+    knowledge compression, allowing an enormous amount of information to be packed into a small space
+
 </p>
+
+you would probably have to create that visual image of the tree in your brain. In this case it would be possible,
+because it is a small game tree. But if this was a game tree with more than 20 nodes it would be really hard to mentally imagine it.
+
+it help us see patterns or trends that we might have missed otherwise.
+
+it simplifies the hardest part of analytics
 
 <p>Now, let's start step by step on how to visualize game trees with Javascript, SVGs and D3.</p>
 
