@@ -6,8 +6,14 @@ date:   2014-12-14 18:38:00
 
 # About
 
-Hi! I'm David Robles, I'm from Hermosillo, Mexico. I'm currently working as a Software Engineer at [Hearsay Social] (
-http://www.hearsaysocial.com/), in San Francisco.
+Hi, I'm David Robles, I'm a Software Engineer who enjoys tackling engineering challenges and writing high-quality
+software. I'm currently working as a Software Engineer at [Hearsay Social] (http://www.hearsaysocial.com/), in San
+Francisco.
+
+Before starting my career as a Software Engineer, I received a PhD in Computer Science from the University of Essex,
+where I conducted research focused on Reinforcement Learning, Simulation-Based Search, Evolutionary Algorithms and
+Games. During this time I was also a Teaching Assistant in several courses in programming and web application
+development.
 
 ## Experience
 
