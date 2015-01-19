@@ -18,9 +18,8 @@ js:         ["visualizing-game-trees-with-d3/d3.js",
 <p>
     <a href="http://d3js.org/">D3.js</a> is a JavaScript library for data visualization. It allows direct inspection and
     manipulation of the DOM, but is intended solely for data visualization. D3 is proving to be very versatile and
-    powerful, thanks to the technologies upon which it is based: JavaScript, SVG, and CSS. It combines powerful
-    visualization components with a data-driven approach to DOM manipulation. In so doing, D3 takes full advantage of
-    the capabilities of the modern browser.
+    powerful, thanks to the technologies upon which it is based: JavaScript, SVG, and CSS. In so doing, D3 takes full
+    advantage of the capabilities of the modern browser.
 </p>
 <p>
     In this post I will show how to use D3.js to visualize game trees using
@@ -32,20 +31,22 @@ js:         ["visualizing-game-trees-with-d3/d3.js",
 
 <p>
     In game theory, <strong>a game tree</strong> is a directed graph whose nodes are positions in a game and whose edges
-    are moves. Here is an example of a Tic-Tac-Toe game position in which the first player,
-    <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>, is about to move next:
+    are moves. Here is an example of a game tree in which the root node is a Tic-Tac-Toe game position in which the
+    first player, <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>, is about to move next:
 </p>
 
 <div id="full-static-game-tree"></div>
 
 <p>
-    In this position there are three possible moves for
-    <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>, and only one of them guaranteeing a win if
-    we assume perfect play by the second player,
+    As we can see, there are three possible moves for <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>, and only
+    the middle-bottom square guarantees a win for the first player if we assume perfect play by the second player,
     <span style="font-weight: bold; color: rgba(41, 128, 185, 1.0)">&#11044;</span>.
 </p>
 
-<p>So how did I generate such a graph. I will describe it next.</p>
+<p>
+    Being able to visualize game trees like this one can be very helpful to analyze the decision-making process of the
+    players. Next, I'll show you step by step how to visualize game trees.
+</p>
 
 <h2>Drawing the board</h2>
 
