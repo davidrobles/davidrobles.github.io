@@ -133,14 +133,4 @@ var generateSVGTree = function(tic, mysel, options) {
         nodeSize: 40
     });
 
-    var tic = new ma.games.TicTacToe({
-        board: [['O', 'X', 'O'],
-                [' ', 'X', ' '],
-                [' ', ' ', ' ']]
-    });
-    generateSVGTree(tic, "#final-game-tree-5-ply", {
-        nodeSize: 12,
-        edgeWidth: 1
-    });
-
 }());
