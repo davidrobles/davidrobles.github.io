@@ -39,7 +39,7 @@ js:         ["visualizing-game-trees-with-d3/d3.js",
 
 <p>
     Being able to visualize game trees like this one is very useful to analyze the possible moves and outcomes to make
-    better decisions. For example, in this particular figure we can make the following observations:
+    better decisions. For example, in this figure we can see that:
 </p>
 
 <ul>
@@ -54,20 +54,20 @@ js:         ["visualizing-game-trees-with-d3/d3.js",
         </ul>
     </li>
     <li>
-        If we assume perfect play by the second player, only a move to the middle-bottom square guarantees a win for the
-        first player.
+        If we assume perfect play by the second player, only the move to the middle-bottom square guarantees a win for
+        the first player.
     </li>
 </ul>
 
 <p>
-    Even in a trivial example as this, it is much easier to verify these observations with a corresponding graphic
-    visualization of the game tree. This is the power of data visualization: it allows us see patterns or trends that we
-    might have missed otherwise.
+    Even in a trivial example like this, it is much easier to see these observations with a corresponding
+    visualization of the game tree. Also, in the case of more complex examples, data visualization allows us see
+    patterns or trends that we might have missed otherwise.
 </p>
 
 <p>Now let's walk through, step by step, how to visualize game trees with Javascript, SVGs and D3.</p>
 
-<h2>Drawing the board</h2>
+<h2>Drawing the Tic-Tac-Toe game board</h2>
 
 <p>I will be using a game position that is near the end of the game so it can represent the whole game tree in such a
     small space.</p>
