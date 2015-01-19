@@ -38,15 +38,28 @@ js:         ["visualizing-game-trees-with-d3/d3.js",
 <div id="full-static-game-tree"></div>
 
 <p>
-    As we can see, there are three possible moves for <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>, and only
-    the middle-bottom square guarantees a win for the first player if we assume perfect play by the second player,
-    <span style="font-weight: bold; color: rgba(41, 128, 185, 1.0)">&#11044;</span>.
+    Being able to visualize game trees like this one can be very helpful to analyze decision-making process in turn-based
+    games. For example, in this figure we can clearly see that ,
 </p>
 
+<ul>
+    <li>There are three possible moves for <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>.</li>
+    <li>There are 10 possible game positions that can be reached from the current position.</li>
+    <li>There are five leaf nodes, which means five possible endgame positions. Two are wins for <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>,
+        one is a win for <span style="font-weight: bold; color: rgba(41, 128, 185, 1.0)">&#11044;</span>, and two draws.
+    </li>
+    <li>
+        If we assume perfect play by the second player, only the middle-bottom square guarantees a win for the first
+        player.
+    </li>
+</ul>
+
 <p>
-    Being able to visualize game trees like this one can be very helpful to analyze the decision-making process of the
-    players. Next, I'll show you step by step how to visualize game trees.
+    If I had told you all those points without a tree, it would probably take you more time to understand why. But
+    visualizing the trees is very easy to understand my points.
 </p>
+
+<p>Now, let's start step by step on how to visualize game trees with Javascript, SVGs and D3.</p>
 
 <h2>Drawing the board</h2>
 
