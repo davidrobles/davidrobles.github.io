@@ -16,6 +16,14 @@ h1 {
     margin: 0.4em 0 0.8em 0;
 }
 
+h1 a {
+    color: #568d9f;
+}
+
+h1 a:hover {
+    color: #1199C3;
+}
+
 h2 {
     font-size: 1.3em;
     font-weight: 600;
@@ -39,12 +47,12 @@ p {
 }
 
 a {
-    color: #568d9f;
+    color: #1199C3;
     text-decoration: none;
 }
 
 a:hover {
-    color: #1199C3;
+    color: #568d9f;
     text-decoration: none;
 }
 
