@@ -69,7 +69,8 @@ js:         ["visualizing-game-trees-with-d3/d3.js",
 
 <h2>Drawing the Tic-Tac-Toe game board</h2>
 
-<p>First of all, we need to create an instance of a Tic-Tac-Toe game position:</p>
+<p>First of all, we need to create an instance of a Tic-Tac-Toe game position. I'll be using the Tic-Tac-Toe
+implementation from <a href="/blog/2014/08/01/mauler-a-javascript-framework-for-abstract-strategy-games/">Mauler</a>:</p>
 
 {% highlight javascript %}
 var ticTacToe = new TicTacToe({
@@ -82,8 +83,11 @@ var ticTacToe = new TicTacToe({
 <script>
 var boardLength = 150,
     squareLength = Math.floor(boardLength / 3),
+    lineWidth = 3;
     bgColor = "rgb(255, 219, 122)",
-    gridColor = "rgb(229, 197, 110)";
+    gridColor = "rgb(229, 197, 110)",
+    crossColor = "rgba(231, 76, 60, 1.0)",
+    noughtColor = "rgba(41, 128, 185,1.0)";
 var svgEl = document.createElement("svg");
 var svg = d3.select(svgEl)
             .attr("class", "board")
@@ -96,16 +100,21 @@ var tic = new ma.games.TicTacToe({
 });
 </script>
 
-<p>Then, we need to define the constants used in the SVG element for the game board:</p>
+<p>Next, define the dimensions and colors for the board:</p>
 
 {% highlight javascript %}
 var boardLength = 150,
     squareLength = Math.floor(boardLength / 3),
     bgColor = "rgb(255, 219, 122)",
-    gridColor = "rgb(229, 197, 110)";
+    gridColor = "rgb(229, 197, 110)",
+    crossColor = "rgba(231, 76, 60, 1.0)",
+    noughtColor = "rgba(41, 128, 185,1.0)";
 {% endhighlight %}
 
-<p>Next, create the SVG element and set the dimensions. We will save it as a d3 selection to make things easier later:</p>
+<p>
+    Now we can create the SVG and set its dimensions. For convenience, a d3 selection of the
+    <span class="code">&lt;svg&gt;</span> element will be stored in the <span class="code">svg</span> variable:
+</p>
 
 {% highlight javascript %}
 var svg = d3.select(document.createElement("svg"))
@@ -113,98 +122,105 @@ var svg = d3.select(document.createElement("svg"))
                 .attr("height", boardLength);
 {% endhighlight %}
 
-<p>Fill the background:</p>
+<p>Fill the background using a SVG <span class="code">&lt;rect&gt;</span> element:</p>
 
 {% highlight javascript %}
-svg.append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", boardLength)
-    .attr("height", boardLength)
-    .attr("fill", bgColor)
-    .attr("stroke", "none");
+svg.append("rect").attr({
+    "x": 0,
+    "y": 0,
+    "width": boardLength,
+    "height": boardLength,
+    "fill": bgColor,
+    "stroke": "none"
+});
 {% endhighlight %}
 
 <script>
 document.write((function() {
-    svg.append("rect")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("width", boardLength)
-        .attr("height", boardLength)
-        .attr("fill", bgColor)
-        .attr("stroke", "none");
+    svg.append("rect").attr({
+        "x": 0,
+        "y": 0,
+        "width": boardLength,
+        "height": boardLength,
+        "fill": bgColor,
+        "stroke": "none"
+    });
     return svgEl.outerHTML;
 }()));
 </script>
 
-<p>Draw the grid:</p>
+<p>
+    Draw the grid using a <span class="code">&lt;rect&gt;</span> element for the border and
+    <span class="code">&lt;line&gt;</span> elements for the grid:
+</p>
 
 {% highlight javascript %}
 // border
-svg.append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", boardLength)
-    .attr("height", boardLength)
-    .attr("fill", "none")
-    .attr("stroke", gridColor)
-    .attr("stroke-width", 6);
-
+svg.append("rect").attr({
+    "x": 0,
+    "y": 0,
+    "width": boardLength,
+    "height": boardLength,
+    "fill": "none",
+    "stroke": gridColor,
+    "stroke-width": Math.floor(lineWidth * 2)
+});
 // lines
 for (var i = 1; i < 3; i++) {
     // vertical
-    svg.append("line")
-        .attr("x1", squareLength * i)
-        .attr("y1", 0)
-        .attr("x2", squareLength * i)
-        .attr("y2", boardLength)
-        .attr("stroke", borderColor)
-        .attr("stroke-width", 3);
+    svg.append("line").attr({
+        "x1": squareLength * i,
+        "y1": 0,
+        "x2": squareLength * i,
+        "y2": boardLength,
+        "stroke": gridColor,
+        "stroke-width": lineWidth
+    });
     // horizontal
-    svg.append("line")
-        .attr("x1", 0)
-        .attr("y1", squareLength * i)
-        .attr("x2", boardLength)
-        .attr("y2", squareLength * i)
-        .attr("stroke", borderColor)
-        .attr("stroke-width", 3);
+    svg.append("line").attr({
+        "x1": 0,
+        "y1": squareLength * i,
+        "x2": boardLength,
+        "y2": squareLength * i,
+        "stroke": gridColor,
+        "stroke-width": lineWidth
+    });
 }
 {% endhighlight %}
 
 <script>
 document.write((function() {
-
     // border
-    svg.append("rect")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width", boardLength)
-            .attr("height", boardLength)
-            .attr("fill", "none")
-            .attr("stroke", gridColor)
-            .attr("stroke-width", 6);
-
+    svg.append("rect").attr({
+        "x": 0,
+        "y": 0,
+        "width": boardLength,
+        "height": boardLength,
+        "fill": "none",
+        "stroke": gridColor,
+        "stroke-width": Math.floor(lineWidth * 2)
+    });
     // lines
     for (var i = 1; i < 3; i++) {
         // vertical
-        svg.append("line")
-                .attr("x1", squareLength * i)
-                .attr("y1", 0)
-                .attr("x2", squareLength * i)
-                .attr("y2", 150)
-                .attr("stroke", gridColor)
-                .attr("stroke-width", 3);
+        svg.append("line").attr({
+            "x1": squareLength * i,
+            "y1": 0,
+            "x2": squareLength * i,
+            "y2": boardLength,
+            "stroke": gridColor,
+            "stroke-width": lineWidth
+        });
         // horizontal
-        svg.append("line")
-                .attr("x1", 0)
-                .attr("y1", squareLength * i)
-                .attr("x2", boardLength)
-                .attr("y2", squareLength * i)
-                .attr("stroke", gridColor)
-                .attr("stroke-width", 3);
+        svg.append("line").attr({
+            "x1": 0,
+            "y1": squareLength * i,
+            "x2": boardLength,
+            "y2": squareLength * i,
+            "stroke": gridColor,
+            "stroke-width": lineWidth
+        });
     }
-
     return svgEl.outerHTML;
 }()));
 </script>
@@ -213,8 +229,6 @@ document.write((function() {
 
 {% highlight javascript %}
 var scale = d3.scale.ordinal().domain([0, 1, 2]).rangeRoundBands([0, 150], 1, 0.5);
-var crossColor = "rgba(231, 76, 60, 1.0)";
-var noughtColor = "rgba(41, 128, 185,1.0)";
 for (var row = 0; row < 3; row++) {
     for (var col = 0; col < 3; col++) {
         var cellType = tic.cell(row, col);
@@ -281,6 +295,11 @@ document.write((function() {
     return svgEl.outerHTML;
 }()));
 </script>
+
+<p>
+    And here it is the SVG implementation of a Tic-Tac-Toe board! Now let's move into the important part: the
+    visualization of the tree.
+</p>
 
 <h2>Generate the tree</h2>
 
