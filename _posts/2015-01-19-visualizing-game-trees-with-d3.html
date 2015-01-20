@@ -1,11 +1,13 @@
 ---
 layout:     post
 title:      "Visualizing Game Trees with D3.js"
-date:       2015-01-19 16:00:00
+date:       2015-01-25 22:00:00
 comments:   true
-excerpt:    "In this post I describe a simple API for abstract strategy games and algorithms to play these games. An
-interface like this one is the base of a game-playing framework and it will be used in following blog posts
-to describe algorithms such as Minimax, Alpha-Beta and Monte-Carlo Tree Search."
+excerpt:    "D3.js is a JavaScript library for data visualization. It is proving to be very versatile and powerful,
+             thanks to the technologies upon which it is based: JavaScript, SVG, and CSS. In this post I will show how
+             to use D3.js to visualize game trees using Mauler, the abstract strategy games framework that I described
+             in a previous post."
+
 img:        "visualizing-game-trees-with-d3/copy.png"
 style:      ["visualizing-game-trees-with-d3/style.css"]
 js:         ["visualizing-game-trees-with-d3/d3.js",
@@ -60,7 +62,7 @@ js:         ["visualizing-game-trees-with-d3/d3.js",
 </ul>
 
 <p>
-    Even in a trivial example like this, it is much easier to see these observations with a corresponding
+    Even in a trivial example like this, it is much easier to make these observations with a corresponding
     visualization of the game tree. Also, in the case of more complex examples, data visualization allows us see
     patterns or trends that we might have missed otherwise.
 </p>
@@ -122,7 +124,7 @@ var svg = d3.select(document.createElement("svg"))
                 .attr("height", boardLength);
 {% endhighlight %}
 
-<p>Fill the background using a SVG <span class="code">&lt;rect&gt;</span> element:</p>
+<p>Fill the background using an SVG <span class="code">&lt;rect&gt;</span> element:</p>
 
 {% highlight javascript %}
 svg.append("rect").attr({
@@ -225,97 +227,157 @@ document.write((function() {
 }()));
 </script>
 
-<h2>Draw Xs and Os</h2>
+<p>
+    Draw the <span style="font-weight: bold; color: rgba(231, 76, 60, 1.0)">X</span>s and
+    <span style="font-weight: bold; color: rgba(41, 128, 185, 1.0)">&#11044;</span>s:
+</p>
 
 {% highlight javascript %}
-var scale = d3.scale.ordinal().domain([0, 1, 2]).rangeRoundBands([0, 150], 1, 0.5);
+
+var scale = d3.scale.ordinal()
+                    .domain([0, 1, 2])
+                    .rangeRoundBands([0, boardLength], 1, 0.5);
+
+var drawCross = function(row, col) {
+    var cellSize = squareLength / 4,
+        crossLineWidth = squareLength / 10;
+    svg.append("line").attr({
+        "x1": scale(col) - cellSize,
+        "y1": scale(row) - cellSize,
+        "x2": scale(col) + cellSize,
+        "y2": scale(row) + cellSize,
+        "stroke": crossColor,
+        "stroke-width": crossLineWidth
+    });
+    svg.append("line").attr({
+        "x1": scale(col) - cellSize,
+        "y1": scale(row) + cellSize,
+        "x2": scale(col) + cellSize,
+        "y2": scale(row) - cellSize,
+        "stroke": crossColor,
+        "stroke-width": crossLineWidth
+    });
+};
+
+var drawNought = function(row, col) {
+    svg.append("circle").attr({
+        "cx": scale(col),
+        "cy": scale(row),
+        "r": squareLength * 0.3,
+        "fill": noughtColor
+    });
+};
+
 for (var row = 0; row < 3; row++) {
     for (var col = 0; col < 3; col++) {
-        var cellType = tic.cell(row, col);
+        var cellType = ticTacToe.cell(row, col);
         if (cellType === "CROSS") {
-            var cellSize = 150 / 11;
-            svg.append("line")
-                .attr("x1", scale(col) - cellSize)
-                .attr("y1", scale(row) - cellSize)
-                .attr("x2", scale(col) + cellSize)
-                .attr("y2", scale(row) + cellSize)
-                .attr("stroke", crossColor)
-                .attr("stroke-width", 150 / 30);
-            svg.append("line")
-                .attr("x1", scale(col) - cellSize)
-                .attr("y1", scale(row) + cellSize)
-                .attr("x2", scale(col) + cellSize)
-                .attr("y2", scale(row) - cellSize)
-                .attr("stroke", crossColor)
-                .attr("stroke-width", 150 / 30);
+            drawCross(row, col);
         } else if (cellType === "NOUGHT") {
-            svg.append("circle")
-                .attr("cx", scale(col))
-                .attr("cy", scale(row))
-                .attr("r", 150 * 0.1)
-                .attr("fill", noughtColor);
+            drawNought(row, col);
         }
     }
 }
+
 {% endhighlight %}
 
 <script>
+
 document.write((function() {
-    var scale = d3.scale.ordinal().domain([0, 1, 2]).rangeRoundBands([0, 150], 1, 0.5);
-    var crossColor = "rgba(231, 76, 60, 1.0)";
-    var noughtColor = "rgba(41, 128, 185,1.0)";
+
+    var scale = d3.scale.ordinal()
+                        .domain([0, 1, 2])
+                        .rangeRoundBands([0, boardLength], 1, 0.5);
+
+    var drawCross = function(row, col) {
+        var cellSize = squareLength / 4,
+            crossLineWidth = squareLength / 10;
+        svg.append("line").attr({
+            "x1": scale(col) - cellSize,
+            "y1": scale(row) - cellSize,
+            "x2": scale(col) + cellSize,
+            "y2": scale(row) + cellSize,
+            "stroke": crossColor,
+            "stroke-width": crossLineWidth
+        });
+        svg.append("line").attr({
+            "x1": scale(col) - cellSize,
+            "y1": scale(row) + cellSize,
+            "x2": scale(col) + cellSize,
+            "y2": scale(row) - cellSize,
+            "stroke": crossColor,
+            "stroke-width": crossLineWidth
+        });
+    };
+
+    var drawNought = function(row, col) {
+        svg.append("circle").attr({
+            "cx": scale(col),
+            "cy": scale(row),
+            "r": squareLength * 0.3,
+            "fill": noughtColor
+        });
+    };
+
     for (var row = 0; row < 3; row++) {
         for (var col = 0; col < 3; col++) {
             var cellType = tic.cell(row, col);
             if (cellType === "CROSS") {
-                var cellSize = 150 / 11;
-                svg.append("line")
-                    .attr("x1", scale(col) - cellSize)
-                    .attr("y1", scale(row) - cellSize)
-                    .attr("x2", scale(col) + cellSize)
-                    .attr("y2", scale(row) + cellSize)
-                    .attr("stroke", crossColor)
-                    .attr("stroke-width", 150 / 30);
-                svg.append("line")
-                    .attr("x1", scale(col) - cellSize)
-                    .attr("y1", scale(row) + cellSize)
-                    .attr("x2", scale(col) + cellSize)
-                    .attr("y2", scale(row) - cellSize)
-                    .attr("stroke", crossColor)
-                    .attr("stroke-width", 150 / 30);
+                drawCross(row, col);
             } else if (cellType === "NOUGHT") {
-                svg.append("circle")
-                    .attr("cx", scale(col))
-                    .attr("cy", scale(row))
-                    .attr("r", 150 * 0.1)
-                    .attr("fill", noughtColor);
+                drawNought(row, col);
             }
         }
     }
+
     return svgEl.outerHTML;
 }()));
 </script>
 
 <p>
-    And here it is the SVG implementation of a Tic-Tac-Toe board! Now let's move into the important part: the
-    visualization of the tree.
+    And now we have a full SVG implementation of the Tic-Tac-Toe board! For convenience, from now on we will assume a
+    <span class="code">drawTicTacToe(game)</span> function that returns a new <span class="code">&lt;svg&gt;</span>
+    element based on the given Tic-Tac-Toe game.
 </p>
+
+<!--<p>Now let's move into the important part: the visualization of the tree.</p>-->
 
 <h2>Generate the tree</h2>
 
-<p>Define a root node of the tree:</p>
+<p>
+    The next step is to automatically generate the tree that we want to visualize. The tree will have the following
+    structure:
+</p>
 
 {% highlight javascript %}
-var root = {
-    game: tic
+var tree = {
+    game: ticTacToe,
+    children: [{
+        game: game,
+        children: [{
+            game: nextGameState1
+        }]
+    }, {
+        game: nextGameState2
+    }]
 };
 {% endhighlight %}
 
 <p>
-    Create an algorithm that will generate the tree. In this case we are using a depth-first search algorithm.
-    Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. One starts at
-    the root (selecting some arbitrary node as the root in the case of a graph) and explores as far as possible along
-    each branch before backtracking.
+    Every node in the tree has a <span class="code">game</span> property  that represents the current game state, and
+    the <span class="code">children</span> is an optional property that has the list of possible game states that
+    can be reached by making each of the legal moves. To generate the game tree we will start creating the root node:
+</p>
+
+{% highlight javascript %}
+var root = {
+    game: ticTacToe
+};
+{% endhighlight %}
+
+<p>
+    Now we will create a simple <a href="http://en.wikipedia.org/wiki/Depth-first_search">depth-first search</a> (DFS)
+    algorithm to generate the tree from a given node:
 </p>
 
 {% highlight javascript %}
@@ -332,24 +394,38 @@ var depthFirstTreeGenerator = function(node) {
 };
 {% endhighlight %}
 
-<p>And generate the tree by passing the root node to the algorithm:</p>
+<p>And we just have to pass the root node to the DFS algorithm to generate the full tree:</p>
 
 {% highlight javascript %}
 depthFirstTreeGenerator(root);
 {% endhighlight %}
 
-<h2>Visualizing the game tree</h2>
+<h2>Visualize the game tree</h2>
+
+<p>
+    Now that we have the game tree that we want to visualize, and a <span class="code">drawTicTacToe(game)</span> function
+    that returns a new <span class="code">&lt;svg&gt;</span> of the game, we can finally draw the tree. Here is the code
+    to visualize the tree with D3:
+</p>
 
 {% highlight javascript %}
+var margin = { top: 50, right: 30, bottom: 60, left: 30 },
+    width = 675 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom,
+    nodeSize = 85,
+    edgeWidth = 2,
+    treeBgColor = "#eeeeee",
+    edgeColor = "#666666";
+
 var diagonal = d3.svg.diagonal().projection(function(d) { return [d.x, d.y]; });
 
-var svg = d3.select("#full-static-game-tree")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .attr("style", "background-color: #eeeeee")
-    .append("g")
-    .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+var svg = d3.select(svgElem)
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .attr("style", "background-color: " + treeBgColor)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
 var tree = d3.layout.tree().size([width, height]);
 
@@ -359,47 +435,43 @@ tree.separation(function() {
 
 var nodes = tree(root);
 
-var drawNodes = function() {
+var nodeMargin = nodeSize / 3.4;
 
-    // Draw edges
-    svg.selectAll("path")
-        .data(tree.links(nodes))
-        .enter().append("path")
-        .attr("d", diagonal)
-        .attr("fill", "none")
-        .attr("stroke", "#666666")
-        .attr("stroke-width", 2);
+svg.selectAll("path")
+    .data(tree.links(nodes))
+    .enter().append("path")
+    .attr("d", diagonal)
+    .attr("fill", "none")
+    .attr("stroke", edgeColor)
+    .attr("stroke-width", edgeWidth);
 
-    svg.selectAll("g.node-group")
-        .data(nodes)
-        .enter()
-        .append("g")
-        .attr("class", "node-group")
-        .attr("transform", function(d) {
-            return "translate(" + (d.x - 25) + ", " + (d.y - 25) + ")"
-        });
+svg.selectAll("g.node-group")
+    .data(nodes)
+    .enter()
+    .append("g")
+    .attr("class", "node-group")
+    .attr("transform", function(d) {
+        return "translate(" + (d.x - nodeMargin) + ", " + (d.y - nodeMargin) + ")"
+    });
 
-    // Draw nodes
-    svg.selectAll(".node-group")
-        .each(function(node) {
-            svgView.model = node.game;
-            svgView.svg = d3.select(this);
-            svgView.render();
-        });
+// Draw nodes
+svg.selectAll(".node-group")
+    .each(function(node) {
+        svgView.model = node.game;
+        svgView.svg = d3.select(this);
+        svgView.render();
+    });
 
-    // Resize game nodes
-    svg.selectAll(".node-group")
-        .attr("transform", function() {
-            return this.getAttribute("transform") + " scale(0.6)";
-        });
-
-};
-
-drawNodes();
+// Resize game nodes
+svg.selectAll(".node-group")
+    .attr("transform", function() {
+        return this.getAttribute("transform") + " scale(0.6)";
+    });
 {% endhighlight %}
 
+<h2>Examples</h2>
 
-<p>At two plies</p>
+<p>Here are a few examples of game trees of different sizes generated with this script. At two plies:</p>
 
 <div id="final-game-tree-2-ply"></div>
 
@@ -410,6 +482,19 @@ drawNodes();
 <p>At four plies:</p>
 
 <div id="final-game-tree-4-ply"></div>
+
+<h2>Source Code</h2>
+
+<a href="http://bl.ocks.org/davidrobles/c4f8a3d6403b48692fa4">Here</a> is the complete source code of this blog post:
+
+<h2>Summary</h2>
+
+<p>
+    In this blog post I showed how we can use D3.js to visualize game trees using the game of Tic-Tac-Toe. The
+    code used here would work for any other abstract strategy game as long as it follows the Mauler interface. In the
+    next blog posts I'll show how to visualize game tree search algorithms (i.e. Minimax, Alpha-Beta Pruning, Monte-Carlo
+    Tree Search) to play abstract strategy games.
+</p>
 
 <!--<h2>Depth-first search</h2>-->
 
