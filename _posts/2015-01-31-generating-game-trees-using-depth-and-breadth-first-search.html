@@ -1,0 +1,227 @@
+---
+layout:     post
+title:      "Generating Game Trees using Depth- and Breadth-First Search"
+date:       2015-01-31 16:00:00
+comments:   true
+excerpt:    "D3.js is a JavaScript library for data visualization. It is proving to be very versatile and powerful,
+             thanks to the technologies upon which it is based: JavaScript, SVG, and CSS. In this post I will show how
+             to use D3.js to visualize game trees using Mauler, the abstract strategy games framework that I described
+             in a previous post."
+
+img:        "visualizing-game-trees-with-d3/copy.png"
+style:      ["generating-game-trees/style.css"]
+js:         ["generating-game-trees/depth-first.js",
+             "visualizing-game-trees-with-d3/d3.js",
+             "visualizing-game-trees-with-d3/underscore.js",
+             "visualizing-game-trees-with-d3/backbone.js",
+             "visualizing-game-trees-with-d3/mauler-0.0.4.js"]
+---
+
+<p>
+    In a <a href="/blog/2015/01/25/visualizing-game-trees-with-d3/">previous post</a> I described how to visualize
+    game trees using D3.js. Now I'll present two animations of the creation of the game tree using two of the most common tree
+    traversal algorithms: <a href="http://en.wikipedia.org/wiki/Depth-first_search">depth-first search</a> and
+    <a href="http://en.wikipedia.org/wiki/Breadth-first_search">breadth-first search</a>.
+</p>
+
+<div style="float: left;">
+    <p style="text-align: center; font-weight: bold;">Depth-First Search</p>
+    <div id="dfs"></div>
+</div>
+
+<div style="float: right;">
+    <p style="text-align: center; font-weight: bold;">Breadth-First Search</p>
+    <div id="bfs"></div>
+</div>
+
+<div style="clear: both"></div>
+
+<button class="restart" id="two-demos" data-cual="two-demos">Restart</button>
+
+<script>
+
+$(document).ready(function() {
+    var restartDemo = document.getElementById("two-demos");
+    restartDemo.addEventListener("click", function() {
+        $("#dfs").empty();
+        $("#bfs").empty();
+        genDFS("#dfs", {
+            width: 320,
+            height: 240,
+            nodeSize: 30,
+            top: 30,
+            left: 20,
+            right: 20,
+            bottom: 30,
+            searchType: "depth",
+            callback: function() {
+
+            },
+            ticTacToe: new ma.games.TicTacToe({
+                board: [['O', 'X', ' '],
+                        ['O', 'X', ' '],
+                        [' ', 'O', 'X']]
+            })
+        });
+        genDFS("#bfs", {
+            width: 320,
+            height: 240,
+            nodeSize: 30,
+            top: 30,
+            left: 20,
+            right: 20,
+            bottom: 30,
+            searchType: "breadth",
+            ticTacToe: new ma.games.TicTacToe({
+                board: [['O', 'X', ' '],
+                    ['O', 'X', ' '],
+                    [' ', 'O', 'X']]
+            })
+        });
+    });
+    $(restartDemo).trigger("click");
+});
+
+</script>
+
+<p>If you want to jump straight to the source code, here it is:</p>
+<ul>
+    <li><a href="http://bl.ocks.org/davidrobles/d3d7955cf8fc5b99ca94">Depth-First Search</a></li>
+    <li><a href="http://bl.ocks.org/davidrobles/c6db7c54d002013ba4e5">Breadth-First Search</a></li>
+</ul>
+
+<div style="clear: both"></div>
+
+<h2>Depth-First Search (DFS)</h2>
+
+<p>
+    The main idea of the depth-first search algorithm is that it starts from the root of the tree and tries to go
+    quickly as far from as possible. Here is the DFS function that is called on every iteration of the animation
+    loop (until the tree is fully traversed):
+</p>
+
+{% highlight javascript %}
+    var depthFirstIteration = function(node) {
+        if (node === undefined) {
+            return undefined;
+        }
+        var moves = node.game.moves();
+        // go to parent node
+        if (moves.length === 0
+                || (node.children && node.children.length === moves.length)) {
+            return depthFirstIteration(node.parent);
+        }
+        else {
+            if (node.children === undefined) {
+                node.children = [];
+            }
+            var child = {
+                game: node.game.copy().move(node.children.length),
+                parent: node,
+                id: nodes.length
+            };
+            node.children.push(child);
+            return child;
+        }
+    };
+{% endhighlight %}
+
+<p>And here is the depth-first search animation:</p>
+
+<div id="dfs-main"></div>
+
+<button class="restart" id="dfs-button">Restart</button>
+
+<script>
+
+$(document).ready(function() {
+    var restartDemo = document.getElementById("dfs-button");
+    restartDemo.addEventListener("click", function() {
+        $("#dfs-main").empty();
+        genDFS("#dfs-main", {
+            width: 675,
+            height: 400,
+            nodeSize: 32,
+            top: 40,
+            left: 20,
+            right: 20,
+            bottom: 40,
+            searchType: "depth",
+            ticTacToe: new ma.games.TicTacToe({
+                board: [['O', 'X', ' '],
+                    ['O', 'X', ' '],
+                    [' ', ' ', 'X']]
+            })
+        });
+    });
+    $(restartDemo).trigger("click");
+});
+
+</script>
+
+<h2>Breadth-First Search</h2>
+
+<p>
+On the other hand, the idea of breadth-first search is to start at the root node and explore the tree level by level,
+(first visiting all neighbor nodes). Here is the BFS function that is called on every
+iteration of the animation loop (until the tree is fully traversed):
+
+</p>
+
+{% highlight javascript %}
+    var breadthFirstIteration = function() {
+        var node = undefined;
+        if (queue.length > 0) {
+            node = queue.shift();
+            if (node.parent !== undefined && node.parent != node) {
+                if (node.parent.children === undefined) {
+                    node.parent.children = [];
+                }
+                node.parent.children.push(node);
+            }
+            var moves = node.game.moves();
+            for (var i = 0; i < moves.length; i++) {
+                var child = {
+                    game: node.game.copy().move(i),
+                    parent: node,
+                    id: counter++
+                };
+                queue.push(child);
+            }
+        }
+        return node;
+    };
+{% endhighlight %}
+
+<p>And here is the breadth-first search animation:</p>
+
+<div id="bfs-main"></div>
+
+<button class="restart" id="bfs-button">Restart</button>
+
+<script>
+
+$(document).ready(function() {
+    var restartDemo = document.getElementById("bfs-button");
+    restartDemo.addEventListener("click", function() {
+        $("#bfs-main").empty();
+        genDFS("#bfs-main", {
+            width: 675,
+            height: 400,
+            nodeSize: 32,
+            top: 40,
+            left: 20,
+            right: 20,
+            bottom: 40,
+            searchType: "breadth",
+            ticTacToe: new ma.games.TicTacToe({
+                board: [['O', 'X', ' '],
+                        ['O', 'X', ' '],
+                        [' ', ' ', 'X']]
+            })
+        });
+    });
+    $(restartDemo).trigger("click");
+});
+
+</script>
