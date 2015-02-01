@@ -165,9 +165,8 @@ $(document).ready(function() {
 
 {% highlight javascript %}
 var breadthFirstIteration = function() {
-    var node = undefined;
     if (queue.length > 0) {
-        node = queue.shift();
+        var node = queue.shift();
         if (node.parent != node) {
             if (!node.parent.children) {
                 node.parent.children = [];
@@ -183,8 +182,8 @@ var breadthFirstIteration = function() {
             };
             queue.push(child);
         }
+        return node;
     }
-    return node;
 };
 {% endhighlight %}
 
