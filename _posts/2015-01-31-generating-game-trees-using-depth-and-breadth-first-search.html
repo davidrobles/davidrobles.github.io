@@ -3,11 +3,9 @@ layout:     post
 title:      "Generating Game Trees using Depth- and Breadth-First Search"
 date:       2015-01-31 16:00:00
 comments:   true
-excerpt:    "D3.js is a JavaScript library for data visualization. It is proving to be very versatile and powerful,
-             thanks to the technologies upon which it is based: JavaScript, SVG, and CSS. In this post I will show how
-             to use D3.js to visualize game trees using Mauler, the abstract strategy games framework that I described
-             in a previous post."
-
+excerpt:    "In a previous post I described how to visualize game trees using D3.js. Now I'll present two animations of
+the creation of the game tree using two of the most common tree traversal algorithms: depth-first search
+and breadth-first search."
 img:        "visualizing-game-trees-with-d3/copy.png"
 style:      ["generating-game-trees/style.css"]
 js:         ["generating-game-trees/depth-first.js",
@@ -163,7 +161,7 @@ $(document).ready(function() {
 
 <p>
 On the other hand, the idea of breadth-first search is to start at the root node and explore the tree level by level,
-(first visiting all neighbor nodes). Here is the BFS function that is called on every
+    first visiting all the neighbor nodes. Here is the BFS function that is called on every
 iteration of the animation loop (until the tree is fully traversed):
 
 </p>
@@ -225,3 +223,10 @@ $(document).ready(function() {
 });
 
 </script>
+
+<p>
+    And that's it! In the next blog post I'll show how to add the
+    <a href="http://en.wikipedia.org/wiki/Minimax">Minimax</a> values to the game nodes. The Minimax value indicate
+    whether the game position is a win, loss or draw for the player whose turn is, and finding that value is the goal of
+    most game-playing algorithms.
+</p>
