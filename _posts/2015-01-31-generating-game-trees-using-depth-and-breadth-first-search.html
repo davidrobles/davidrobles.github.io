@@ -159,11 +159,9 @@ $(document).ready(function() {
 
 <h2>Breadth-First Search</h2>
 
-<p>
-On the other hand, the idea of breadth-first search is to start at the root node and explore the tree level by level,
-    first visiting all the neighbor nodes. Here is the BFS function that is called on every
-iteration of the animation loop (until the tree is fully traversed):
-
+<p>On the other hand, the idea of breadth-first search is to start at the root node and explore the tree level by level,
+    visiting all siblings before visiting any children. Here is the BFS function that is called on every
+    iteration of the animation loop (until the tree is fully traversed):
 </p>
 
 {% highlight javascript %}
