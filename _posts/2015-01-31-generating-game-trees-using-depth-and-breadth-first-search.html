@@ -175,12 +175,11 @@ var breadthFirstIteration = function() {
         }
         var moves = node.game.moves();
         for (var i = 0; i < moves.length; i++) {
-            var child = {
+            queue.push({
                 game: node.game.copy().move(i),
                 parent: node,
                 id: counter++
-            };
-            queue.push(child);
+            });
         }
         return node;
     }
