@@ -99,29 +99,28 @@ $(document).ready(function() {
 </p>
 
 {% highlight javascript %}
-    var depthFirstIteration = function(node) {
-        if (node === undefined) {
-            return undefined;
+var depthFirstIteration = function(node) {
+if (!node) {
+return;
+}
+var moves = node.game.moves();
+// go to parent node
+if (moves.length === 0 || (node.children && node.children.length === moves.length)) {
+return depthFirstIteration(node.parent);
+}
+else {
+if (!node.children) {
+node.children = [];
         }
-        var moves = node.game.moves();
-        // go to parent node
-        if (moves.length === 0
-                || (node.children && node.children.length === moves.length)) {
-            return depthFirstIteration(node.parent);
-        }
-        else {
-            if (node.children === undefined) {
-                node.children = [];
-            }
-            var child = {
-                game: node.game.copy().move(node.children.length),
-                parent: node,
-                id: nodes.length
-            };
-            node.children.push(child);
-            return child;
-        }
-    };
+var child = {
+game: node.game.copy().move(node.children.length),
+parent: node,
+id: nodes.length
+};
+node.children.push(child);
+return child;
+}
+};
 {% endhighlight %}
 
 <p>And here is the depth-first search animation:</p>
@@ -165,28 +164,28 @@ $(document).ready(function() {
 </p>
 
 {% highlight javascript %}
-    var breadthFirstIteration = function() {
-        var node = undefined;
-        if (queue.length > 0) {
-            node = queue.shift();
-            if (node.parent !== undefined && node.parent != node) {
-                if (node.parent.children === undefined) {
-                    node.parent.children = [];
-                }
-                node.parent.children.push(node);
+var breadthFirstIteration = function() {
+var node = undefined;
+if (queue.length > 0) {
+node = queue.shift();
+if (node.parent != node) {
+if (!node.parent.children) {
+node.parent.children = [];
             }
-            var moves = node.game.moves();
-            for (var i = 0; i < moves.length; i++) {
-                var child = {
-                    game: node.game.copy().move(i),
-                    parent: node,
-                    id: counter++
-                };
-                queue.push(child);
-            }
+node.parent.children.push(node);
         }
-        return node;
-    };
+var moves = node.game.moves();
+for (var i = 0; i < moves.length; i++) {
+var child = {
+game: node.game.copy().move(i),
+parent: node,
+id: counter++
+};
+queue.push(child);
+}
+}
+return node;
+};
 {% endhighlight %}
 
 <p>And here is the breadth-first search animation:</p>
