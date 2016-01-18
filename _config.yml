@@ -5,3 +5,4 @@ paginate:    8
 timezone:    America/Los_Angeles
 url:         http://davidrobles.net
 permalink:   /blog/:year/:month/:day/:title
+gems:        [jekyll-paginate]
