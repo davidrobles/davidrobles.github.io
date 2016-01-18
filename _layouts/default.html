@@ -28,58 +28,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-sm-9">{{ content }}</div>
-        <div class="col-sm-3">
-          <div class="widget">
-            <div class="name">
-              <div style="text-align: center; margin-bottom: 10px;">
-                <!-- <a href="http://facebook.com/davidrobles">
-                <!--     <img src="/img/social-icons/rss.png"style="width: 30px; height: 30px;" /> -->
-                <!-- </a> -->
-                <a href="http://facebook.com/davidrobles">
-                  <img src="/img/social-icons/facebook.png"style="width: 30px; height: 30px;" />
-                </a>
-                <a href="http://twitter.com/davidrobles">
-                  <img src="/img/social-icons/twitter.png" style="width: 30px; height: 30px;" />
-                </a>
-                <a href="http://www.linkedin.com/in/drobles">
-                  <img src="/img/social-icons/linkedin.png" style="width: 30px; height: 30px;" />
-                </a>
-                <a href="http://github.com/davidrobles">
-                  <img src="/img/social-icons/github.png" style="width: 30px; height: 30px;" />
-                </a>
-                <a href="http://instagram.com/davidrobles">
-                  <img src="/img/social-icons/instagram.png" style="width: 30px; height: 30px;" />
-                </a>
-              </div>
-            </div>
-            <div class="con">
-                <a href="/about" alt="About">
-                <img src="/img/david.jpg" class="about" style="width: 160px; height: 160px" />
-                </a>
-            </div>
-          </div>
-          <div class="widget">
-            <div class="name">Recent Posts</div>
-            <div>
-              <ul>
-                {% for post in site.posts offset: 0 limit: 10  %}
-                  <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-          <!-- <div class="widget"> -->
-          <!--     <div class="name">Tags</div> -->
-          <!--     <div> -->
-          <!--         <ul> -->
-          <!--             {% for tag in site.tags  %} -->
-          <!--             <li><a href="{{ post. }}">{{ tag | first }}</a></li> -->
-          <!--             {% endfor %} -->
-          <!--         </ul> -->
-          <!--     </div> -->
-          <!-- </div> -->
-        </div>
+        <div class="col-sm-12">{{ content }}</div>
       </div> <!-- row -->
     </div> <!-- container -->
 

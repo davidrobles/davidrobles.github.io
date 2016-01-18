@@ -4,7 +4,7 @@ title:  About
 date:   2014-12-14 18:38:00
 ---
 
-# About
+## About
 
 Hi, I'm David Robles, I'm a Software Engineer who enjoys tackling engineering challenges and writing high-quality
 software. I'm currently working as a Software Engineer at [Hearsay Social] (http://www.hearsaysocial.com/), in San
@@ -15,7 +15,7 @@ where I conducted research focused on Reinforcement Learning, Simulation-Based S
 Games. During this time I was also a Teaching Assistant in several courses in programming and web application
 development.
 
-## Experience
+### Experience
 
 **Software Engineer**<br>
 [Hearsay Social](http://www.hearsaysocial.com)<br>
@@ -30,7 +30,7 @@ January 2013 - February 2014
 October 2009 - March 2012
 
 
-## Education
+### Education
 
 **University of Essex**<br>
 Doctor of Philosophy (PhD), Computer Science<br>
